@@ -16,17 +16,17 @@ const grupos = [
 // Aulas e Blog ainda não existem: a página mostra o que vem, sem data prometida e sem conteúdo inventado.
 const formatos = [
   {
-    id: "aulas", nome: "Aulas", status: "Em preparação",
-    texto: "Aulas curtas e gravadas para assistir no seu tempo, organizadas em trilhas para professores, coordenadores e gestores.",
-    itens: ["IA no planejamento de aula, com o professor no controle", "Como orientar alunos no uso de IA", "Dados e privacidade na escola, sem juridiquês", "Primeiros passos para coordenadores"],
-    rotuloItens: "Temas previstos",
-  },
-  {
     id: "workshops", nome: "Workshops", status: "Disponível",
     texto: "Encontros de 2 a 3 horas, ao vivo, com a sua equipe ou no seu evento. Para tirar dúvidas, enxergar possibilidades e identificar pontos de atenção.",
     itens: ["Para redes públicas", "Para escolas particulares", "Para empresas do ecossistema educacional"],
     rotuloItens: "Temas por público",
     href: "#temas",
+  },
+  {
+    id: "aulas", nome: "Aulas", status: "Em preparação",
+    texto: "Aulas curtas e gravadas para assistir no seu tempo, organizadas em trilhas para professores, coordenadores e gestores.",
+    itens: ["IA no planejamento de aula, com o professor no controle", "Como orientar alunos no uso de IA", "Dados e privacidade na escola, sem juridiquês", "Primeiros passos para coordenadores"],
+    rotuloItens: "Temas previstos",
   },
   {
     id: "blog", nome: "Blog", status: "Em breve",
@@ -59,7 +59,8 @@ const formatos = [
     <div class="wrap">
       <div class="cabeca">
         <p class="rotulo">Formatos</p>
-        <h2 id="formatos-t">Três jeitos de começar.</h2>
+        <h2 id="formatos-t">Comece pelos workshops.</h2>
+        <p class="lead">Aulas e blog estão em preparação. Deixe seu contato para saber quando abrirem.</p>
       </div>
       <ul class="formatos">
         {formatos.map((f) => (
@@ -106,7 +107,7 @@ const formatos = [
                 {w.sub && <p>{w.sub}</p>}
                 <p class="legenda">Para: {w.publico}</p>
               </div>
-              <a class="link-seta" href={`/contato?perfil=${g.perfil}&assunto=workshop`} aria-label={`Solicitar: ${w.titulo}`}>Solicitar <Seta /></a>
+              <a class="link-seta" href={`/contato?perfil=${g.perfil}&assunto=workshop&tema=${encodeURIComponent(w.titulo)}`} aria-label={`Solicitar: ${w.titulo}`}>Solicitar <Seta /></a>
             </li>
           ))}
         </ol>
@@ -117,7 +118,7 @@ const formatos = [
   <section class="secao--tight bg-menta-papel">
     <div class="wrap regra">
       <Icone nome="conexao" />
-      <p><strong>Todo workshop termina com um próximo passo nomeado.</strong> Para quem quiser seguir, o convite é para o primeiro nível de trabalho do seu público. Workshop sem próximo passo não acontece.</p>
+      <p><strong>O workshop não termina no último slide.</strong> Ao final, você sai sabendo qual seria o próximo passo para a sua instituição, se quiser seguir, e com quem falar sobre ele.</p>
     </div>
   </section>
 
@@ -144,8 +145,14 @@ const formatos = [
     .temas .link-seta { grid-column: 2; }
   }
 
-  .formatos { list-style: none; padding: 0; margin: 48px 0 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
-  @media (max-width: 960px) { .formatos { grid-template-columns: 1fr; } }
+  .formatos { list-style: none; padding: 0; margin: 48px 0 0; display: grid; grid-template-columns: 1.3fr 1fr; gap: 24px; }
+  .formato--ativo { grid-row: span 2; }
+  .formato:not(.formato--ativo) { gap: 12px; padding: clamp(20px, 2.4vw, 28px); }
+  .formato:not(.formato--ativo) h3 { font-size: 21px; }
+  .formato:not(.formato--ativo) .formato__itens { display: none; }
+  .formato:not(.formato--ativo) .rotulo { display: none; }
+  @media (max-width: 860px) { .formatos { grid-template-columns: 1fr; } .formato--ativo { grid-row: auto; } }
+  .cabeca .lead { margin-top: 16px; }
   .formato { display: flex; flex-direction: column; gap: 20px; padding: clamp(24px, 3vw, 36px); border: 1px solid var(--nexa-linha); border-radius: var(--raio); background: var(--nexa-claro); }
   .formato--ativo { background: var(--nexa-menta-papel); border-color: var(--nexa-menta-suave); }
   .formato > p { color: var(--nexa-muted); }

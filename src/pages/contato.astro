@@ -1,6 +1,6 @@
 ---
 /**
- * Etapa 0 do Ciclo: conversa inicial, 40–45 min, sem custo.
+ * Etapa 0 do Ciclo: conversa inicial, 40 min, sem custo.
  * Sem backend nem e-mail definidos (Doutrina 1.7): o formulário monta um e-mail quando SITE.contato.email existir;
  * até lá, mostra o aviso de canal em configuração. Trocar por Formspree/Netlify Forms quando houver domínio.
  */
@@ -10,11 +10,11 @@ import Icone from "../components/Icone.astro";
 import { SITE } from "../data/site";
 const { contato } = SITE;
 ---
-<Base titulo="Contato" descricao="Agende uma conversa inicial com a Nexa: 40 minutos, sem custo, para entender o pedido da sua rede, escola ou empresa.">
+<Base titulo="Contato" descricao="Solicite uma conversa inicial com a Nexa: 40 minutos, sem custo, para entender o pedido da sua rede, escola ou empresa.">
   <section class="secao bg-claro contato">
     <div class="wrap contato__in">
       <div class="stack">
-        <p class="rotulo">Agendar conversa</p>
+        <p class="rotulo">Solicitar conversa</p>
         <h1>Comece por uma conversa de 40 minutos, sem custo.</h1>
         <p class="lead">Entendemos o pedido nas suas palavras. Se fizer sentido seguir, o escopo sai por escrito. Se a resposta certa for “ainda não”, dizemos.</p>
         <ul class="canais">
@@ -25,8 +25,12 @@ const { contato } = SITE;
       </div>
 
       <form class="form cartao" id="form-contato" data-email={contato.email ?? ""} novalidate>
+        {!contato.email && (
+          <p class="form__pendente" role="note"><strong>Formulário em configuração.</strong> O envio ainda não está ativo nesta versão do site. Você pode preencher para conhecer o fluxo; nada será enviado.</p>
+        )}
+        <p class="form__legenda">Campos marcados com <span aria-hidden="true">*</span><span class="sr">asterisco</span> são obrigatórios.</p>
         <fieldset>
-          <legend class="rotulo">Você fala por</legend>
+          <legend class="rotulo">Você fala por <span class="obr" aria-hidden="true">*</span></legend>
           <div class="perfis">
             <label><input type="radio" name="perfil" value="rede" required /> <span>Rede pública</span></label>
             <label><input type="radio" name="perfil" value="escola" /> <span>Escola particular</span></label>
@@ -34,21 +38,26 @@ const { contato } = SITE;
           </div>
         </fieldset>
         <div class="campos">
-          <label>Nome<input name="nome" autocomplete="name" required /></label>
-          <label>Cargo<input name="cargo" autocomplete="organization-title" /></label>
-          <label class="largo">Instituição<input name="instituicao" autocomplete="organization" required /></label>
-          <label>E-mail<input name="email" type="email" autocomplete="email" required /></label>
-          <label>WhatsApp<input name="whatsapp" type="tel" autocomplete="tel" inputmode="tel" /></label>
+          <label>Nome <span class="obr" aria-hidden="true">*</span><input name="nome" autocomplete="name" required aria-describedby="erro-nome" /><span class="erro" id="erro-nome"></span></label>
+          <label>Cargo <span class="opc">opcional</span><input name="cargo" autocomplete="organization-title" /></label>
+          <label class="largo">Instituição <span class="obr" aria-hidden="true">*</span><input name="instituicao" autocomplete="organization" required aria-describedby="erro-instituicao" /><span class="erro" id="erro-instituicao"></span></label>
+          <label>E-mail <span class="obr" aria-hidden="true">*</span><input name="email" type="email" autocomplete="email" required aria-describedby="erro-email" /><span class="erro" id="erro-email"></span></label>
+          <label>WhatsApp <span class="opc">opcional</span><input name="whatsapp" type="tel" autocomplete="tel" inputmode="tel" /></label>
           <label class="largo">Assunto
             <select name="assunto">
               <option value="conversa">Conversa inicial</option>
               <option value="workshop">Workshop</option>
+              <option value="aulas">Aviso: lançamento das aulas</option>
+              <option value="blog">Aviso: lançamento do blog</option>
+              <option value="conteudos">Aviso: novos conteúdos</option>
               <option value="outro">Outro</option>
             </select>
           </label>
-          <label class="largo">O que você gostaria de resolver?<textarea name="mensagem" rows="5"></textarea></label>
+          <label class="largo">O que você gostaria de conversar? <span class="opc">opcional</span><textarea name="mensagem" rows="5"></textarea></label>
         </div>
-        <label class="consent"><input type="checkbox" name="consentimento" required /> <span>Concordo que a Nexa use estes dados só para responder a este contato. <a href="/privacidade">Privacidade e dados</a>.</span></label>
+        <label class="consent"><input type="checkbox" name="consentimento" required aria-describedby="erro-consentimento" /> <span><span class="obr" aria-hidden="true">*</span> Concordo que a Nexa use estes dados só para responder a este contato. <a href="/privacidade">Privacidade e dados</a>.</span></label>
+        <span class="erro" id="erro-consentimento"></span>
+        <p class="erro" id="erro-perfil"></p>
         <button class="btn" type="submit">Enviar <Seta /></button>
         <p class="form__aviso" role="status" aria-live="polite"></p>
       </form>
@@ -63,18 +72,43 @@ const { contato } = SITE;
     const perfil = params.get("perfil");
     const assunto = params.get("assunto");
     if (perfil) (form.querySelector(`input[name=perfil][value="${CSS.escape(perfil)}"]`) as HTMLInputElement | null)?.click();
-    if (assunto) (form.elements.namedItem("assunto") as HTMLSelectElement).value = assunto;
+    const sel = form.elements.namedItem("assunto") as HTMLSelectElement;
+    if (assunto && [...sel.options].some((o) => o.value === assunto)) sel.value = assunto;
+    // Tema do workshop vindo do link "Solicitar" (?tema=...) já entra na mensagem
+    const tema = params.get("tema");
+    if (tema) (form.elements.namedItem("mensagem") as HTMLTextAreaElement).value = `Tema de interesse: ${tema}\n`;
+
+    const msgs: Record<string, string> = {
+      nome: "Informe seu nome.",
+      instituicao: "Informe a instituição.",
+      email: "Informe um e-mail válido, como nome@escola.com.br.",
+      consentimento: "Marque a concordância para podermos responder.",
+    };
+    const marcar = (el: HTMLInputElement) => {
+      const erro = document.getElementById(`erro-${el.name}`);
+      const ok = el.checkValidity();
+      el.setAttribute("aria-invalid", String(!ok));
+      if (erro) erro.textContent = ok ? "" : msgs[el.name] ?? "";
+      return ok;
+    };
+    form.querySelectorAll<HTMLInputElement>("input[required]:not([type=radio])").forEach((el) =>
+      el.addEventListener("blur", () => { if (el.getAttribute("aria-invalid")) marcar(el); }));
 
     const aviso = form.querySelector(".form__aviso") as HTMLElement;
     form.addEventListener("submit", (ev) => {
       ev.preventDefault();
-      if (!form.checkValidity()) {
-        form.reportValidity();
+      const campos = [...form.querySelectorAll<HTMLInputElement>("input[required]:not([type=radio])")];
+      const invalidos = campos.filter((el) => !marcar(el));
+      const perfilOk = !!form.querySelector("input[name=perfil]:checked");
+      (document.getElementById("erro-perfil") as HTMLElement).textContent = perfilOk ? "" : "Escolha por quem você fala.";
+      if (invalidos.length || !perfilOk) {
+        aviso.textContent = "Revise os campos indicados.";
+        (invalidos[0] ?? form.querySelector<HTMLInputElement>("input[name=perfil]"))?.focus();
         return;
       }
       const destino = form.dataset.email;
       if (!destino) {
-        aviso.textContent = "Canal de contato em configuração. Em breve este formulário estará ativo.";
+        aviso.textContent = "Tudo certo com o preenchimento. O envio ainda não está ativo nesta versão; seus dados continuam no formulário e nada foi enviado.";
         return;
       }
       const d = new FormData(form);
@@ -116,12 +150,21 @@ const { contato } = SITE;
   .campos { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 24px !important; }
   .campos .largo { grid-column: 1 / -1; }
   @media (max-width: 560px) { .campos { grid-template-columns: 1fr; } }
-  .campos label { display: grid; gap: 6px; font-weight: 600; font-size: 14px; }
+  .campos label { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px; font-weight: 600; font-size: 14px; }
+  .campos label > input, .campos label > select, .campos label > textarea, .campos label > .erro { flex-basis: 100%; }
   .campos input, .campos select, .campos textarea {
     font: inherit; font-weight: 400; font-size: 16px; color: var(--nexa-noite);
     padding: 12px 14px; border: 1.5px solid var(--nexa-linha); border-radius: var(--raio-sm); background: var(--nexa-claro); width: 100%;
   }
-  .campos input:focus, .campos select:focus, .campos textarea:focus { outline: none; border-color: var(--nexa-violeta); background: var(--nexa-branco); }
+  .campos input:focus-visible, .campos select:focus-visible, .campos textarea:focus-visible { outline: 3px solid var(--nexa-violeta); outline-offset: 2px; border-color: var(--nexa-violeta); background: var(--nexa-branco); }
+  .campos [aria-invalid="true"] { border-color: #B3261E; }
+  .erro { color: #B3261E; font-size: 14px; font-weight: 600; min-height: 0; }
+  .erro:empty { display: none; }
+  .obr { color: var(--nexa-violeta); font-weight: 700; }
+  .opc { font-weight: 400; color: var(--nexa-muted); font-size: 13px; }
+  .form__legenda { font-size: 14px; color: var(--nexa-muted); margin-bottom: 20px; }
+  .form__pendente { font-size: 15px; padding: 14px 16px; border-radius: var(--raio-sm); background: var(--nexa-claro); border-left: 3px solid var(--nexa-violeta); margin-bottom: 16px; }
+  .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
   .consent { display: flex; gap: 10px; align-items: flex-start; font-size: 14px; color: var(--nexa-muted); margin-top: 20px !important; }
   .consent input { margin-top: 4px; accent-color: var(--nexa-violeta); width: 18px; height: 18px; flex: none; }
   .form .btn { margin-top: 24px !important; }

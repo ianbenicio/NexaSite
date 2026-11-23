@@ -6,7 +6,7 @@
 import Seta from "./Seta.astro";
 import { FAIXA, FAIXA_ESTREITA } from "../data/brand";
 interface Props { rotulo?: string; titulo: string; texto?: string; cta?: string; href?: string; }
-const { rotulo = "Próximo passo", titulo, texto, cta = "Agendar conversa", href = "/contato" } = Astro.props;
+const { rotulo = "Próximo passo", titulo, texto, cta = "Solicitar conversa", href = "/contato" } = Astro.props;
 ---
 <section class="fech bg-noite on-dark" aria-labelledby="fech-t">
   <svg class="fech__faixas" viewBox="0 0 900 560" aria-hidden="true" preserveAspectRatio="xMaxYMid slice">

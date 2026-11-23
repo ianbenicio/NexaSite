@@ -38,17 +38,17 @@ export const NAV = [
 
 // Doutrina 5.2 · números de adoção, sempre com a fonte.
 export const DADOS = [
-  { valor: "22%", texto: "das escolas têm diretriz de uso de IA.", fonte: "TIC Educação 2025" },
-  { valor: "53%", texto: "dos gestores já usam IA.", fonte: "TIC Educação 2025" },
-  { valor: "56%", texto: "dos professores já usam IA.", fonte: "TIC Educação 2025" },
+  { valor: "22%", texto: "das escolas têm diretriz de uso de IA.", fonte: "TIC Educação 2025", url: "https://cetic.br/media/pdf/analises/20260804094932_pt_br_tic_educacao_2025_coletiva_de_imprensa.pdf" },
+  { valor: "53%", texto: "dos gestores já usam IA.", fonte: "TIC Educação 2025", url: "https://cetic.br/media/pdf/analises/20260804094932_pt_br_tic_educacao_2025_coletiva_de_imprensa.pdf" },
+  { valor: "56%", texto: "dos professores já usam IA.", fonte: "TIC Educação 2025", url: "https://cetic.br/media/pdf/analises/20260804094932_pt_br_tic_educacao_2025_coletiva_de_imprensa.pdf" },
 ];
 
 // Home · "Por que agora": evidências de que o uso cresce mais rápido que a orientação e a formação.
 // Só dado publicado, com fonte; nenhum número inventado (D-007).
 export const EVIDENCIAS = [
-  { valor: "7 em 10", texto: "alunos do ensino médio usam IA generativa em pesquisas escolares, com orientação da escola ainda limitada.", fonte: "TIC Educação 2025, Cetic.br" },
-  { valor: "39%", texto: "dos professores brasileiros dizem precisar de formação para usar IA no ensino.", fonte: "OCDE, TALIS 2024" },
-  { valor: "Acima", texto: "do esperado: no Brasil, o uso de IA pelos professores supera o nível de formação que eles receberam.", fonte: "BID, Nota CIMA 37, com dados da TALIS 2024" },
+  { valor: "7 em 10", texto: "alunos do ensino médio usam IA generativa em pesquisas escolares, com orientação da escola ainda limitada.", fonte: "TIC Educação 2025, Cetic.br", url: "https://cetic.br/media/pdf/analises/20260804094932_pt_br_tic_educacao_2025_coletiva_de_imprensa.pdf" },
+  { valor: "39%", texto: "dos professores brasileiros dizem precisar de formação para usar IA no ensino.", fonte: "OCDE, TALIS 2024", url: "https://agenciabrasil.ebc.com.br/educacao/noticia/2025-10/professores-no-brasil-usam-mais-ia-que-media-dos-paises-da-ocde/" },
+  { valor: "Acima", texto: "do esperado: no Brasil, o uso de IA pelos professores supera o nível de formação que eles receberam.", fonte: "BID, Nota CIMA 37, com dados da TALIS 2024", url: "https://publications.iadb.org/publications/spanish/document/Nota-CIMA-37-Inteligencia-artificial-en-las-escuelas-evidencia-desde-TALIS-2024.pdf" },
 ];
 
 // Doutrina 5.1 · uma mensagem, três falas.
@@ -69,7 +69,7 @@ export const ETAPAS_CURTAS = [
 
 // Método 1 · Ciclo Nexa. Etapas 0–4 = Nível 1; 5–7 = Nível 2.
 export const CICLO = [
-  { n: 0, nome: "Conversa inicial", texto: "40 a 45 minutos, sem custo. Entendemos o pedido nas palavras de quem pede e fechamos o escopo por escrito.", artefato: "Acordo de escopo", nivel: 1 },
+  { n: 0, nome: "Conversa inicial", texto: "40 minutos, sem custo. Entendemos o pedido nas palavras de quem pede e fechamos o escopo por escrito.", artefato: "Acordo de escopo", nivel: 1 },
   { n: 1, nome: "Escuta em camadas", texto: "Direção, coordenação e professores, cada camada em separado. Ao menos uma conversa presencial. Registro em até 48 horas.", artefato: "Ficha de registro por camada", nivel: 1 },
   { n: 2, nome: "Cruzamento e leitura", texto: "Trabalho interno da Nexa: cruzamos o que cada camada disse. Toda prioridade precisa de apoio em pelo menos duas camadas.", artefato: "Matriz de prioridades", nivel: 1, interno: true },
   { n: 3, nome: "Devolutiva e pactuação", texto: "Apresentamos a leitura e a instituição escolhe as prioridades, por escrito.", artefato: "Ata de prioridades", nivel: 1, marco: 1 },

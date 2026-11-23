@@ -18,7 +18,7 @@ const ativo = (href: string) => (href === "/" ? atual === "/" : atual === href |
           <li><a href={i.href} aria-current={ativo(i.href) ? "page" : undefined}>{i.rotulo}</a></li>
         ))}
       </ul>
-      <a class="btn topo__cta" href="/contato">Agendar conversa <Seta /></a>
+      <a class="btn topo__cta" href="/contato">Solicitar conversa <Seta /></a>
     </nav>
 
     <details class="menu">
@@ -32,7 +32,7 @@ const ativo = (href: string) => (href === "/" ? atual === "/" : atual === href |
             <li><a href={i.href} aria-current={ativo(i.href) ? "page" : undefined}>{i.rotulo}</a></li>
           ))}
         </ul>
-        <a class="btn" href="/contato">Agendar conversa <Seta /></a>
+        <a class="btn" href="/contato">Solicitar conversa <Seta /></a>
       </div>
     </details>
   </div>
