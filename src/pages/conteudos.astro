@@ -1,0 +1,163 @@
+---
+/** Fonte: Doutrina 5.5 (D-052) e Portfólio v1 · Workshops. Página de tela/evento: registro Faixa diagonal no topo. */
+import Base from "../layouts/Base.astro";
+import Seta from "../components/Seta.astro";
+import Icone from "../components/Icone.astro";
+import Fechamento from "../components/Fechamento.astro";
+import { WORKSHOPS } from "../data/site";
+import { FAIXA, FAIXA_ESTREITA } from "../data/brand";
+
+const grupos = [
+  { id: "redes", rotulo: "Para redes públicas", lista: WORKSHOPS.redes, perfil: "rede", proximo: "Abre o Nível 1 · Diretriz de IA da Rede" },
+  { id: "escolas", rotulo: "Para escolas particulares", lista: WORKSHOPS.escolas, perfil: "escola", proximo: "Abre o Programa 1 · Escola Preparada para IA" },
+  { id: "empresas", rotulo: "Para empresas do ecossistema educacional", lista: WORKSHOPS.empresas, perfil: "empresa", proximo: "Módulo de formação adaptado ao produto da empresa" },
+];
+
+// Aulas e Blog ainda não existem: a página mostra o que vem, sem data prometida e sem conteúdo inventado.
+const formatos = [
+  {
+    id: "aulas", nome: "Aulas", status: "Em preparação",
+    texto: "Aulas curtas e gravadas para assistir no seu tempo, organizadas em trilhas para professores, coordenadores e gestores.",
+    itens: ["IA no planejamento de aula, com o professor no controle", "Como orientar alunos no uso de IA", "Dados e privacidade na escola, sem juridiquês", "Primeiros passos para coordenadores"],
+    rotuloItens: "Temas previstos",
+  },
+  {
+    id: "workshops", nome: "Workshops", status: "Disponível",
+    texto: "Encontros de 2 a 3 horas, ao vivo, com a sua equipe ou no seu evento. Para tirar dúvidas, enxergar possibilidades e identificar pontos de atenção.",
+    itens: ["Para redes públicas", "Para escolas particulares", "Para empresas do ecossistema educacional"],
+    rotuloItens: "Temas por público",
+    href: "#temas",
+  },
+  {
+    id: "blog", nome: "Blog", status: "Em breve",
+    texto: "Textos curtos sobre o que muda na escola com a chegada da IA: diretrizes, rotinas, experiências e perguntas que ouvimos nas instituições.",
+    itens: ["O que as diretrizes do CNE pedem, em linguagem simples", "Perguntas que as famílias fazem sobre IA", "Rotinas da secretaria que a tecnologia pode simplificar"],
+    rotuloItens: "Primeiras pautas",
+  },
+];
+---
+<Base titulo="Conteúdos" descricao="Conteúdos da Nexa sobre IA na educação: aulas, workshops e blog para redes públicas, escolas e empresas do ecossistema.">
+  <section class="hero bg-noite on-dark">
+    <svg class="hero__faixas" viewBox="0 0 900 560" aria-hidden="true" preserveAspectRatio="xMaxYMid slice">
+      <defs>
+        <linearGradient id="aurora-ws" x1="0" y1="1" x2="1" y2="0">
+          <stop offset="0" stop-color="#7546F6" /><stop offset=".52" stop-color="#22C6E8" /><stop offset="1" stop-color="#71E3BA" />
+        </linearGradient>
+      </defs>
+      <path d={FAIXA.d} fill="url(#aurora-ws)" transform="translate(320 60) scale(1.05)" />
+      <path d={FAIXA_ESTREITA.d} fill="#71E3BA" transform="translate(600 120) scale(.85)" />
+    </svg>
+    <div class="wrap hero__in">
+      <p class="rotulo">Conteúdos · Aulas, workshops e blog</p>
+      <h1>Entender onde a IA cabe, e onde ainda não.</h1>
+      <p class="lead">Três formatos para quem quer começar a conversa sobre IA na escola: aulas para estudar no seu ritmo, workshops ao vivo com a equipe e um blog com o que estamos vendo nas instituições. Os workshops já estão abertos. Aulas e blog chegam em breve.</p>
+      <div class="acoes"><a class="btn" href="#temas">Ver temas dos workshops <Seta /></a><a class="btn btn--ghost" href="/contato?assunto=conteudos">Quero ser avisado</a></div>
+    </div>
+  </section>
+
+  <section class="secao bg-branco" aria-labelledby="formatos-t">
+    <div class="wrap">
+      <div class="cabeca">
+        <p class="rotulo">Formatos</p>
+        <h2 id="formatos-t">Três jeitos de começar.</h2>
+      </div>
+      <ul class="formatos">
+        {formatos.map((f) => (
+          <li class={`formato ${f.href ? "formato--ativo" : ""}`} id={`formato-${f.id}`}>
+            <div class="formato__topo">
+              <h3>{f.nome}</h3>
+              <span class={`formato__status ${f.href ? "formato__status--ok" : ""}`}>{f.status}</span>
+            </div>
+            <p>{f.texto}</p>
+            <div>
+              <p class="rotulo">{f.rotuloItens}</p>
+              <ul class="lista-seta formato__itens">{f.itens.map((i) => <li>{i}</li>)}</ul>
+            </div>
+            {f.href
+              ? <a class="link-seta" href={f.href}>Ver os temas <Seta /></a>
+              : <a class="link-seta" href={`/contato?assunto=${f.id}`}>Avisar quando abrir <Seta /></a>}
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section id="temas" class="secao--tight bg-claro" aria-labelledby="temas-t">
+    <div class="wrap cabeca">
+      <p class="rotulo">Workshops · 2 a 3 horas</p>
+      <h2 id="temas-t">Temas disponíveis.</h2>
+      <p class="lead">Gratuitos em eventos, associações e redes, dentro do nosso limite de dois por mês. In-company sob proposta.</p>
+    </div>
+  </section>
+
+  {grupos.map((g, gi) => (
+    <section class={`secao ${gi % 2 ? "bg-branco" : "bg-claro"}`} aria-labelledby={`g-${g.id}`}>
+      <div class="wrap">
+        <div class="grupo__cab">
+          <h2 id={`g-${g.id}`}>{g.rotulo}</h2>
+          <p class="legenda">{g.proximo}</p>
+        </div>
+        <ol class="temas">
+          {g.lista.map((w, i) => (
+            <li>
+              <span class="temas__n tabular">{String(i + 1).padStart(2, "0")}</span>
+              <div>
+                <h3>{w.titulo}</h3>
+                {w.sub && <p>{w.sub}</p>}
+                <p class="legenda">Para: {w.publico}</p>
+              </div>
+              <a class="link-seta" href={`/contato?perfil=${g.perfil}&assunto=workshop`} aria-label={`Solicitar: ${w.titulo}`}>Solicitar <Seta /></a>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </section>
+  ))}
+
+  <section class="secao--tight bg-menta-papel">
+    <div class="wrap regra">
+      <Icone nome="conexao" />
+      <p><strong>Todo workshop termina com um próximo passo nomeado.</strong> Para quem quiser seguir, o convite é para o primeiro nível de trabalho do seu público. Workshop sem próximo passo não acontece.</p>
+    </div>
+  </section>
+
+  <Fechamento titulo="Quer levar um tema para o seu evento ou equipe?" texto="Workshops já podem ser agendados. Se preferir esperar as aulas e o blog, deixe seu contato e avisamos quando abrirem." href="/contato?assunto=workshop" cta="Solicitar um workshop" />
+</Base>
+
+<style>
+  .hero { position: relative; overflow: hidden; padding-block: clamp(64px, 9vw, 128px); }
+  .hero__faixas { position: absolute; right: -4%; top: 0; height: 100%; width: 55%; pointer-events: none; }
+  .hero__in { position: relative; }
+  .hero__in > * + * { margin-top: 24px; }
+  .hero h1 { max-width: 15ch; }
+  .hero .acoes { margin-top: 40px; }
+  @media (max-width: 860px) { .hero__faixas { width: 120%; right: -70%; opacity: .4; } }
+
+  .grupo__cab { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 8px 32px; padding-bottom: 20px; border-bottom: 2px solid var(--nexa-noite); }
+  .temas { list-style: none; padding: 0; margin: 0; }
+  .temas li { display: grid; grid-template-columns: 64px 1fr auto; gap: 24px; align-items: center; padding: 28px 0; border-bottom: 1px solid var(--nexa-linha); }
+  .temas li > div > * + * { margin-top: 6px; }
+  .temas li > div > p:not(.legenda) { color: var(--nexa-muted); }
+  .temas__n { font-family: var(--font-titulo); font-weight: 600; font-size: 28px; color: var(--nexa-violeta); }
+  @media (max-width: 640px) {
+    .temas li { grid-template-columns: 44px 1fr; }
+    .temas .link-seta { grid-column: 2; }
+  }
+
+  .formatos { list-style: none; padding: 0; margin: 48px 0 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  @media (max-width: 960px) { .formatos { grid-template-columns: 1fr; } }
+  .formato { display: flex; flex-direction: column; gap: 20px; padding: clamp(24px, 3vw, 36px); border: 1px solid var(--nexa-linha); border-radius: var(--raio); background: var(--nexa-claro); }
+  .formato--ativo { background: var(--nexa-menta-papel); border-color: var(--nexa-menta-suave); }
+  .formato > p { color: var(--nexa-muted); }
+  .formato__topo { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+  .formato__topo h3 { font-size: 26px; }
+  .formato__status { font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; padding: 5px 10px; border-radius: 999px; border: 1px solid var(--nexa-linha); color: var(--nexa-muted); background: var(--nexa-branco); white-space: nowrap; }
+  .formato__status--ok { border-color: var(--nexa-noite); color: var(--nexa-noite); background: var(--nexa-menta); }
+  .formato__itens { margin-top: 12px; font-size: 15px; }
+  .formato .link-seta { margin-top: auto; }
+  #temas .lead { margin-top: 16px; }
+  #temas h2 { margin-top: 8px; }
+
+  .regra { display: flex; gap: 20px; align-items: flex-start; max-width: 860px; }
+  .regra p { font-size: 18px; }
+</style>

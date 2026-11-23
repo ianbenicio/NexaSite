@@ -4,16 +4,56 @@ import Seta from "../components/Seta.astro";
 import Icone from "../components/Icone.astro";
 import FotoFaixa from "../components/FotoFaixa.astro";
 import Fechamento from "../components/Fechamento.astro";
-import { DADOS, FALAS, ETAPAS_CURTAS, NAO_SOMOS, CNE } from "../data/site";
+import { DADOS, EVIDENCIAS, FALAS, ETAPAS_CURTAS, CNE } from "../data/site";
+// Cenas da home: situações descritivas, sem caso real nem número inventado (D-007).
+// Gramática neutra: a home é lida por escolas, então nada de vocabulário vetado no B2B (D-010).
+const cenas = [
+  {
+    quem: "Escolas e redes",
+    titulo: "Cada professor usa a IA de um jeito, e ninguém combinou nada.",
+    texto: "Uma professora prepara aulas com um assistente de IA. O colega da sala ao lado proibiu. A coordenação descobre pelos alunos. Quando a família pergunta, cada um responde uma coisa.",
+    nexa: "Escutamos quem já usa e escrevemos com a equipe uma política com usos permitidos por etapa. A instituição passa a dar uma resposta só.",
+  },
+  {
+    quem: "Rede pública",
+    titulo: "O prazo das diretrizes começou a correr, e a rede não sabe por onde começar.",
+    texto: "A orientação chegou, o controle externo vai perguntar, e a equipe técnica já está no limite com o resto da agenda. Doze meses parecem muito até virarem seis.",
+    nexa: "Traduzimos as diretrizes para a realidade da rede e entregamos a diretriz municipal com um plano de adequação, responsáveis e marcos.",
+  },
+  {
+    quem: "Escolas e redes",
+    titulo: "Compraram a plataforma. Meses depois, pouca gente entra.",
+    texto: "A licença está paga, o treinamento aconteceu, a senha ninguém lembra. A ferramenta chegou antes de alguém perguntar para que ela serviria na rotina.",
+    nexa: "Começamos pela rotina que a ferramenta deveria servir. Só depois de entender o processo avaliamos com a equipe se uma ferramenta faz sentido, qual, e o que precisa mudar para ela ser usada.",
+  },
+  {
+    quem: "Escolas e redes",
+    titulo: "A formação foi ótima. Na segunda-feira, tudo continuou igual.",
+    texto: "Auditório cheio, slides compartilhados, boa impressão geral. Sem tempo para praticar no trabalho de verdade e sem ninguém para acompanhar depois, a rotina venceu.",
+    nexa: "Formamos em cima do trabalho real, acompanhamos entre os encontros e medimos o que mudou em 60 a 90 dias, inclusive o que não melhorou.",
+  },
+  {
+    quem: "Escola particular",
+    titulo: "Uma mãe perguntou na reunião se a escola usa IA. A resposta foi um silêncio.",
+    texto: "As famílias leem sobre IA todos os dias e querem saber o que acontece com os filhos. Sem uma posição clara, cada conversa vira improviso, e isso aparece na matrícula.",
+    nexa: "Construímos a política de IA da escola e uma versão em linguagem de família, com roteiro para a equipe usar nas conversas de matrícula.",
+  },
+  {
+    quem: "Escolas e redes",
+    titulo: "O professor leva para casa o que a IA poderia adiantar.",
+    texto: "Planejamento, devolutivas, mensagens para as famílias, planilhas da secretaria. A noite do professor vai embora em tarefas que se repetem toda semana.",
+    nexa: "Escolhemos com a equipe um ou dois processos, redesenhamos e colocamos a IA para devolver tempo ao professor. A decisão pedagógica continua com ele.",
+  },
+];
 ---
 <Base>
   <!-- 1 · Topo (Guia 4.1 · Site e redes) -->
   <section class="hero bg-claro">
     <div class="wrap hero__in">
       <div class="hero__txt">
-        <p class="rotulo">Consultoria em educação</p>
-        <h1>Organizar o processo antes de escolher a ferramenta.</h1>
-        <p class="lead">Ajudamos redes públicas e escolas particulares a colocar a IA para funcionar com responsabilidade: primeiro o processo, depois as pessoas, então a ferramenta.</p>
+        <p class="rotulo">Processos, pessoas e IA na educação</p>
+        <h1>Organize o processo antes da escolha da ferramenta.</h1>
+        <p class="lead">Ajudamos redes públicas e escolas particulares a trabalharem com tecnologias e IA, com eficiência e responsabilidade.</p>
         <div class="acoes">
           <a class="btn" href="/contato">Agendar conversa <Seta /></a>
           <a class="btn btn--ghost" href="/metodo">Ver o método</a>
@@ -23,13 +63,42 @@ import { DADOS, FALAS, ETAPAS_CURTAS, NAO_SOMOS, CNE } from "../data/site";
     </div>
   </section>
 
-  <!-- 2 · Por que agora (Doutrina 5.2) -->
+
+  <!-- 2 · Cenas: o visitante se reconhece antes de ler sobre a Nexa -->
+  <section class="secao bg-branco" aria-labelledby="cenas-t">
+    <div class="wrap">
+      <div class="cabeca">
+        <p class="rotulo">Talvez seja o seu caso</p>
+        <h2 id="cenas-t">Alguma destas cenas parece com a sua semana?</h2>
+        <p class="lead">São cenas comuns em escolas. Nenhuma se resolve com uma ferramenta nova. Todas começam a mudar quando alguém organiza o processo.</p>
+      </div>
+      <ul class="cenas">
+        {cenas.map((c) => (
+          <li class="cena">
+            <p class="cena__quem">{c.quem}</p>
+            <h3>{c.titulo}</h3>
+            <p class="cena__texto">{c.texto}</p>
+            <div class="cena__nexa">
+              <p class="rotulo">Com a Nexa</p>
+              <p>{c.nexa}</p>
+            </div>
+          </li>
+        ))}
+      </ul>
+      <div class="cenas__fim">
+        <p>Se reconheceu alguma, a conversa começa por ela.</p>
+        <a class="btn" href="/contato">Agendar conversa <Seta /></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3 · Por que agora (Doutrina 5.2) -->
   <section class="secao bg-noite on-dark agora" aria-labelledby="agora-t">
     <div class="wrap">
       <div class="agora__topo">
         <div class="cabeca">
           <p class="rotulo">Por que agora</p>
-          <h2 id="agora-t">O uso já chegou. A regra, quase nunca.</h2>
+          <h2 id="agora-t">A tecnologia de IA já chegou à escola, e para ficar.</h2>
           <p class="lead">{CNE.frase}</p>
         </div>
         <div class="prazo" aria-label="12 meses de adequação">
@@ -47,10 +116,27 @@ import { DADOS, FALAS, ETAPAS_CURTAS, NAO_SOMOS, CNE } from "../data/site";
           </li>
         ))}
       </ul>
+
+      <div class="indaga">
+        <div class="indaga__txt">
+          <p class="rotulo">A pergunta que fica</p>
+          <p class="indaga__tit">Os números mostram quantos usam. Eles mostram se usam bem?</p>
+          <p>A adesão cresceu mais rápido do que qualquer formação, regra ou acompanhamento conseguiu acompanhar. A IA está nos celulares, nos planejamentos e nas secretarias. Se ela está melhorando o ensino e a rotina da escola, ou só acontecendo, ninguém consegue dizer ainda. A própria OCDE registra que o impacto da IA na educação segue incerto.</p>
+        </div>
+        <ul class="indaga__lista">
+          {EVIDENCIAS.map((d) => (
+            <li>
+              <p class="indaga__v tabular">{d.valor}</p>
+              <p>{d.texto}</p>
+              <p class="legenda">Fonte: {d.fonte}</p>
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   </section>
 
-  <!-- 3 · Dois caminhos (D-005: nenhum material atravessa a fronteira sem tradução) -->
+  <!-- 4 · Dois caminhos (D-005: nenhum material atravessa a fronteira sem tradução) -->
   <section class="secao bg-claro" aria-labelledby="caminhos-t">
     <div class="wrap">
       <div class="cabeca">
@@ -58,14 +144,14 @@ import { DADOS, FALAS, ETAPAS_CURTAS, NAO_SOMOS, CNE } from "../data/site";
         <h2 id="caminhos-t">Dois públicos, a mesma ordem de trabalho.</h2>
       </div>
       <div class="grid-2 caminhos">
-        <a class="caminho caminho--rede" href="/redes-publicas">
+        <a class="caminho caminho--rede" href="/redes-escolares/rede-publica">
           <Icone nome="governanca" />
           <p class="rotulo">Redes públicas</p>
           <h3>Secretarias municipais de educação</h3>
           <p>{FALAS.b2g}</p>
           <span class="link-seta">Diretriz, plano de adequação e formação <Seta /></span>
         </a>
-        <a class="caminho caminho--escola" href="/escolas">
+        <a class="caminho caminho--escola" href="/redes-escolares/escolas-particulares">
           <Icone nome="pessoas" />
           <p class="rotulo">Escolas particulares</p>
           <h3>Direção, mantenedores e coordenação</h3>
@@ -76,7 +162,7 @@ import { DADOS, FALAS, ETAPAS_CURTAS, NAO_SOMOS, CNE } from "../data/site";
     </div>
   </section>
 
-  <!-- 4 · Como trabalhamos (trilho de setas) -->
+  <!-- 5 · Como trabalhamos (trilho de setas) -->
   <section class="secao bg-branco" aria-labelledby="como-t">
     <div class="wrap">
       <div class="cabeca">
@@ -96,35 +182,23 @@ import { DADOS, FALAS, ETAPAS_CURTAS, NAO_SOMOS, CNE } from "../data/site";
           </li>
         ))}
       </ol>
+      <div class="recusa">
+        <p class="rotulo">O que você não vai receber de nós</p>
+        <p>Plataforma pronta procurando onde encaixar, curso solto sem acompanhamento, ferramenta indicada por comissão ou um “sim” para tudo. Quando algo não deve ser feito, dizemos, mesmo que isso reduza o nosso contrato.</p>
+      </div>
       <a class="link-seta" href="/metodo">Ver o Ciclo Nexa completo <Seta /></a>
     </div>
   </section>
 
-  <!-- 5 · O que não somos (Doutrina 1.4) -->
-  <section class="secao bg-claro" aria-labelledby="nao-t">
-    <div class="wrap nao">
-      <div class="cabeca">
-        <p class="rotulo">O que não somos</p>
-        <h2 id="nao-t">Parecer consultoria antes de parecer tecnologia.</h2>
-        <p class="lead">Dizer o que recusamos ajuda a instituição a saber o que esperar de nós.</p>
-      </div>
-      <ul class="nao__lista">
-        {NAO_SOMOS.map((n) => (
-          <li><h3>{n.titulo}</h3><p>{n.texto}</p></li>
-        ))}
-      </ul>
-    </div>
-  </section>
-
-  <!-- 6 · Workshops (D-052) -->
+  <!-- 6 · Conteúdos (workshops, D-052) -->
   <section class="secao--tight bg-menta-papel" aria-labelledby="ws-t">
     <div class="wrap ws">
       <Icone nome="formacao" />
       <div>
-        <p class="rotulo">Workshops</p>
-        <h2 id="ws-t">Duas a três horas, prático, e você sai com uma ferramenta de uso imediato.</h2>
+        <p class="rotulo">Conteúdos · Workshops</p>
+        <h2 id="ws-t">Duas a três horas para tirar dúvidas, enxergar possibilidades e identificar onde a IA pede atenção na sua instituição.</h2>
       </div>
-      <a class="btn btn--ghost" href="/workshops">Ver temas</a>
+      <a class="btn btn--ghost" href="/conteudos">Ver conteúdos</a>
     </div>
   </section>
 
@@ -151,6 +225,17 @@ import { DADOS, FALAS, ETAPAS_CURTAS, NAO_SOMOS, CNE } from "../data/site";
   .dados { list-style: none; padding: 0; margin: 64px 0 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
   .dados li { border-top: 1px solid rgb(204 213 229 / .25); padding-top: 24px; }
   .dados li > * + * { margin-top: 8px; }
+  .indaga { margin-top: 72px; padding-top: 56px; border-top: 1px solid rgb(204 213 229 / .25); display: grid; grid-template-columns: 1fr 1.2fr; gap: clamp(32px, 5vw, 80px); align-items: start; }
+  @media (max-width: 900px) { .indaga { grid-template-columns: 1fr; } }
+  .indaga__txt > * + * { margin-top: 16px; }
+  .indaga__txt p:last-child { color: var(--nexa-claro-noite); }
+  .indaga__tit { font-family: var(--font-titulo); font-weight: 600; font-size: clamp(24px, 2.6vw, 34px); line-height: 1.2; color: var(--nexa-branco); }
+  .indaga__lista { list-style: none; padding: 0; margin: 0; display: grid; }
+  .indaga__lista li { display: grid; grid-template-columns: 8.5em 1fr; column-gap: 20px; padding: 20px 0; border-top: 1px solid rgb(204 213 229 / .25); }
+  .indaga__lista li:first-child { border-top: 0; padding-top: 0; }
+  .indaga__lista .legenda { grid-column: 2; margin-top: 6px; }
+  .indaga__v { grid-row: span 2; font-family: var(--font-titulo); font-weight: 600; font-size: clamp(26px, 2.6vw, 32px); line-height: 1.1; color: var(--nexa-claro); white-space: nowrap; }
+  @media (max-width: 520px) { .indaga__lista li { grid-template-columns: 1fr; } .indaga__lista .legenda { grid-column: 1; } .indaga__v { grid-row: auto; margin-bottom: 6px; } }
   .dados__v { font-family: var(--font-titulo); font-weight: 600; font-size: clamp(44px, 5vw, 64px); line-height: 1; color: var(--nexa-menta); letter-spacing: -0.02em; }
   @media (max-width: 720px) { .dados { grid-template-columns: 1fr; gap: 0; } .dados li { padding-block: 24px; } }
 
@@ -178,12 +263,18 @@ import { DADOS, FALAS, ETAPAS_CURTAS, NAO_SOMOS, CNE } from "../data/site";
   @media (max-width: 900px) { .trilho { grid-template-columns: 1fr 1fr; } .trilho::before { display: none; } }
   @media (max-width: 520px) { .trilho { grid-template-columns: 1fr; } }
 
-  .nao { display: grid; grid-template-columns: 1fr 1.3fr; gap: clamp(32px, 6vw, 96px); align-items: start; }
-  .nao__lista { list-style: none; margin: 0; padding: 0; }
-  .nao__lista li { padding: 24px 0; border-top: 1px solid var(--nexa-linha); display: grid; grid-template-columns: 1fr 1.4fr; gap: 24px; }
-  .nao__lista li:last-child { border-bottom: 1px solid var(--nexa-linha); }
-  .nao__lista p { color: var(--nexa-muted); }
-  @media (max-width: 900px) { .nao { grid-template-columns: 1fr; } .nao__lista li { grid-template-columns: 1fr; gap: 8px; } }
+  .recusa { margin: 8px 0 40px; padding: 24px 28px; border-left: 3px solid var(--nexa-violeta); background: var(--nexa-claro); border-radius: 0 var(--raio-sm) var(--raio-sm) 0; max-width: 860px; }
+  .recusa > * + * { margin-top: 8px; }
+
+  .cenas { list-style: none; padding: 0; margin: 56px 0 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr)); gap: 24px; }
+  .cena { display: flex; flex-direction: column; gap: 14px; padding: clamp(24px, 3vw, 36px); border: 1px solid var(--nexa-linha); border-radius: var(--raio); background: var(--nexa-claro); }
+  .cena__quem { font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--nexa-muted); }
+  .cena h3 { font-size: clamp(19px, 1.7vw, 21px); }
+  .cena__texto { color: var(--nexa-muted); }
+  .cena__nexa { margin-top: auto; padding-top: 18px; border-top: 1px solid var(--nexa-linha); }
+  .cena__nexa > * + * { margin-top: 8px; }
+  .cenas__fim { margin-top: 48px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px 32px; padding: 28px 32px; border-radius: var(--raio); background: var(--nexa-noite); color: var(--nexa-claro); }
+  .cenas__fim p { font-family: var(--font-titulo); font-weight: 600; font-size: clamp(19px, 2vw, 24px); }
 
   .ws { display: flex; align-items: center; gap: 32px; }
   .ws > div { flex: 1; }

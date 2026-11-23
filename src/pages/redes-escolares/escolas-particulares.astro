@@ -1,0 +1,246 @@
+---
+/**
+ * Registro Encontro · escola B2B (Guia 4.1 · Parte III).
+ * Menta papel e noite. As faixas do símbolo crescem, saem pela borda e viram o desenho da peça.
+ * Gramática B2B (Doutrina 1.6): programa, preparação, diferenciação, famílias, tempo devolvido ao professor.
+ * PROIBIDO nesta página: diagnóstico, problema, correção, erro, déficit (D-010).
+ * Fonte: Portfólio v1 · B2B N1 e N2.
+ */
+import Base from "../../layouts/Base.astro";
+import Seta from "../../components/Seta.astro";
+import Icone from "../../components/Icone.astro";
+import Fechamento from "../../components/Fechamento.astro";
+import { FALAS, WORKSHOPS } from "../../data/site";
+import { SIMBOLO } from "../../data/brand";
+
+const n1 = [
+  "Mapeamento apreciativo das práticas e processos da escola, com direção, coordenação e professores: o que a escola já faz bem e onde a IA pode amplificar.",
+  "Política institucional de IA: usos por etapa, vedações do CNE, dados, papéis e revisão.",
+  "Versão para famílias, em uma página e sem jargão, com roteiro de comunicação para o período de matrícula.",
+  "Mapa de prioridades: implementar agora, preparar antes, ainda não.",
+  "Encontro de apresentação à equipe.",
+];
+const n2 = [
+  "Processo atual e processo redesenhado, documentados. A documentação é a especificação da ferramenta.",
+  "Ferramenta implementada na ordem: usar o que a escola já tem, contratar por curadoria ou construir sob medida.",
+  "Formação da equipe no processo novo, não na ferramenta isolada.",
+  "Medição em 60 a 90 dias: tempo devolvido, adesão da equipe, satisfação das famílias quando couber, e o que não melhorou.",
+];
+// Foco da escola particular: qualidade que a família percebe e custo de gestão que o mantenedor enxerga.
+// Cenas sem caso real nem número inventado (D-007). Vocabulário B2B vetado continua valendo (D-010).
+const cenasEscola = [
+  {
+    titulo: "Rematrícula: o mesmo dado digitado quatro vezes.",
+    texto: "A ficha chega pelo formulário, passa para a planilha da secretaria, depois para o sistema de gestão, depois para o financeiro. Cada passagem custa horas, e o boleto sai com o nome do responsável trocado.",
+  },
+  {
+    titulo: "A coordenação passou a semana respondendo mensagens.",
+    texto: "Horário da prova, material da excursão, tarefa que não chegou. Cada resposta leva dois minutos. Somadas, levam o tempo que deveria ir para acompanhar professor em sala.",
+  },
+  {
+    titulo: "A família elogia a professora e reclama da secretaria.",
+    texto: "O que segura uma família não é só a aula. É a resposta no mesmo dia, o documento que sai sem segunda ida à escola, a mesma informação vinda de pessoas diferentes.",
+  },
+  {
+    titulo: "Na reunião da mantenedora, ninguém sabe dizer quanto custa a rotina.",
+    texto: "Hora extra no fechamento do mês, retrabalho na secretaria, sistemas pagos usados pela metade. Sem olhar o processo, não dá para dizer para onde vai o dinheiro, nem o tempo.",
+  },
+];
+const medidas = [
+  ["Tempo por processo", "Quanto a equipe leva hoje para matricular, emitir um documento ou fechar o mês, e quanto leva depois."],
+  ["Retrabalho", "Quantas vezes o mesmo dado é digitado e quantas etapas existem só para conferir outra etapa."],
+  ["Resposta às famílias", "Em quanto tempo a família recebe resposta, e se recebe a mesma resposta de quem quer que atenda."],
+  ["Adesão da equipe", "Quem usa o processo novo depois de 60 a 90 dias, e o que não melhorou."],
+];
+---
+<Base titulo="Escolas particulares" descricao="Política de IA da escola, versão para famílias e processos que devolvem tempo ao professor. Para escolas particulares de 200 a 800 alunos.">
+  <section class="hero bg-menta-papel">
+    <svg class="hero__faixas" viewBox={`0 0 ${SIMBOLO.w} ${SIMBOLO.h}`} aria-hidden="true">
+      <path d={SIMBOLO.corpo} fill="#C6F3E2" />
+      <path d={SIMBOLO.dobras} fill="#C6F3E2" />
+    </svg>
+    <div class="wrap hero__in">
+      <nav class="migalha" aria-label="Você está em"><a href="/redes-escolares">Redes escolares</a><span aria-hidden="true">/</span><span aria-current="page">Escolas particulares</span><a class="migalha__outra" href="/redes-escolares/rede-publica">Ver rede pública</a></nav>
+      <p class="rotulo">Para escolas particulares</p>
+      <h1>Quando a família perguntar sobre IA, sua escola tem resposta.</h1>
+      <p class="lead">{FALAS.b2b}</p>
+      <div class="acoes">
+        <a class="btn" href="/contato?perfil=escola">Agendar conversa <Seta /></a>
+        <a class="btn btn--ghost" href="#programas">Ver os programas</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="secao--tight bg-branco" aria-labelledby="mat-t">
+    <div class="wrap grid-3 pilares">
+      <div><Icone nome="dialogo" /><h3 id="mat-t">Uma posição clara para a matrícula</h3><p>Política própria, alinhada às diretrizes aprovadas pelo CNE, e uma versão em linguagem de família que mostra como a IA preserva o que os pais valorizam.</p></div>
+      <div><Icone nome="pessoas" /><h3>O professor decide</h3><p>A IA entra para devolver tempo ao professor, não para substituí-lo. A decisão pedagógica fica sempre com a pessoa.</p></div>
+      <div><Icone nome="tecnologia" /><h3>A ferramenta que a escola já paga</h3><p>Muitas escolas já têm IA no sistema de ensino. Começamos por ela antes de sugerir qualquer compra.</p></div>
+    </div>
+  </section>
+
+  <!-- Foco: qualidade que a família percebe, custo que a mantenedora enxerga -->
+  <section class="secao bg-menta-papel foco" aria-labelledby="foco-t">
+    <div class="wrap">
+      <div class="cabeca">
+        <p class="rotulo">Por trás da sala de aula</p>
+        <h2 id="foco-t">A família percebe a qualidade da escola também pela secretaria.</h2>
+        <p class="lead">A aula é o centro, mas a confiança se constrói em cada atendimento, cada boleto, cada recado. Quando os processos de gestão andam bem, a escola gasta menos para funcionar e a família sente a diferença sem que ninguém precise dizer.</p>
+      </div>
+      <ul class="foco__cenas">
+        {cenasEscola.map((c) => (
+          <li>
+            <h3>{c.titulo}</h3>
+            <p>{c.texto}</p>
+          </li>
+        ))}
+      </ul>
+
+      <div class="painel">
+        <div class="painel__cab">
+          <p class="rotulo">Com a Nexa</p>
+          <p class="painel__tit">A qualidade que a escola oferece passa a ter registro.</p>
+          <p>Escolhemos com a equipe os processos que mais pesam, redesenhamos e medimos antes e depois. A direção e a mantenedora passam a ver, com números da própria escola, onde o tempo e o dinheiro voltaram a render.</p>
+        </div>
+        <dl class="painel__lista">
+          {medidas.map(([k, v]) => <div><dt>{k}</dt><dd>{v}</dd></div>)}
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <section id="programas" class="secao bg-claro" aria-labelledby="n1-t">
+    <div class="wrap prog">
+      <div class="prog__cab">
+        <span class="tag">Programa 1 · 4 a 6 semanas</span>
+        <h2 id="n1-t">Escola Preparada para IA</h2>
+        <p class="lead">A escola chega à matrícula com política própria, versão para famílias e o mapa de onde a IA pode devolver tempo à equipe.</p>
+        <p class="legenda">Para diretores e mantenedores, com a coordenação pedagógica junto. Nenhuma ferramenta é implementada neste programa.</p>
+      </div>
+      <ul class="lista-seta prog__lista">{n1.map((e) => <li>{e}</li>)}</ul>
+    </div>
+  </section>
+
+  <section class="secao bg-branco" aria-labelledby="n2-t">
+    <div class="wrap prog">
+      <div class="prog__cab">
+        <span class="tag">Programa 2 · 10 a 16 semanas</span>
+        <h2 id="n2-t">Processos Inteligentes</h2>
+        <p class="lead">Redesenhamos um ou dois processos escolhidos no Programa 1, formamos a equipe no processo novo e implementamos a ferramenta certa.</p>
+        <p class="legenda">Para escolas que concluíram o Programa 1.</p>
+      </div>
+      <div>
+        <ul class="lista-seta prog__lista">{n2.map((e) => <li>{e}</li>)}</ul>
+        <div class="trilhas">
+          <div class="cartao">
+            <p class="rotulo">Trilha pedagógica</p>
+            <p>Planejamento de aulas, avaliação e devolutiva com a nota sempre decidida pelo professor, adaptação de material e letramento em IA com os alunos.</p>
+          </div>
+          <div class="cartao">
+            <p class="rotulo">Trilha de gestão</p>
+            <p>Atendimento e captação, secretaria (matrícula, rematrícula, documentos), comunicação com as famílias e rotinas da coordenação.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="secao bg-claro" aria-labelledby="comp-t">
+    <div class="wrap">
+      <div class="cabeca">
+        <p class="rotulo">O retorno para a escola</p>
+        <h2 id="comp-t">Menos custo para funcionar. Mais valor para mostrar.</h2>
+        <p class="lead">Cada hora que a equipe deixa de gastar em retrabalho volta como economia ou como atenção às famílias. E uma escola que organiza seus processos com tecnologia passa a ter o que mostrar: no atendimento, na reunião de pais e na matrícula.</p>
+      </div>
+      <div class="retorno">
+        <div class="retorno__col">
+          <p class="rotulo">Onde a escola economiza</p>
+          <ul class="lista-seta">
+            <li><strong>Controle de contratações.</strong> Sistemas, licenças e serviços mapeados: o que é usado, o que se sobrepõe e o que pode sair.</li>
+            <li><strong>Processos internos.</strong> Matrícula, documentos e fechamento do mês sem digitar o mesmo dado várias vezes.</li>
+            <li><strong>Tempo da equipe.</strong> Horas de secretaria e coordenação devolvidas para o que só uma pessoa pode fazer.</li>
+          </ul>
+        </div>
+        <div class="retorno__col">
+          <p class="rotulo">O que a escola ganha</p>
+          <ul class="lista-seta">
+            <li><strong>Análise de dados.</strong> Frequência, atendimento e rotinas pedagógicas lidos num painel, não em planilhas soltas.</li>
+            <li><strong>Acompanhamento com indicadores.</strong> Poucos indicadores combinados com a direção, revistos a cada 60 a 90 dias.</li>
+            <li><strong>Resultados para as famílias.</strong> Material claro para apresentar aos pais o que a escola faz, com tecnologia e com cuidado.</li>
+            <li><strong>Imagem de escola preparada.</strong> Uma posição sobre IA que a equipe sustenta e que a família percebe na matrícula.</li>
+          </ul>
+        </div>
+      </div>
+      <p class="legenda retorno__nota">Quanto a escola economiza depende de onde ela está hoje. Por isso medimos antes e depois, com números da própria escola. As condições de contratação são combinadas na conversa inicial.</p>
+    </div>
+  </section>
+
+  <section class="secao bg-menta-papel" aria-labelledby="wse-t">
+    <div class="wrap">
+      <div class="cabeca">
+        <p class="rotulo">Workshops para escolas</p>
+        <h2 id="wse-t">Para começar com a equipe.</h2>
+        <p class="lead">Duas a três horas para esclarecer dúvidas e enxergar possibilidades. Em eventos e associações, ou in-company. Todo workshop termina com o convite para o Programa 1.</p>
+      </div>
+      <ul class="grid-2 ws-lista">
+        {WORKSHOPS.escolas.map((w) => (
+          <li class="cartao"><h3>{w.titulo}</h3>{w.sub && <p>{w.sub}</p>}<p class="legenda">Para: {w.publico}</p></li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <Fechamento
+    titulo="Uma conversa com a direção, sem custo."
+    texto="Em 40 minutos entendemos o que a escola quer para o próximo ano letivo. Se fizer sentido seguir, o escopo sai por escrito."
+    href="/contato?perfil=escola"
+  />
+</Base>
+
+<style>
+  .hero { position: relative; overflow: hidden; padding-block: clamp(64px, 9vw, 136px); }
+  /* faixas ampliadas: símbolo em uma cor, cortado pela borda, longe do texto */
+  .hero__faixas { position: absolute; width: clamp(520px, 62vw, 980px); right: -18%; top: 50%; transform: translateY(-50%); pointer-events: none; }
+  .hero__in { position: relative; }
+  .hero__in > * + * { margin-top: 24px; }
+  .hero h1 { max-width: 16ch; }
+  .hero .acoes { margin-top: 40px; }
+  @media (max-width: 760px) { .hero__faixas { right: -60%; opacity: .7; } }
+
+  /* foco: cenas em menta papel, painel branco com borda menta */
+  .foco .cabeca { max-width: 860px; }
+  .foco .cabeca > * + * { margin-top: 20px; }
+  .foco__cenas { list-style: none; padding: 0; margin: 56px 0 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr)); gap: 40px 48px; }
+  .foco__cenas li { padding-top: 24px; border-top: 2px solid var(--nexa-noite); }
+  .foco__cenas li > * + * { margin-top: 12px; }
+  .foco__cenas h3 { font-size: clamp(19px, 1.8vw, 22px); }
+  .foco__cenas p { color: var(--nexa-muted); }
+  .painel { margin-top: 72px; display: grid; grid-template-columns: 1fr 1.2fr; gap: clamp(24px, 4vw, 64px); background: var(--nexa-branco); border: 1px solid var(--nexa-menta-suave); border-top: 4px solid var(--nexa-menta); border-radius: var(--raio); padding: clamp(28px, 4vw, 56px); }
+  @media (max-width: 900px) { .painel { grid-template-columns: 1fr; } }
+  .painel__cab > * + * { margin-top: 16px; }
+  .painel__tit { font-family: var(--font-titulo); font-weight: 600; font-size: clamp(21px, 2vw, 26px); line-height: 1.3; }
+  .painel__cab p:last-child { color: var(--nexa-muted); }
+  .painel__lista { margin: 0; display: grid; }
+  .painel__lista div { padding: 14px 0; border-top: 1px solid var(--nexa-linha); }
+  .painel__lista div:first-child { border-top: 0; padding-top: 0; }
+  .painel__lista dt { font-weight: 700; }
+  .painel__lista dd { margin: 4px 0 0; color: var(--nexa-muted); font-size: 15px; }
+  .retorno { margin-top: 48px; display: grid; grid-template-columns: 1fr 1fr; gap: clamp(32px, 5vw, 72px); }
+  @media (max-width: 860px) { .retorno { grid-template-columns: 1fr; } }
+  .retorno__col > * + * { margin-top: 20px; }
+  .retorno__nota { margin-top: 40px; max-width: 760px; }
+
+  .pilares > div > * + * { margin-top: 12px; }
+  .pilares p { color: var(--nexa-muted); }
+
+  .prog { display: grid; grid-template-columns: 1fr 1.1fr; gap: clamp(32px, 6vw, 96px); align-items: start; }
+  .prog__cab > * + * { margin-top: 20px; }
+  .prog__lista li { font-size: 17px; }
+  .trilhas { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 40px; }
+  .trilhas .cartao { background: var(--nexa-menta-papel); border-color: var(--nexa-menta-suave); }
+  @media (max-width: 900px) { .prog { grid-template-columns: 1fr; } }
+  @media (max-width: 560px) { .trilhas { grid-template-columns: 1fr; } }
+
+  .ws-lista { list-style: none; padding: 0; margin: 48px 0 0; }
+  .ws-lista p:not(.legenda) { color: var(--nexa-muted); }
+</style>

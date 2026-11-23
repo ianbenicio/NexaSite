@@ -30,8 +30,9 @@ for (const f of arquivos) {
   };
   achar(BANIDAS, "banida em qualquer material");
   achar(VETADOS_FACHADA, "referencial sem artefato, D-017");
-  // B2B: página de escolas e home (canal aberto lido por escolas)
-  if (/escolas|^dist[\/]index\.html$/.test(f)) achar(VETADAS_B2B, "vetada no B2B, D-010");
+  // B2B: página de escolas particulares, página geral de redes e home (canal aberto lido por escolas)
+  const rel = f.split(/[\\/]/).join("/");
+  if (/escolas-particulares|^dist\/(redes-escolares\/)?index\.html$/.test(rel)) achar(VETADAS_B2B, "vetada no B2B, D-010");
 }
 console.log(falhas ? `\n${falhas} ocorrência(s).` : `✓ ${arquivos.length} páginas sem vocabulário vetado.`);
 process.exit(falhas ? 1 : 0);

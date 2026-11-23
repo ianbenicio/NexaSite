@@ -5,7 +5,7 @@ export const SITE = {
   nome: "Nexa Inteligência Educacional",
   assinatura: "Processos antes da tecnologia.",
   descricao:
-    "Consultoria em educação para redes públicas e escolas particulares. Organizamos o processo, formamos a equipe e só então escolhemos a ferramenta.",
+    "Parceira de redes públicas e escolas particulares na chegada da IA. Organizamos o processo, formamos a equipe e só então escolhemos a ferramenta.",
   // Doutrina 1.7 / Pontos a ver 7: domínio, e-mail e WhatsApp ainda em aberto.
   url: "https://[dominio].com.br",
   contato: {
@@ -29,18 +29,26 @@ export const CNE = {
 };
 
 export const NAV = [
-  { href: "/redes-publicas", rotulo: "Redes públicas" },
-  { href: "/escolas", rotulo: "Escolas" },
+  { href: "/", rotulo: "Início" },
+  { href: "/redes-escolares", rotulo: "Redes escolares" },
   { href: "/metodo", rotulo: "Método" },
-  { href: "/workshops", rotulo: "Workshops" },
+  { href: "/conteudos", rotulo: "Conteúdos" },
   { href: "/sobre", rotulo: "Sobre" },
 ];
 
-// Doutrina 5.2 · os únicos números que o material da Nexa usa sobre o tema, sempre com a fonte.
+// Doutrina 5.2 · números de adoção, sempre com a fonte.
 export const DADOS = [
   { valor: "22%", texto: "das escolas têm diretriz de uso de IA.", fonte: "TIC Educação 2025" },
   { valor: "53%", texto: "dos gestores já usam IA.", fonte: "TIC Educação 2025" },
   { valor: "56%", texto: "dos professores já usam IA.", fonte: "TIC Educação 2025" },
+];
+
+// Home · "Por que agora": evidências de que o uso cresce mais rápido que a orientação e a formação.
+// Só dado publicado, com fonte; nenhum número inventado (D-007).
+export const EVIDENCIAS = [
+  { valor: "7 em 10", texto: "alunos do ensino médio usam IA generativa em pesquisas escolares, com orientação da escola ainda limitada.", fonte: "TIC Educação 2025, Cetic.br" },
+  { valor: "39%", texto: "dos professores brasileiros dizem precisar de formação para usar IA no ensino.", fonte: "OCDE, TALIS 2024" },
+  { valor: "Acima", texto: "do esperado: no Brasil, o uso de IA pelos professores supera o nível de formação que eles receberam.", fonte: "BID, Nota CIMA 37, com dados da TALIS 2024" },
 ];
 
 // Doutrina 5.1 · uma mensagem, três falas.
@@ -67,7 +75,7 @@ export const CICLO = [
   { n: 3, nome: "Devolutiva e pactuação", texto: "Apresentamos a leitura e a instituição escolhe as prioridades, por escrito.", artefato: "Ata de prioridades", nivel: 1, marco: 1 },
   { n: 4, nome: "Entrega da política ou diretriz", texto: "Política de IA da escola com versão para famílias, ou diretriz da rede com plano de adequação de 12 meses.", artefato: "Documento aprovado", nivel: 1, marco: 2 },
   { n: 5, nome: "Redesenho do processo", texto: "Com quem executa o processo. Passa quando essa pessoa diz que consegue trabalhar assim na semana seguinte.", artefato: "Mapa de processos", nivel: 2 },
-  { n: 6, nome: "Equipar", texto: "Usar o que já existe, contratar por curadoria ou construir. Ao menos duas opções comparadas.", artefato: "Comparativo de ferramentas", nivel: 2 },
+  { n: 6, nome: "Equipar", texto: "Usar o que já existe, contratar por curadoria ou construir. Opções comparadas com critérios abertos.", artefato: "Comparativo de ferramentas", nivel: 2 },
   { n: 7, nome: "Formar e medir", texto: "Formação no processo novo e medição entre 60 e 90 dias, com o campo “o que não melhorou”.", artefato: "Relatório de evidência", nivel: 2, marco: 3 },
 ] as const;
 
@@ -76,7 +84,7 @@ export const VALORES = [
   { valor: "Processo antes da ferramenta", pratica: "Nenhuma ferramenta é recomendada, vendida ou construída antes de mapearmos o processo que ela vai servir. Às vezes a resposta certa é “ainda não”.", recusa: "“Só instala isso pra gente” sem o mapeamento do processo." },
   { valor: "O educador decide", pratica: "Toda solução mantém com a pessoa a decisão pedagógica final. As vedações do CNE são requisito de projeto, não detalhe.", recusa: "Automação que tire do professor a decisão sobre o aluno." },
   { valor: "Só afirmamos o que mostramos", pratica: "Nenhum caso, número ou referência sem evidência em arquivo. Resultado negativo entra no relatório.", recusa: "Prometer resultado de aprendizagem que não conseguimos medir." },
-  { valor: "Independência declarada", pratica: "Curadoria sem comissão. Quando uma solução da Nexa está entre as opções, dizemos isso e mostramos ao menos duas alternativas.", recusa: "Comissão de fornecedor; esconder que a opção recomendada é nossa." },
+  { valor: "Independência declarada", pratica: "Curadoria sem comissão. Quando uma solução da Nexa está entre as opções, dizemos isso e mostramos as alternativas.", recusa: "Comissão de fornecedor; esconder que a opção recomendada é nossa." },
   { valor: "Medimos o que entregamos", pratica: "Todo serviço termina com evidência do que mudou: reação, aprendizagem da equipe, condições da instituição.", recusa: "Relatório só de presença e satisfação." },
   { valor: "Integridade sem zona cinzenta", pratica: "Preço defensável em auditoria, planilha aberta no setor público, contrato dentro da nossa capacidade.", recusa: "Redigir o termo de referência de um processo que disputamos; qualquer prática cinzenta." },
 ];
@@ -87,7 +95,7 @@ export const NAO_SOMOS = [
   { titulo: "Fábrica de software genérica", texto: "Construímos software quando ele nasce de um processo que redesenhamos com a instituição." },
   { titulo: "Produtora de cursos avulsos", texto: "Formação solta, sem processo e sem acompanhamento, não muda a prática." },
   { titulo: "Revendedora com comissão", texto: "A independência da curadoria é parte do que entregamos." },
-  { titulo: "Consultoria de “sim, senhor”", texto: "Apontamos o que não deve ser feito, mesmo quando isso reduz o nosso contrato." },
+  { titulo: "Parceira de “sim” para tudo", texto: "Apontamos o que não deve ser feito, mesmo quando isso reduz o nosso contrato." },
 ];
 
 // Portfólio v1 · Workshops. Todo workshop termina com convite ao Nível 1 (D-052).
@@ -111,7 +119,7 @@ export const WORKSHOPS = {
 
 // Método 3 · inventário de fachada: só referenciais com artefato interno podem ser citados.
 export const REFERENCIAIS = [
-  { nome: "Consultoria de processo", autor: "Edgar Schein", uso: "Conversa inicial" },
+  { nome: "Relação de ajuda", autor: "Edgar Schein", uso: "Conversa inicial" },
   { nome: "Contratação compartilhada", autor: "Peter Block", uso: "Acordo de escopo" },
   { nome: "Investigação Apreciativa", autor: "Cooperrider e Whitney", uso: "Escuta nas escolas" },
   { nome: "Service Blueprint", autor: "Shostack; Stickdorn e outros", uso: "Mapa de processos" },

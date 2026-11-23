@@ -1,0 +1,339 @@
+---
+/**
+ * Registro Dossiê · rede B2G (Guia 4.1 · Parte III).
+ * Papel claro, noite e violeta. A menta só marca o que é entregue. Grafismo: trilho de etapas.
+ * Gramática B2G (Doutrina 1.6): adequação, diretriz, conformidade, indicador, relatório de impacto, prazo.
+ * Fonte do conteúdo: Portfólio v1 · B2G N1 e N2. Preços não aparecem (faixas provisórias até pendência 7).
+ */
+import Base from "../../layouts/Base.astro";
+import Seta from "../../components/Seta.astro";
+import Icone from "../../components/Icone.astro";
+import Fechamento from "../../components/Fechamento.astro";
+import { FALAS, CNE, WORKSHOPS } from "../../data/site";
+
+const n1 = [
+  "Levantamento do uso atual de IA e dos processos pedagógicos e de gestão em uma amostra de escolas: questionário à rede e escuta de gestores e coordenadores.",
+  "Matriz regulatória aplicada à rede: o que é vedado, o que é obrigatório e o que é recomendado, com prazos.",
+  "Diretriz municipal de IA: usos permitidos por etapa, vedações, papéis, governança, dados e revisão.",
+  "Mapa de processos prioritários em três categorias: implementar agora, preparar antes, não usar IA.",
+  "Plano de adequação de 12 meses, com responsáveis e marcos.",
+  "Apresentação à equipe gestora e versão resumida para comunicar às escolas.",
+];
+const n2 = [
+  "Trilha de formação em blocos presenciais concentrados, de 2 a 3 dias por ida, com acompanhamento remoto entre os blocos.",
+  "Formação de coordenadores pedagógicos como multiplicadores.",
+  "Curadoria de ferramentas para os processos priorizados: opções comparadas com critérios abertos, sem comissão, com preferência pelo que a rede ou o programa estadual já oferecem.",
+  "Piloto supervisionado em escolas selecionadas.",
+  "Relatório de impacto nos níveis 1 a 3 de Guskey: reação, aprendizagem da equipe e condições da instituição, com o campo “o que não melhorou”.",
+];
+const trilho = [
+  { t: "Conhecer a rede", m: false },
+  { t: "Levantar uso e processos", m: false },
+  { t: "Redigir a diretriz com a equipe", m: false },
+  { t: "Priorizar processos", m: false },
+  { t: "Apresentar e pactuar", m: true },
+];
+const vedacoes = [
+  "Correção ou atribuição de nota exclusivamente automatizada de redação e produção autoral.",
+  "Punição acadêmica baseada só em detector de texto de IA.",
+  "Pontuação social ou reconhecimento automatizado de emoções.",
+  "Acesso direto e não supervisionado de crianças da educação infantil e dos anos iniciais a ferramentas de IA.",
+];
+// Foco da rede pública: resultado que se explica. Recurso ligado a indicador (VAAR do Fundeb, ICMS Educacional)
+// aparece de forma sóbria. Cenas sem caso real nem número inventado (D-007). Aprendizagem entra como referência
+// que a rede já produz; a Nexa mede o percurso (Guskey 1 a 3) e não promete subir índice.
+const cenasRede = [
+  {
+    titulo: "O índice saiu. A pergunta da prefeitura é uma só: o que foi feito?",
+    texto: "A secretaria sabe que trabalhou o ano inteiro. Mas as ações estão espalhadas em ofícios, listas de presença e grupos de mensagem. Nada mostra, escola por escola, o que aconteceu e o que mudou.",
+  },
+  {
+    titulo: "A formação foi em março. Em outubro, ninguém sabe quantos professores aplicaram.",
+    texto: "Houve auditório cheio e certificado emitido. Depois, silêncio. O coordenador acha que algumas escolas avançaram, mas não tem como mostrar quais.",
+  },
+  {
+    titulo: "O resultado da avaliação chega quando o ano letivo já virou.",
+    texto: "Durante meses, a rede trabalha sem nenhum sinal intermediário. Quando o número aparece, já não dá para ajustar o rumo. Só para explicar.",
+  },
+  {
+    titulo: "O sistema pediu comprovação, e o documento estava com quem saiu da secretaria.",
+    texto: "Condicionalidades, relatórios, prestações de contas. A memória da rede mora em pastas pessoais, e cada troca de equipe recomeça do zero.",
+  },
+];
+const percurso = [
+  { quem: "Secretaria", medida: "Marcos do plano de adequação cumpridos no prazo e processos redesenhados em uso." },
+  { quem: "Diretores", medida: "Rotinas combinadas funcionando na escola, com registro de acompanhamento." },
+  { quem: "Coordenadores", medida: "Encontros de acompanhamento e devolutivas feitos como multiplicadores." },
+  { quem: "Professores", medida: "Participação, prática aplicada em sala entre os blocos e percepção de uso." },
+];
+const referencias = ["Saeb e Ideb", "Indicador Criança Alfabetizada", "Avaliação estadual", "Avaliações próprias do município"];
+---
+<Base titulo="Rede pública" descricao="Diretriz municipal de IA, plano de adequação de 12 meses e formação docente com relatório de impacto. Planilha de custos aberta.">
+  <section class="hero bg-claro">
+    <div class="wrap hero__in">
+     <div class="hero__txt">
+      <nav class="migalha" aria-label="Você está em"><a href="/redes-escolares">Redes escolares</a><span aria-hidden="true">/</span><span aria-current="page">Rede pública</span><a class="migalha__outra" href="/redes-escolares/escolas-particulares">Ver escolas particulares</a></nav>
+      <p class="rotulo">Para redes públicas · secretarias municipais de educação</p>
+      <h1>Em 12 meses, sua rede precisa ter governança de IA, letramento no currículo e formação docente.</h1>
+      <p class="lead">Entregamos a diretriz, o plano de adequação e a formação com relatório de evidência, com planilha aberta e prazo claro.</p>
+      <div class="acoes">
+        <a class="btn" href="/contato?perfil=rede">Agendar conversa com a Nexa <Seta /></a>
+        <a class="btn btn--ghost" href="#nivel-1">Ver os serviços</a>
+      </div>
+      <ol class="ppf" aria-label="Ordem de trabalho">
+        <li>Processo</li><li>Pessoas</li><li class="ppf__ult">Ferramenta</li>
+      </ol>
+     </div>
+
+      <aside class="p12" aria-labelledby="p12-t">
+        <p class="rotulo" id="p12-t">Cabe no prazo</p>
+        <p class="p12__tit">Os dois níveis somam até 8 meses. O prazo de adequação é de 12.</p>
+        <div class="p12__barra" aria-hidden="true">
+          <span class="p12__seg p12__seg--n1" style="--de:0;--ate:2"></span>
+          <span class="p12__seg p12__seg--n2" style="--de:2;--ate:8"></span>
+          <span class="p12__marco" style="--em:2"></span>
+          <span class="p12__marco p12__marco--fim" style="--em:8"></span>
+        </div>
+        <div class="p12__escala" aria-hidden="true"><span>Mês 0</span><span>Mês 12</span></div>
+        <dl class="p12__lista">
+          <div><dt><span class="p12__cor p12__cor--n1"></span>Nível 1 · Diretriz de IA da Rede</dt><dd>6 a 8 semanas</dd></div>
+          <div><dt><span class="p12__cor p12__cor--n2"></span>Nível 2 · Formação e Implementação</dt><dd>4 a 6 meses</dd></div>
+          <div><dt><span class="p12__cor p12__cor--marco"></span>Entrega com marco</dt><dd>diretriz e relatório</dd></div>
+        </dl>
+      </aside>
+    </div>
+  </section>
+
+  <!-- Foco: resultado que a rede consegue mostrar -->
+  <section class="secao bg-noite on-dark foco" aria-labelledby="foco-t">
+    <div class="wrap">
+      <div class="cabeca">
+        <p class="rotulo">Resultado que aparece</p>
+        <h2 id="foco-t">No fim do ciclo, a rede precisa mostrar o que melhorou, e como.</h2>
+        <p class="lead">Parte do recurso que chega à educação do município já acompanha indicadores, como a complementação VAAR do Fundeb e a parcela do ICMS ligada à aprendizagem. Quem decide olha para o número. Quem trabalha precisa explicar o caminho até ele.</p>
+      </div>
+      <ul class="foco__cenas">
+        {cenasRede.map((c) => (
+          <li>
+            <h3>{c.titulo}</h3>
+            <p>{c.texto}</p>
+          </li>
+        ))}
+      </ul>
+
+      <div class="painel">
+        <div class="painel__cab">
+          <p class="rotulo">Com a Nexa</p>
+          <p class="painel__tit">Cada etapa do trabalho vira indicador. Cada indicador tem dono, escola e data.</p>
+          <p>Combinamos com a secretaria, logo no começo, o que vai ser medido e como. Poucos indicadores, possíveis de coletar com a equipe que existe, lidos a cada 60 a 90 dias e não só no fim do ano.</p>
+        </div>
+        <div class="painel__col">
+          <p class="rotulo">O percurso, que medimos</p>
+          <dl class="painel__lista">
+            {percurso.map((p) => <div><dt>{p.quem}</dt><dd>{p.medida}</dd></div>)}
+          </dl>
+        </div>
+        <div class="painel__col">
+          <p class="rotulo">A aprendizagem, que a rede já mede</p>
+          <ul class="painel__ref">{referencias.map((r) => <li>{r}</li>)}</ul>
+          <p class="painel__nota">Colocamos esses resultados lado a lado com o percurso de cada escola. Não prometemos subir índice. Mostramos o que foi feito, onde avançou, onde travou e o que não melhorou, para a rede ajustar o rumo enquanto ainda dá tempo.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="secao--tight bg-branco" aria-labelledby="prazo-t">
+    <div class="wrap grid-2 prazo">
+      <div class="stack-sm">
+        <p class="rotulo">Prazo e conformidade</p>
+        <h2 id="prazo-t">A adequação tem data.</h2>
+        <p>{CNE.frase} A rede precisa mostrar ao controle externo que tem regra, responsáveis e evidência.</p>
+        <p class="legenda">Janelas: saldo orçamentário em novembro e dezembro; ciclo de propostas de janeiro a março.</p>
+      </div>
+      <div class="cartao">
+        <p class="rotulo">Vedações que já valem</p>
+        <ul class="lista-seta">{vedacoes.map((v) => <li>{v}</li>)}</ul>
+        <p class="legenda">Fonte: {CNE.curto}, {CNE.data}. Na Nexa, cada vedação é requisito de projeto.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Nível 1 -->
+  <section id="nivel-1" class="secao bg-claro" aria-labelledby="n1-t">
+    <div class="wrap">
+      <div class="servico">
+        <div class="servico__cab">
+          <span class="tag tag--linha">Nível 1 · 6 a 8 semanas</span>
+          <h2 id="n1-t">Diretriz de IA da Rede</h2>
+          <p class="lead">A rede já usa IA sem regra, e agora tem prazo. Entregamos a diretriz municipal de uso de IA, adequada às diretrizes do CNE, ao Referencial do MEC, à LGPD e ao ECA Digital, com plano de adequação de 12 meses: um documento defensável diante do controle externo.</p>
+          <p class="legenda">Nenhuma ferramenta é implementada no Nível 1. O mapa de processos indica onde ela fará sentido no Nível 2.</p>
+        </div>
+        <div>
+          <p class="rotulo">Entregas</p>
+          <ol class="lista-entrega" style="margin-top:24px">{n1.map((e) => <li>{e}</li>)}</ol>
+        </div>
+      </div>
+
+      <div class="trilho" aria-label="Como funciona o Nível 1">
+        <p class="rotulo">Como funciona</p>
+        <ol>
+          {trilho.map((p, i) => (
+            <li class={p.m ? "marco" : ""}>
+              <span class="trilho__ponto" aria-hidden="true"></span>
+              <span class="trilho__n tabular">{i + 1}</span>
+              <span>{p.t}</span>
+              {p.m && <span class="trilho__marco">Marco de entrega</span>}
+            </li>
+          ))}
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- Nível 2 -->
+  <section class="secao bg-branco" aria-labelledby="n2-t">
+    <div class="wrap servico">
+      <div class="servico__cab">
+        <span class="tag tag--linha">Nível 2 · 4 a 6 meses</span>
+        <h2 id="n2-t">Formação e Implementação Assistida</h2>
+        <p class="lead">Transforma a diretriz em prática. Coordenadores e professores são formados nos processos priorizados no Nível 1, como planejamento, avaliação e letramento em IA para os alunos, com piloto supervisionado de ferramenta e relatório de impacto: a evidência de gestão responsável.</p>
+        <p class="legenda">Para redes que concluíram o Nível 1 ou já têm diretriz própria equivalente.</p>
+      </div>
+      <div>
+        <p class="rotulo">Entregas</p>
+        <ol class="lista-entrega" style="margin-top:24px">{n2.map((e) => <li>{e}</li>)}</ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- Dados e LGPD (condições comerciais ficam para a conversa inicial) -->
+  <section class="secao bg-claro" aria-labelledby="contr-t">
+    <div class="wrap">
+      <div class="cabeca">
+        <p class="rotulo">Dados e LGPD</p>
+        <h2 id="contr-t">Os dados da rede continuam da rede.</h2>
+      </div>
+      <div class="cartao dados-lgpd">
+        <Icone nome="governanca" />
+        <div class="stack-sm">
+          <h3>Dados e LGPD como condição de assinatura</h3>
+          <p>A rede é a controladora e a Nexa, operadora. Não coletamos dado de aluno por conta própria. Todo contrato com solução leva contrato de tratamento de dados, minimização e cuidado reforçado com crianças e adolescentes. Dados nunca são usados para treinar modelo.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Workshops -->
+  <section class="secao bg-branco" aria-labelledby="wsr-t">
+    <div class="wrap">
+      <div class="cabeca">
+        <p class="rotulo">Workshops para redes</p>
+        <h2 id="wsr-t">Para começar com a equipe técnica.</h2>
+        <p class="lead">Duas a três horas para esclarecer dúvidas e enxergar possibilidades. Gratuitos em eventos, associações e redes, dentro do nosso limite mensal. Todo workshop termina com o convite para o Nível 1.</p>
+      </div>
+      <ul class="grid-2 ws-lista">
+        {WORKSHOPS.redes.map((w) => (
+          <li class="cartao"><h3>{w.titulo}</h3>{w.sub && <p>{w.sub}</p>}<p class="legenda">Para: {w.publico}</p></li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <Fechamento
+    titulo="Comece por uma conversa com a secretaria."
+    texto={FALAS.trinta}
+    href="/contato?perfil=rede"
+  />
+</Base>
+
+<style>
+  .hero { padding-block: clamp(56px, 8vw, 112px) clamp(48px, 6vw, 80px); }
+  .hero__in { display: grid; grid-template-columns: 1.35fr 1fr; gap: clamp(32px, 5vw, 80px); align-items: end; }
+  .hero__txt > * + * { margin-top: 24px; }
+  .hero h1 { max-width: 20ch; font-size: clamp(34px, 4.2vw, 54px); }
+  @media (max-width: 960px) { .hero__in { grid-template-columns: 1fr; } }
+
+  /* painel 12 meses: escala real (12 colunas), menta só nos marcos de entrega */
+  .p12 { background: var(--nexa-branco); border: 1px solid var(--nexa-linha); border-radius: var(--raio); padding: clamp(24px, 3vw, 36px); }
+  .p12 > * + * { margin-top: 16px; }
+  .p12__tit { font-family: var(--font-titulo); font-weight: 600; font-size: 20px; line-height: 1.35; }
+  .p12__barra { position: relative; height: 14px; border-radius: 999px; background: var(--nexa-claro); border: 1px solid var(--nexa-linha); margin-top: 28px !important; }
+  .p12__seg { position: absolute; top: -1px; bottom: -1px; left: calc(var(--de) / 12 * 100%); width: calc((var(--ate) - var(--de)) / 12 * 100%); }
+  .p12__seg--n1 { background: var(--nexa-noite); border-radius: 999px 0 0 999px; }
+  .p12__seg--n2 { background: var(--nexa-violeta); }
+  .p12__marco { position: absolute; top: 50%; left: calc(var(--em) / 12 * 100%); width: 18px; height: 18px; margin: -9px 0 0 -9px; border-radius: 50%; background: var(--nexa-menta); border: 2px solid var(--nexa-noite); }
+  .p12__escala { display: flex; justify-content: space-between; font-size: 13px; color: var(--nexa-muted); margin-top: 10px !important; }
+  .p12__lista { margin: 24px 0 0 !important; display: grid; gap: 10px; border-top: 1px solid var(--nexa-linha); padding-top: 20px; }
+  .p12__lista div { display: flex; justify-content: space-between; gap: 16px; font-size: 15px; }
+  .p12__lista dt { display: flex; align-items: center; gap: 10px; font-weight: 600; }
+  .p12__lista dd { margin: 0; color: var(--nexa-muted); text-align: right; }
+  @media (max-width: 480px) { .p12__lista div { flex-direction: column; gap: 2px; } .p12__lista dd { text-align: left; padding-left: 22px; } }
+  .p12__cor { width: 12px; height: 12px; border-radius: 3px; flex: none; }
+  .p12__cor--n1 { background: var(--nexa-noite); }
+  .p12__cor--n2 { background: var(--nexa-violeta); }
+  .p12__cor--marco { background: var(--nexa-menta); border: 2px solid var(--nexa-noite); border-radius: 50%; }
+  .hero .acoes { margin-top: 40px; }
+
+  /* trilho Processo — Pessoas — Ferramenta (capa de proposta, registro Dossiê) */
+  .ppf { list-style: none; padding: 0; margin-top: 72px !important; display: flex; align-items: center; max-width: 720px; font-weight: 600; font-size: 18px; }
+  .ppf li { display: flex; align-items: center; gap: 12px; flex: 1; }
+  .ppf li::before { content: ""; width: 20px; height: 20px; border-radius: 50%; background: var(--nexa-noite); flex: none; }
+  .ppf li:not(:last-child)::after { content: ""; flex: 1; height: 1px; background: var(--nexa-claro-noite); margin-inline: 16px; }
+  .ppf__ult { flex: none !important; color: var(--nexa-violeta); }
+  .ppf__ult::before { background: var(--nexa-violeta) !important; }
+  @media (max-width: 520px) { .ppf { font-size: 15px; } .ppf li::before { width: 14px; height: 14px; } .ppf li:not(:last-child)::after { margin-inline: 8px; } }
+
+  .prazo { align-items: center; }
+
+  /* foco: cenas no noite, painel claro com menta só no que é entregue */
+  .foco .cabeca { max-width: 860px; }
+  .foco .cabeca > * + * { margin-top: 20px; }
+  .foco__cenas { list-style: none; padding: 0; margin: 56px 0 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr)); gap: 40px 48px; }
+  .foco__cenas li { padding-top: 24px; border-top: 1px solid rgb(204 213 229 / 0.25); }
+  .foco__cenas li > * + * { margin-top: 12px; }
+  .foco__cenas h3 { font-size: clamp(19px, 1.8vw, 22px); color: var(--nexa-branco); }
+  .foco__cenas p { opacity: .78; }
+  .painel { margin-top: 72px; display: grid; grid-template-columns: 1.1fr 1fr 1fr; gap: clamp(24px, 3.5vw, 48px); background: var(--nexa-claro); color: var(--nexa-noite); border-radius: var(--raio); padding: clamp(28px, 4vw, 56px); border-top: 4px solid var(--nexa-menta); }
+  @media (max-width: 1000px) { .painel { grid-template-columns: 1fr; } }
+  .painel .rotulo { color: var(--nexa-violeta); }
+  .painel__cab > * + *, .painel__col > * + * { margin-top: 16px; }
+  .painel__tit { font-family: var(--font-titulo); font-weight: 600; font-size: clamp(21px, 2vw, 26px); line-height: 1.3; }
+  .painel__cab p:last-child { color: var(--nexa-muted); }
+  .painel__lista { margin: 0; display: grid; }
+  .painel__lista div { padding: 12px 0; border-top: 1px solid var(--nexa-linha); }
+  .painel__lista dt { font-weight: 700; }
+  .painel__lista dd { margin: 4px 0 0; color: var(--nexa-muted); font-size: 15px; }
+  .painel__ref { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+  .painel__ref li { font-size: 14px; font-weight: 600; padding: 6px 12px; border-radius: 999px; border: 1px solid var(--nexa-linha); background: var(--nexa-branco); }
+  .painel__nota { color: var(--nexa-muted); font-size: 15px; }
+
+  .servico { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(32px, 6vw, 96px); align-items: start; }
+  .servico__cab > * + * { margin-top: 20px; }
+  @media (max-width: 900px) { .servico { grid-template-columns: 1fr; } }
+
+  .trilho { margin-top: 80px; }
+  .trilho ol { list-style: none; padding: 0; margin: 32px 0 0; display: grid; grid-template-columns: repeat(5, 1fr); position: relative; }
+  .trilho ol::before { content: ""; position: absolute; left: 10px; right: 10px; top: 9px; height: 2px; background: var(--nexa-noite); }
+  .trilho li { position: relative; display: flex; flex-direction: column; gap: 8px; padding-right: 16px; font-weight: 600; }
+  .trilho__ponto { width: 20px; height: 20px; border-radius: 50%; background: var(--nexa-claro); border: 2px solid var(--nexa-noite); position: relative; }
+  .marco .trilho__ponto { background: var(--nexa-menta); border-color: var(--nexa-noite); }
+  .trilho__n { font-size: 13px; color: var(--nexa-muted); letter-spacing: .1em; margin-top: 8px; }
+  .trilho__marco { font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--nexa-violeta); }
+  @media (max-width: 800px) {
+    .trilho ol { grid-template-columns: 1fr; gap: 24px; }
+    .trilho ol::before { left: 9px; right: auto; top: 10px; bottom: 10px; width: 2px; height: auto; }
+    .trilho li { padding-left: 40px; }
+    .trilho__ponto { position: absolute; left: 0; top: 0; }
+    .trilho__n { margin-top: 0; }
+  }
+
+  .regras { margin-top: 48px; }
+  .regras > div > * + * { margin-top: 12px; }
+  .regras p { color: var(--nexa-muted); }
+  .dados-lgpd { margin-top: 48px; display: flex; gap: 24px; align-items: flex-start; }
+  .dados-lgpd > * + * { margin-top: 0; }
+  @media (max-width: 600px) { .dados-lgpd { flex-direction: column; } }
+
+  .ws-lista { list-style: none; padding: 0; margin: 48px 0 0; }
+  .ws-lista p:not(.legenda) { color: var(--nexa-muted); }
+</style>

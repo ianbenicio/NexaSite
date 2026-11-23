@@ -3,6 +3,7 @@ import Logo from "./Logo.astro";
 import Seta from "./Seta.astro";
 import { NAV } from "../data/site";
 const atual = Astro.url.pathname.replace(/\/$/, "") || "/";
+const ativo = (href: string) => (href === "/" ? atual === "/" : atual === href || atual.startsWith(href + "/"));
 ---
 <header class="topo">
   <div class="wrap topo__in">
@@ -14,7 +15,7 @@ const atual = Astro.url.pathname.replace(/\/$/, "") || "/";
     <nav class="topo__nav" aria-label="Principal">
       <ul>
         {NAV.map((i) => (
-          <li><a href={i.href} aria-current={atual === i.href ? "page" : undefined}>{i.rotulo}</a></li>
+          <li><a href={i.href} aria-current={ativo(i.href) ? "page" : undefined}>{i.rotulo}</a></li>
         ))}
       </ul>
       <a class="btn topo__cta" href="/contato">Agendar conversa <Seta /></a>
@@ -28,7 +29,7 @@ const atual = Astro.url.pathname.replace(/\/$/, "") || "/";
       <div class="menu__painel">
         <ul>
           {NAV.map((i) => (
-            <li><a href={i.href} aria-current={atual === i.href ? "page" : undefined}>{i.rotulo}</a></li>
+            <li><a href={i.href} aria-current={ativo(i.href) ? "page" : undefined}>{i.rotulo}</a></li>
           ))}
         </ul>
         <a class="btn" href="/contato">Agendar conversa <Seta /></a>

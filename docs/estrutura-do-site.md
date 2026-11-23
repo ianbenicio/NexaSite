@@ -9,7 +9,7 @@
 
 | Necessidade | De onde vem | Como o site responde |
 |---|---|---|
-| Ser lida como **consultoria em educação**, não empresa de tecnologia | Guia 4.1 · "A ideia visual"; Doutrina 1.1 | Papel claro, texto noite, cor só para identificar. Nenhuma imagem de robô/holograma. |
+| Ser lida como **parceira em educação**, não empresa de tecnologia | Guia 4.1 · "A ideia visual"; Doutrina 1.1 | Papel claro, texto noite, cor só para identificar. Nenhuma imagem de robô/holograma. |
 | Falar com **dois mercados sem misturar gramáticas** (D-005) | Doutrina 1.6 | Duas páginas separadas: **Redes públicas** (registro Dossiê) e **Escolas** (registro Encontro). A home só faz a triagem. |
 | Usar o **gatilho de prazo**: diretrizes aprovadas pelo CNE, 12 meses | Doutrina 5.2 | Seção "Por que agora" com os três números e fonte ao lado. |
 | Converter em **conversa inicial** (etapa 0 do Ciclo, sem custo) | Método 1 | Um só CTA em todo o site: **Agendar conversa**, com perfil (rede / escola / empresa). |
@@ -20,7 +20,7 @@
 
 ## 2. Referências de mercado (pesquisa 23/11/2026)
 
-Consultorias de política e formação em IA para escolas e redes (EUA) e o debate brasileiro após o CNE:
+Organizações de política e formação em IA para escolas e redes (EUA) e o debate brasileiro após o CNE:
 
 - **AI for Education** — menu de serviços: auditoria de política, workshops, política-modelo. Padrão: oferta modular e recursos gratuitos como porta de entrada. <https://www.aiforeducation.io/our-services>
 - **Education Elements** — "parceiro de distrito, não template". Padrão: diferenciação contra o modelo pronto. <https://www.edelements.com/ai-for-educators>
@@ -52,7 +52,7 @@ Navegação (Guia 4.1 · "Site e redes"): **Redes públicas · Escolas · Métod
 ## 4. Seções por página
 
 ### Home
-1. **Topo** — rótulo "Consultoria em educação", título, frase "Organizamos o processo, formamos a equipe e só então escolhemos a ferramenta.", botão com seta, foto no corte em faixa ([FOTO REAL DE FORMAÇÃO]).
+1. **Topo** — rótulo "Processos, pessoas e IA na educação", título, frase "Organizamos o processo, formamos a equipe e só então escolhemos a ferramenta.", botão com seta, foto no corte em faixa ([FOTO REAL DE FORMAÇÃO]).
 2. **Por que agora** — 22% / 53% / 56% (TIC Educação 2025) + prazo de 12 meses em colchetes gráficos.
 3. **Dois caminhos** — cartão Redes públicas / cartão Escolas, cada um com a frase da sua gramática (Doutrina 5.1).
 4. **Como trabalhamos** — trilho de setas: Escutar → Desenhar → Formar → Escolher.

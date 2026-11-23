@@ -14,7 +14,7 @@ const { contato } = SITE;
     <nav aria-label="Rodapé" class="rodape__col">
       <p class="rotulo">Navegar</p>
       <ul>
-        {NAV.map((i) => <li><a href={i.href}>{i.rotulo}</a></li>)}
+        {NAV.filter((i) => i.href !== "/").map((i) => <li><a href={i.href}>{i.rotulo}</a></li>)}
         <li><a href="/contato">Contato</a></li>
       </ul>
     </nav>
@@ -36,7 +36,7 @@ const { contato } = SITE;
 </footer>
 
 <style>
-  .rodape { padding-top: 80px; }
+  .rodape { padding-top: 80px; border-top: 1px solid rgb(204 213 229 / 0.2); }
   .rodape a { color: var(--nexa-claro); text-decoration: none; }
   .rodape a:hover { color: var(--nexa-menta); }
   .rodape__in { display: grid; gap: 48px; grid-template-columns: 1.6fr 1fr 1fr; padding-bottom: 64px; }

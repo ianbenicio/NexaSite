@@ -1,0 +1,143 @@
+---
+/**
+ * Página geral "Redes escolares": porta única do menu para os dois públicos (D-005).
+ * Explica o que se repete nas duas redes e resume o que muda em cada uma, sem misturar as gramáticas:
+ * os detalhes ficam nas páginas de rede pública (Dossiê) e de escolas particulares (Encontro).
+ * Vocabulário B2B vetado também aqui, porque escolas particulares leem esta página.
+ */
+import Base from "../../layouts/Base.astro";
+import Seta from "../../components/Seta.astro";
+import Icone from "../../components/Icone.astro";
+import Fechamento from "../../components/Fechamento.astro";
+import type { IconeNome } from "../../data/brand";
+
+const comum: { icone: IconeNome; titulo: string; texto: string }[] = [
+  { icone: "dialogo", titulo: "O uso chegou antes da regra", texto: "Professores e gestores já usam IA, cada um do seu jeito. Ninguém combinou o que pode, o que não pode e quem responde por isso." },
+  { icone: "tecnologia", titulo: "A ferramenta chega antes do processo", texto: "Plataformas são compradas ou oferecidas sem que alguém tenha desenhado para qual rotina elas servem. A adesão cai em poucos meses." },
+  { icone: "formacao", titulo: "A formação não chega à sala", texto: "Palestras e cursos isolados explicam a ferramenta, mas ninguém acompanha a prática na semana seguinte." },
+  { icone: "governanca", titulo: "Todo mundo pergunta, ao mesmo tempo", texto: "As diretrizes aprovadas pelo CNE, as famílias, o conselho, a imprensa. A instituição precisa de uma resposta só, por escrito." },
+];
+
+const redes = [
+  {
+    id: "publica",
+    rotulo: "Rede pública",
+    titulo: "Secretarias municipais de educação",
+    href: "/redes-escolares/rede-publica",
+    cta: "Ver a página da rede pública",
+    linhas: [
+      ["O que se busca", "Resultado que a prefeitura consegue ver e explicar, escola por escola."],
+      ["Quem decide", "Secretaria, com a equipe técnica e as coordenações da rede."],
+      ["O que pesa", "Prazo de 12 meses das diretrizes, controle externo, orçamento com janelas e muitas escolas para alcançar."],
+      ["O que entregamos", "Diretriz municipal de IA, plano de adequação, formação de coordenadores e relatório de impacto."],
+      ["Ritmo", "Nível 1 em 6 a 8 semanas. Nível 2 em 4 a 6 meses."],
+    ],
+  },
+  {
+    id: "particular",
+    rotulo: "Escolas particulares",
+    titulo: "Direção, mantenedores e coordenação",
+    href: "/redes-escolares/escolas-particulares",
+    cta: "Ver a página das escolas particulares",
+    linhas: [
+      ["O que se busca", "Qualidade que a família percebe e uma rotina que custa menos para funcionar."],
+      ["Quem decide", "Direção e mantenedora, com a coordenação pedagógica junto."],
+      ["O que pesa", "Famílias perguntando, período de matrícula, tempo do professor e o que a escola já paga em sistemas."],
+      ["O que entregamos", "Política de IA da escola, versão para famílias e processos que devolvem tempo ao professor."],
+      ["Ritmo", "Programa 1 em 4 a 6 semanas. Programa 2 em 10 a 16 semanas."],
+    ],
+  },
+];
+---
+<Base titulo="Redes escolares" descricao="Rede pública ou escola particular: o que se repete quando a IA chega à escola, o que muda em cada uma e como a Nexa trabalha com as duas.">
+  <section class="hero bg-claro">
+    <div class="wrap hero__in">
+      <div class="hero__txt">
+        <p class="rotulo">Redes escolares</p>
+        <h1>A IA já entrou na escola. O jeito de organizar muda de uma rede para outra.</h1>
+        <p class="lead">Secretarias municipais e escolas particulares vivem a mesma chegada da IA com pressões diferentes. A ordem de trabalho é a mesma: primeiro o processo, depois as pessoas, então a ferramenta.</p>
+        <div class="acoes">
+          <a class="btn" href="/redes-escolares/rede-publica">Rede pública <Seta /></a>
+          <a class="btn btn--ghost" href="/redes-escolares/escolas-particulares">Escolas particulares</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="secao bg-branco" aria-labelledby="comum-t">
+    <div class="wrap">
+      <div class="cabeca">
+        <p class="rotulo">O que se repete</p>
+        <h2 id="comum-t">Pública ou particular, as dificuldades começam parecidas.</h2>
+        <p class="lead">Quase nunca falta ferramenta. Falta atualização de processo, implementação de tecnologia e acompanhamento.</p>
+      </div>
+      <ul class="grid-4 comum">
+        {comum.map((c) => (
+          <li>
+            <Icone nome={c.icone} />
+            <h3>{c.titulo}</h3>
+            <p>{c.texto}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section class="secao bg-claro" aria-labelledby="muda-t">
+    <div class="wrap">
+      <div class="cabeca">
+        <p class="rotulo">O que muda</p>
+        <h2 id="muda-t">Cada rede, do seu jeito.</h2>
+        <p class="lead">Um resumo lado a lado. Os detalhes de cada serviço estão na página de cada rede.</p>
+      </div>
+      <div class="redes">
+        {redes.map((r) => (
+          <article class={`rede rede--${r.id}`} aria-labelledby={`rede-${r.id}`}>
+            <div class="rede__cab">
+              <p class="rotulo">{r.rotulo}</p>
+              <h3 id={`rede-${r.id}`}>{r.titulo}</h3>
+            </div>
+            <dl>
+              {r.linhas.map(([k, v]) => (
+                <div><dt>{k}</dt><dd>{v}</dd></div>
+              ))}
+            </dl>
+            <a class="btn" href={r.href}>{r.cta} <Seta /></a>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <Fechamento
+    titulo="Não sabe por onde começar? Comece pela conversa."
+    texto="Em 40 minutos, sem custo, entendemos o pedido da sua rede ou escola e dizemos qual caminho faz sentido, inclusive se a resposta for “ainda não”."
+  />
+</Base>
+
+<style>
+  .hero { padding-block: clamp(56px, 8vw, 112px); }
+  .hero__txt { max-width: 860px; }
+  .hero__txt > * + * { margin-top: 24px; }
+  .hero h1 { font-size: clamp(34px, 4.4vw, 56px); }
+  .hero .acoes { margin-top: 40px; }
+
+  .comum { list-style: none; padding: 0; margin: 56px 0 0; gap: 40px 32px; }
+  .comum li > * + * { margin-top: 12px; }
+  .comum li { padding-top: 24px; border-top: 2px solid var(--nexa-noite); }
+  .comum p { color: var(--nexa-muted); }
+
+  .redes { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 56px; }
+  @media (max-width: 900px) { .redes { grid-template-columns: 1fr; } }
+  .rede { display: flex; flex-direction: column; gap: 28px; border-radius: var(--raio); padding: clamp(28px, 3.5vw, 48px); border: 1px solid var(--nexa-linha); }
+  .rede--publica { background: var(--nexa-branco); }
+  .rede--particular { background: var(--nexa-menta-papel); border-color: var(--nexa-menta-suave); }
+  .rede__cab > * + * { margin-top: 8px; }
+  .rede dl { margin: 0; display: grid; }
+  .rede dl div { display: grid; grid-template-columns: 9.5em 1fr; gap: 16px; padding: 16px 0; border-top: 1px solid var(--nexa-linha); }
+  .rede--particular dl div { border-color: var(--nexa-menta-suave); }
+  .rede dt { font-weight: 700; font-size: 13px; letter-spacing: .1em; text-transform: uppercase; color: var(--nexa-muted); padding-top: 3px; }
+  .rede dd { margin: 0; }
+  .rede .btn { margin-top: auto; align-self: flex-start; }
+  @media (max-width: 520px) { .rede dl div { grid-template-columns: 1fr; gap: 4px; } .rede .btn { font-size: 15px; } }
+</style>

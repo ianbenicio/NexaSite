@@ -151,3 +151,11 @@ p { margin: 0; }
   .tabela td { display: block; border: 0; padding: 4px 0; width: auto !important; }
   .tabela td[data-label]::before { content: attr(data-label); display: block; font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--nexa-muted); font-weight: 700; margin-top: 8px; }
 }
+
+/* migalha das páginas de rede */
+.migalha { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; font-size: 14px; font-weight: 600; color: var(--nexa-muted); margin-bottom: 28px; }
+.migalha a { color: var(--nexa-muted); text-decoration: none; }
+.migalha a:hover { color: var(--nexa-violeta); text-decoration: underline; }
+.migalha [aria-current] { color: var(--nexa-noite); }
+.migalha__outra { margin-left: auto; color: var(--nexa-violeta) !important; }
+@media (max-width: 560px) { .migalha__outra { margin-left: 0; flex-basis: 100%; } }

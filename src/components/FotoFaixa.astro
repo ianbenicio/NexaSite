@@ -13,13 +13,18 @@ const id = `ff-${Math.random().toString(36).slice(2, 8)}`;
 ---
 <figure class="foto-faixa">
   <svg viewBox="0 0 740 420" role={src ? "img" : "presentation"} aria-label={src ? alt : undefined}>
-    <defs><clipPath id={id}><path d={larga} /></clipPath></defs>
+    <defs>
+      <clipPath id={id}><path d={larga} /></clipPath>
+      <linearGradient id={`${id}-g`} x1="0" y1="1" x2="1" y2="0">
+        <stop offset="0" stop-color="#E7E0FE" /><stop offset=".52" stop-color="#DDF4FA" /><stop offset="1" stop-color="#E2F8F0" />
+      </linearGradient>
+    </defs>
     <g clip-path={`url(#${id})`}>
       {src ? (
         <image href={src} x="0" y="0" width="640" height="420" preserveAspectRatio="xMidYMid slice" />
       ) : (
         <>
-          <rect width="640" height="420" fill="#DCE2EE" />
+          <rect width="640" height="420" fill={`url(#${id}-g)`} />
           <text x="320" y="200" text-anchor="middle" class="ff__txt">{legenda.split(" DE ")[0]}</text>
           <text x="320" y="232" text-anchor="middle" class="ff__txt">{legenda.includes(" DE ") ? "DE " + legenda.split(" DE ")[1] : ""}</text>
         </>
