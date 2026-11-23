@@ -1,0 +1,129 @@
+---
+/**
+ * Etapa 0 do Ciclo: conversa inicial, 40–45 min, sem custo.
+ * Sem backend nem e-mail definidos (Doutrina 1.7): o formulário monta um e-mail quando SITE.contato.email existir;
+ * até lá, mostra o aviso de canal em configuração. Trocar por Formspree/Netlify Forms quando houver domínio.
+ */
+import Base from "../layouts/Base.astro";
+import Seta from "../components/Seta.astro";
+import Icone from "../components/Icone.astro";
+import { SITE } from "../data/site";
+const { contato } = SITE;
+---
+<Base titulo="Contato" descricao="Agende uma conversa inicial com a Nexa: 40 minutos, sem custo, para entender o pedido da sua rede, escola ou empresa.">
+  <section class="secao bg-claro contato">
+    <div class="wrap contato__in">
+      <div class="stack">
+        <p class="rotulo">Agendar conversa</p>
+        <h1>Comece por uma conversa de 40 minutos, sem custo.</h1>
+        <p class="lead">Entendemos o pedido nas suas palavras. Se fizer sentido seguir, o escopo sai por escrito. Se a resposta certa for “ainda não”, dizemos.</p>
+        <ul class="canais">
+          <li><Icone nome="dialogo" /><div><p class="rotulo">E-mail</p><p>{contato.email ? <a href={`mailto:${contato.email}`}>{contato.email}</a> : <span class="placeholder-texto">{contato.emailRotulo}</span>}</p></div></li>
+          <li><Icone nome="conexao" /><div><p class="rotulo">WhatsApp</p><p>{contato.whatsapp ? <a href={`https://wa.me/${contato.whatsapp}`}>Abrir conversa</a> : <span class="placeholder-texto">{contato.whatsappRotulo}</span>}</p></div></li>
+          <li><Icone nome="pessoas" /><div><p class="rotulo">Onde estamos</p><p>{contato.cidade}</p></div></li>
+        </ul>
+      </div>
+
+      <form class="form cartao" id="form-contato" data-email={contato.email ?? ""} novalidate>
+        <fieldset>
+          <legend class="rotulo">Você fala por</legend>
+          <div class="perfis">
+            <label><input type="radio" name="perfil" value="rede" required /> <span>Rede pública</span></label>
+            <label><input type="radio" name="perfil" value="escola" /> <span>Escola particular</span></label>
+            <label><input type="radio" name="perfil" value="empresa" /> <span>Empresa do ecossistema</span></label>
+          </div>
+        </fieldset>
+        <div class="campos">
+          <label>Nome<input name="nome" autocomplete="name" required /></label>
+          <label>Cargo<input name="cargo" autocomplete="organization-title" /></label>
+          <label class="largo">Instituição<input name="instituicao" autocomplete="organization" required /></label>
+          <label>E-mail<input name="email" type="email" autocomplete="email" required /></label>
+          <label>WhatsApp<input name="whatsapp" type="tel" autocomplete="tel" inputmode="tel" /></label>
+          <label class="largo">Assunto
+            <select name="assunto">
+              <option value="conversa">Conversa inicial</option>
+              <option value="workshop">Workshop</option>
+              <option value="outro">Outro</option>
+            </select>
+          </label>
+          <label class="largo">O que você gostaria de resolver?<textarea name="mensagem" rows="5"></textarea></label>
+        </div>
+        <label class="consent"><input type="checkbox" name="consentimento" required /> <span>Concordo que a Nexa use estes dados só para responder a este contato. <a href="/privacidade">Privacidade e dados</a>.</span></label>
+        <button class="btn" type="submit">Enviar <Seta /></button>
+        <p class="form__aviso" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+  </section>
+</Base>
+
+<script>
+  const form = document.getElementById("form-contato") as HTMLFormElement | null;
+  if (form) {
+    const params = new URLSearchParams(location.search);
+    const perfil = params.get("perfil");
+    const assunto = params.get("assunto");
+    if (perfil) (form.querySelector(`input[name=perfil][value="${CSS.escape(perfil)}"]`) as HTMLInputElement | null)?.click();
+    if (assunto) (form.elements.namedItem("assunto") as HTMLSelectElement).value = assunto;
+
+    const aviso = form.querySelector(".form__aviso") as HTMLElement;
+    form.addEventListener("submit", (ev) => {
+      ev.preventDefault();
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
+      const destino = form.dataset.email;
+      if (!destino) {
+        aviso.textContent = "Canal de contato em configuração. Em breve este formulário estará ativo.";
+        return;
+      }
+      const d = new FormData(form);
+      const perfis: Record<string, string> = { rede: "Rede pública", escola: "Escola particular", empresa: "Empresa do ecossistema" };
+      const corpo = [
+        `Perfil: ${perfis[String(d.get("perfil"))] ?? ""}`,
+        `Nome: ${d.get("nome")}`,
+        `Cargo: ${d.get("cargo")}`,
+        `Instituição: ${d.get("instituicao")}`,
+        `E-mail: ${d.get("email")}`,
+        `WhatsApp: ${d.get("whatsapp")}`,
+        "",
+        String(d.get("mensagem") ?? ""),
+      ].join("\n");
+      const titulo = `[Site] ${d.get("assunto")} · ${d.get("instituicao")}`;
+      location.href = `mailto:${destino}?subject=${encodeURIComponent(titulo)}&body=${encodeURIComponent(corpo)}`;
+      aviso.textContent = "Abrimos seu programa de e-mail com a mensagem pronta.";
+    });
+  }
+</script>
+
+<style>
+  .contato__in { display: grid; grid-template-columns: 1fr 1.1fr; gap: clamp(40px, 6vw, 96px); align-items: start; }
+  .contato h1 { font-size: clamp(32px, 4vw, 48px); }
+  @media (max-width: 900px) { .contato__in { grid-template-columns: 1fr; } }
+  .canais { list-style: none; padding: 0; margin: 40px 0 0 !important; display: grid; gap: 20px; }
+  .canais li { display: flex; gap: 16px; align-items: flex-start; }
+  .canais .rotulo { margin-bottom: 4px; }
+
+  .form fieldset { border: 0; padding: 0; margin: 0; }
+  .form legend { margin-bottom: 12px; }
+  .perfis { display: flex; flex-wrap: wrap; gap: 8px; }
+  .perfis label { position: relative; }
+  .perfis input { position: absolute; opacity: 0; inset: 0; cursor: pointer; }
+  .perfis span { display: inline-block; padding: 10px 16px; border: 1.5px solid var(--nexa-linha); border-radius: 999px; font-weight: 600; font-size: 15px; }
+  .perfis input:checked + span { background: var(--nexa-noite); color: var(--nexa-claro); border-color: var(--nexa-noite); }
+  .perfis input:focus-visible + span { outline: 3px solid var(--nexa-violeta); outline-offset: 2px; }
+
+  .campos { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 24px !important; }
+  .campos .largo { grid-column: 1 / -1; }
+  @media (max-width: 560px) { .campos { grid-template-columns: 1fr; } }
+  .campos label { display: grid; gap: 6px; font-weight: 600; font-size: 14px; }
+  .campos input, .campos select, .campos textarea {
+    font: inherit; font-weight: 400; font-size: 16px; color: var(--nexa-noite);
+    padding: 12px 14px; border: 1.5px solid var(--nexa-linha); border-radius: var(--raio-sm); background: var(--nexa-claro); width: 100%;
+  }
+  .campos input:focus, .campos select:focus, .campos textarea:focus { outline: none; border-color: var(--nexa-violeta); background: var(--nexa-branco); }
+  .consent { display: flex; gap: 10px; align-items: flex-start; font-size: 14px; color: var(--nexa-muted); margin-top: 20px !important; }
+  .consent input { margin-top: 4px; accent-color: var(--nexa-violeta); width: 18px; height: 18px; flex: none; }
+  .form .btn { margin-top: 24px !important; }
+  .form__aviso { font-weight: 600; color: var(--nexa-violeta); min-height: 1.6em; }
+</style>

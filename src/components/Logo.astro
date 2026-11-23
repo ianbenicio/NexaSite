@@ -1,0 +1,66 @@
+---
+/**
+ * Assinatura Nexa montada a partir dos vetores oficiais (Guia 4.1 · Construção).
+ * H = altura do símbolo = 100 unidades.
+ *   nome: 0,5 H · espaço símbolo→nome: 0,2 H · descritor: 0,135 H, Manrope 600, caixa alta, 14%.
+ * O nome nunca é digitado em fonte: vem do lettering em vetor.
+ */
+import { SIMBOLO, LETTERING } from "../data/brand";
+
+interface Props {
+  variante?: "principal" | "compacta" | "simbolo";
+  tom?: "noite" | "claro"; // cor do nome: noite sobre claro, claro sobre noite
+  altura?: number; // altura do símbolo em px
+  class?: string;
+}
+const { variante = "principal", tom = "noite", altura = 48, class: cls = "" } = Astro.props;
+
+const H = 100;
+const simW = (SIMBOLO.w / SIMBOLO.h) * H; // ≈100,66
+const gap = 0.2 * H;
+const nomeH = 0.5 * H;
+const nomeEsc = nomeH / LETTERING.h;
+const nomeW = LETTERING.w * nomeEsc; // ≈228,3
+const x0 = simW + gap;
+const comDescritor = variante === "principal";
+const nomeY = comDescritor ? 17 : (H - nomeH) / 2;
+const descTam = 0.135 * H;
+const descY = nomeY + nomeH + 8 + descTam * 0.74;
+const larguraTotal = variante === "simbolo" ? simW : x0 + nomeW;
+const corNome = tom === "noite" ? "var(--nexa-noite)" : "var(--nexa-claro)";
+const sEsc = H / SIMBOLO.h;
+---
+<svg
+  class={`logo ${cls}`}
+  viewBox={`0 0 ${larguraTotal.toFixed(2)} ${H}`}
+  height={altura}
+  width={Math.round((larguraTotal / H) * altura)}
+  role="img"
+  aria-label="Nexa Inteligência Educacional"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <g transform={`scale(${sEsc})`}>
+    <path fill="#71E3BA" d={SIMBOLO.corpo} />
+    <path fill="#7546F6" d={SIMBOLO.dobras} />
+  </g>
+  {variante !== "simbolo" && (
+    <g fill={corNome} transform={`translate(${x0} ${nomeY}) scale(${nomeEsc})`}>
+      {LETTERING.letras.map((l) => <path transform={`translate(${l.x} 0)`} d={l.d} fill-rule="evenodd" />)}
+    </g>
+  )}
+  {comDescritor && (
+    <text
+      x={x0}
+      y={descY}
+      fill={corNome}
+      font-family="Manrope, sans-serif"
+      font-weight="600"
+      font-size={descTam}
+      textLength={nomeW}
+      lengthAdjust="spacing"
+    >INTELIGÊNCIA EDUCACIONAL</text>
+  )}
+</svg>
+<style>
+  .logo { height: auto; flex: none; }
+</style>

@@ -1,0 +1,193 @@
+---
+import Base from "../layouts/Base.astro";
+import Seta from "../components/Seta.astro";
+import Icone from "../components/Icone.astro";
+import FotoFaixa from "../components/FotoFaixa.astro";
+import Fechamento from "../components/Fechamento.astro";
+import { DADOS, FALAS, ETAPAS_CURTAS, NAO_SOMOS, CNE } from "../data/site";
+---
+<Base>
+  <!-- 1 · Topo (Guia 4.1 · Site e redes) -->
+  <section class="hero bg-claro">
+    <div class="wrap hero__in">
+      <div class="hero__txt">
+        <p class="rotulo">Consultoria em educação</p>
+        <h1>Organizar o processo antes de escolher a ferramenta.</h1>
+        <p class="lead">Ajudamos redes públicas e escolas particulares a colocar a IA para funcionar com responsabilidade: primeiro o processo, depois as pessoas, então a ferramenta.</p>
+        <div class="acoes">
+          <a class="btn" href="/contato">Agendar conversa <Seta /></a>
+          <a class="btn btn--ghost" href="/metodo">Ver o método</a>
+        </div>
+      </div>
+      <FotoFaixa />
+    </div>
+  </section>
+
+  <!-- 2 · Por que agora (Doutrina 5.2) -->
+  <section class="secao bg-noite on-dark agora" aria-labelledby="agora-t">
+    <div class="wrap">
+      <div class="agora__topo">
+        <div class="cabeca">
+          <p class="rotulo">Por que agora</p>
+          <h2 id="agora-t">O uso já chegou. A regra, quase nunca.</h2>
+          <p class="lead">{CNE.frase}</p>
+        </div>
+        <div class="prazo" aria-label="12 meses de adequação">
+          <Seta modo="cor" class="prazo__seta" />
+          <p><span class="prazo__n tabular">12</span><span class="prazo__u">meses</span></p>
+          <Seta modo="cor" class="prazo__seta prazo__seta--inv" />
+        </div>
+      </div>
+      <ul class="dados">
+        {DADOS.map((d) => (
+          <li>
+            <p class="dados__v tabular">{d.valor}</p>
+            <p>{d.texto}</p>
+            <p class="legenda">Fonte: {d.fonte}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- 3 · Dois caminhos (D-005: nenhum material atravessa a fronteira sem tradução) -->
+  <section class="secao bg-claro" aria-labelledby="caminhos-t">
+    <div class="wrap">
+      <div class="cabeca">
+        <p class="rotulo">Para quem trabalhamos</p>
+        <h2 id="caminhos-t">Dois públicos, a mesma ordem de trabalho.</h2>
+      </div>
+      <div class="grid-2 caminhos">
+        <a class="caminho caminho--rede" href="/redes-publicas">
+          <Icone nome="governanca" />
+          <p class="rotulo">Redes públicas</p>
+          <h3>Secretarias municipais de educação</h3>
+          <p>{FALAS.b2g}</p>
+          <span class="link-seta">Diretriz, plano de adequação e formação <Seta /></span>
+        </a>
+        <a class="caminho caminho--escola" href="/escolas">
+          <Icone nome="pessoas" />
+          <p class="rotulo">Escolas particulares</p>
+          <h3>Direção, mantenedores e coordenação</h3>
+          <p>{FALAS.b2b}</p>
+          <span class="link-seta">Política, versão para famílias e processos <Seta /></span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 · Como trabalhamos (trilho de setas) -->
+  <section class="secao bg-branco" aria-labelledby="como-t">
+    <div class="wrap">
+      <div class="cabeca">
+        <p class="rotulo">Como trabalhamos</p>
+        <h2 id="como-t">Quatro etapas, nesta ordem.</h2>
+        <p class="lead">A ferramenta vem por último. Às vezes a resposta certa é “ainda não”.</p>
+      </div>
+      <ol class="trilho">
+        {ETAPAS_CURTAS.map((e, i) => (
+          <li class={i === 0 ? "atual" : ""}>
+            <div class="trilho__marca">
+              <Seta modo={i === 0 ? "cor" : i === 1 ? "uma" : "contorno"} class={`trilho__seta t${i}`} />
+              <span class="trilho__n tabular">0{i + 1}</span>
+            </div>
+            <h3>{e.nome}</h3>
+            <p>{e.texto}</p>
+          </li>
+        ))}
+      </ol>
+      <a class="link-seta" href="/metodo">Ver o Ciclo Nexa completo <Seta /></a>
+    </div>
+  </section>
+
+  <!-- 5 · O que não somos (Doutrina 1.4) -->
+  <section class="secao bg-claro" aria-labelledby="nao-t">
+    <div class="wrap nao">
+      <div class="cabeca">
+        <p class="rotulo">O que não somos</p>
+        <h2 id="nao-t">Parecer consultoria antes de parecer tecnologia.</h2>
+        <p class="lead">Dizer o que recusamos ajuda a instituição a saber o que esperar de nós.</p>
+      </div>
+      <ul class="nao__lista">
+        {NAO_SOMOS.map((n) => (
+          <li><h3>{n.titulo}</h3><p>{n.texto}</p></li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- 6 · Workshops (D-052) -->
+  <section class="secao--tight bg-menta-papel" aria-labelledby="ws-t">
+    <div class="wrap ws">
+      <Icone nome="formacao" />
+      <div>
+        <p class="rotulo">Workshops</p>
+        <h2 id="ws-t">Duas a três horas, prático, e você sai com uma ferramenta de uso imediato.</h2>
+      </div>
+      <a class="btn btn--ghost" href="/workshops">Ver temas</a>
+    </div>
+  </section>
+
+  <Fechamento
+    titulo="Comece por uma conversa de 40 minutos, sem custo."
+    texto="Entendemos o pedido nas suas palavras. Se fizer sentido seguir, o escopo sai por escrito. Se a resposta certa for “ainda não”, dizemos."
+  />
+</Base>
+
+<style>
+  .hero { padding-block: clamp(48px, 7vw, 104px) clamp(56px, 8vw, 112px); overflow: hidden; }
+  .hero__in { display: grid; grid-template-columns: 1.05fr 1fr; gap: clamp(32px, 5vw, 72px); align-items: center; }
+  .hero__txt > * + * { margin-top: 24px; }
+  .hero__txt .acoes { margin-top: 40px; }
+  @media (max-width: 900px) { .hero__in { grid-template-columns: 1fr; } }
+
+  .agora__topo { display: flex; justify-content: space-between; gap: 48px; align-items: center; flex-wrap: wrap; }
+  .prazo { display: flex; align-items: center; gap: 12px; }
+  .prazo p { display: flex; flex-direction: column; align-items: center; line-height: 1; }
+  .prazo__n { font-family: var(--font-titulo); font-weight: 600; font-size: clamp(72px, 9vw, 112px); letter-spacing: -0.03em; }
+  .prazo__u { font-weight: 700; letter-spacing: .14em; text-transform: uppercase; font-size: 14px; color: var(--nexa-menta); margin-top: 8px; }
+  .prazo :global(.prazo__seta) { width: clamp(40px, 4.5vw, 56px); }
+  .prazo :global(.prazo__seta--inv) { transform: rotate(180deg); }
+  .dados { list-style: none; padding: 0; margin: 64px 0 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+  .dados li { border-top: 1px solid rgb(204 213 229 / .25); padding-top: 24px; }
+  .dados li > * + * { margin-top: 8px; }
+  .dados__v { font-family: var(--font-titulo); font-weight: 600; font-size: clamp(44px, 5vw, 64px); line-height: 1; color: var(--nexa-menta); letter-spacing: -0.02em; }
+  @media (max-width: 720px) { .dados { grid-template-columns: 1fr; gap: 0; } .dados li { padding-block: 24px; } }
+
+  .caminhos { margin-top: 48px; }
+  .caminho {
+    display: flex; flex-direction: column; gap: 16px; text-decoration: none; color: inherit;
+    padding: clamp(28px, 3.5vw, 48px); border-radius: var(--raio); border: 1px solid var(--nexa-linha);
+    transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+  }
+  .caminho:hover { transform: translateY(-3px); box-shadow: 0 16px 40px rgb(17 26 51 / .08); border-color: var(--nexa-violeta); }
+  .caminho--rede { background: var(--nexa-branco); }
+  .caminho--escola { background: var(--nexa-menta-papel); border-color: var(--nexa-menta-suave); }
+  .caminho .link-seta { margin-top: auto; padding-top: 8px; }
+
+  .trilho { list-style: none; padding: 0; margin: 56px 0 40px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; position: relative; }
+  .trilho::before { content: ""; position: absolute; left: 0; right: 0; top: 28px; height: 1px; background: var(--nexa-linha); }
+  .trilho li { position: relative; }
+  .trilho li > * + * { margin-top: 12px; }
+  .trilho__marca { display: flex; align-items: center; gap: 12px; background: var(--nexa-branco); width: max-content; padding-right: 12px; }
+  .trilho :global(.trilho__seta) { width: 44px; }
+  .trilho :global(.t1) { color: var(--nexa-menta); }
+  .trilho :global(.t2), .trilho :global(.t3) { color: var(--nexa-muted); }
+  .trilho__n { font-weight: 700; color: var(--nexa-muted); font-size: 14px; letter-spacing: .1em; }
+  .trilho p { color: var(--nexa-muted); }
+  @media (max-width: 900px) { .trilho { grid-template-columns: 1fr 1fr; } .trilho::before { display: none; } }
+  @media (max-width: 520px) { .trilho { grid-template-columns: 1fr; } }
+
+  .nao { display: grid; grid-template-columns: 1fr 1.3fr; gap: clamp(32px, 6vw, 96px); align-items: start; }
+  .nao__lista { list-style: none; margin: 0; padding: 0; }
+  .nao__lista li { padding: 24px 0; border-top: 1px solid var(--nexa-linha); display: grid; grid-template-columns: 1fr 1.4fr; gap: 24px; }
+  .nao__lista li:last-child { border-bottom: 1px solid var(--nexa-linha); }
+  .nao__lista p { color: var(--nexa-muted); }
+  @media (max-width: 900px) { .nao { grid-template-columns: 1fr; } .nao__lista li { grid-template-columns: 1fr; gap: 8px; } }
+
+  .ws { display: flex; align-items: center; gap: 32px; }
+  .ws > div { flex: 1; }
+  .ws h2 { font-size: clamp(21px, 2.2vw, 26px); margin-top: 8px; max-width: 32ch; }
+  .ws :global(.icone) { width: 48px; height: 48px; }
+  @media (max-width: 720px) { .ws { flex-direction: column; align-items: flex-start; gap: 16px; } }
+</style>

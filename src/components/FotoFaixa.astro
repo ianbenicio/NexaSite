@@ -1,0 +1,36 @@
+---
+/**
+ * Foto no corte em faixa (Guia 4.1 · Formas base: "Corte em faixa").
+ * Faixa larga a 48°, subindo para a direita, + uma faixa estreita menta.
+ * Sem acervo próprio autorizado, a peça leva o campo [FOTO] (Guia · Fotografia).
+ */
+interface Props { src?: string; alt?: string; legenda?: string; }
+const { src, alt = "", legenda = "[FOTO REAL DE FORMAÇÃO]" } = Astro.props;
+// Paralelogramo a 48°: 420 / tan(48°) ≈ 378 de deslocamento horizontal.
+const larga = "M398 0 L620 0 Q640 0 626.6 14.9 L275.4 405.1 Q262 420 242 420 L20 420 Q0 420 13.4 405.1 L364.6 14.9 Q378 0 398 0Z";
+const estreita = "M694 0 L722 0 Q736 0 726.6 10.4 L360.4 409.6 Q351 420 337 420 L309 420 Q295 420 304.4 409.6 L670.6 10.4 Q680 0 694 0Z";
+const id = `ff-${Math.random().toString(36).slice(2, 8)}`;
+---
+<figure class="foto-faixa">
+  <svg viewBox="0 0 740 420" role={src ? "img" : "presentation"} aria-label={src ? alt : undefined}>
+    <defs><clipPath id={id}><path d={larga} /></clipPath></defs>
+    <g clip-path={`url(#${id})`}>
+      {src ? (
+        <image href={src} x="0" y="0" width="640" height="420" preserveAspectRatio="xMidYMid slice" />
+      ) : (
+        <>
+          <rect width="640" height="420" fill="#DCE2EE" />
+          <text x="320" y="200" text-anchor="middle" class="ff__txt">{legenda.split(" DE ")[0]}</text>
+          <text x="320" y="232" text-anchor="middle" class="ff__txt">{legenda.includes(" DE ") ? "DE " + legenda.split(" DE ")[1] : ""}</text>
+        </>
+      )}
+    </g>
+    <path d={estreita} fill="#71E3BA" />
+  </svg>
+</figure>
+
+<style>
+  .foto-faixa { margin: 0; }
+  .foto-faixa svg { width: 100%; height: auto; overflow: visible; }
+  .ff__txt { font-family: var(--font-texto); font-weight: 700; font-size: 18px; letter-spacing: .14em; fill: #536077; }
+</style>

@@ -1,0 +1,39 @@
+---
+/** Base: Doutrina 4.4. Texto provisório: revisar com advogado (Pontos a ver 5 / pendência 12). */
+import Base from "../layouts/Base.astro";
+import { SITE } from "../data/site";
+---
+<Base titulo="Privacidade e dados" descricao="Como a Nexa trata os dados de quem entra em contato e os dados das instituições que atende.">
+  <section class="secao bg-claro">
+    <div class="wrap texto">
+      <p class="rotulo">Privacidade e dados</p>
+      <h1>Só o dado necessário, pelo tempo necessário.</h1>
+      <p class="legenda">Versão provisória · [data de revisão jurídica]</p>
+
+      <h2>Dados deste site</h2>
+      <p>O formulário de contato pede nome, cargo, instituição, e-mail e, se você quiser, WhatsApp. Usamos esses dados só para responder ao seu contato e registrar a conversa no nosso controle comercial. Não vendemos nem compartilhamos esses dados com terceiros para fins de marketing.</p>
+      <p>Para pedir acesso, retificação ou exclusão dos seus dados, escreva para <span class="placeholder-texto">{SITE.contato.emailRotulo}</span>.</p>
+
+      <h2>Dados das instituições que atendemos</h2>
+      <ul class="lista-seta">
+        <li>A instituição é a controladora dos dados; a Nexa atua como operadora.</li>
+        <li>A Nexa não coleta dado de aluno por conta própria.</li>
+        <li>Todo contrato com solução leva um contrato de tratamento de dados: finalidade, dados tratados, prazo, medidas de segurança, subcontratados (inclusive provedores de IA), aviso de incidente, devolução e eliminação no fim do contrato.</li>
+        <li>Minimização: só o dado necessário para o processo.</li>
+        <li>Crianças e adolescentes: tratamento no melhor interesse, sem perfilamento, e dados nunca usados para treinar modelo.</li>
+        <li>Preferimos provedores de IA que não usam os dados do cliente para treinamento, e verificamos onde os dados ficam armazenados.</li>
+        <li>Segurança mínima: conta individual com verificação em duas etapas, cópia de segurança, registro de acesso e exclusão ao fim do contrato.</li>
+      </ul>
+
+      <h2>Cookies</h2>
+      <p>Este site não usa cookies de rastreamento nem ferramentas de publicidade.</p>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .texto { max-width: 760px; }
+  .texto > * + * { margin-top: 20px; }
+  .texto h1 { font-size: clamp(32px, 4vw, 48px); }
+  .texto h2 { font-size: 24px; margin-top: 48px; }
+</style>

@@ -1,0 +1,38 @@
+---
+import "../styles/global.css";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import { SITE } from "../data/site";
+
+interface Props { titulo?: string; descricao?: string; }
+const { titulo, descricao = SITE.descricao } = Astro.props;
+const tituloFinal = titulo ? `${titulo} · Nexa Inteligência Educacional` : `Nexa Inteligência Educacional · ${SITE.assinatura}`;
+---
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{tituloFinal}</title>
+    <meta name="description" content={descricao} />
+    <meta name="theme-color" content="#111A33" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="preload" href="/fonts/Sora-600.ttf" as="font" type="font/ttf" crossorigin />
+    <link rel="preload" href="/fonts/Manrope-400.ttf" as="font" type="font/ttf" crossorigin />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="pt_BR" />
+    <meta property="og:title" content={tituloFinal} />
+    <meta property="og:description" content={descricao} />
+    <meta property="og:image" content="/brand/avatar-512.png" />
+  </head>
+  <body>
+    <a class="pular" href="#conteudo">Pular para o conteúdo</a>
+    <Header />
+    <main id="conteudo">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

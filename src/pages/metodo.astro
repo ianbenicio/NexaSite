@@ -1,0 +1,177 @@
+---
+/**
+ * Fonte: Método e Processos Internos v1 (Ciclo Nexa, regras de condução, stack).
+ * Só referenciais liberados no inventário de fachada (D-017). JTBD, Wiggins & McTighe e Black & Wiliam NÃO entram.
+ * Página neutra (lida pelos dois públicos): evitar vocabulário vetado no B2B.
+ */
+import Base from "../layouts/Base.astro";
+import Seta from "../components/Seta.astro";
+import Icone from "../components/Icone.astro";
+import Fechamento from "../components/Fechamento.astro";
+import { CICLO, REFERENCIAIS } from "../data/site";
+
+const regras = [
+  { t: "Nada é atribuído a quem falou", d: "O que um professor diz não é atribuído a ele na devolutiva. O que aparece vira padrão do sistema, nunca acusação de pessoa." },
+  { t: "Professor fala com uma pessoa só", d: "Dois consultores na sala inibem quem está na sala de aula, e é ali que está a informação que mais importa." },
+  { t: "Ao menos uma conversa presencial", d: "Sempre. O resto se adapta ao contexto e à logística da instituição." },
+  { t: "Registro em até 48 horas", d: "Registro feito de memória depois de uma semana não serve como evidência." },
+  { t: "Todo marco é uma entrega", d: "Nenhum contrato tem um único momento de apresentação no final. Cada marco tem começo e fim declarados." },
+];
+const guskey = [
+  { n: "1", t: "Reação", d: "Como os participantes receberam a formação." },
+  { n: "2", t: "Aprendizagem da equipe", d: "O que a equipe passou a saber e a fazer." },
+  { n: "3", t: "Condições da instituição", d: "O que mudou na organização para sustentar a prática." },
+];
+---
+<Base titulo="Método" descricao="O Ciclo Nexa em 8 etapas e 3 marcos: escutar, desenhar o processo, formar a equipe e só então escolher a ferramenta, medindo o que muda.">
+  <section class="hero bg-claro">
+    <div class="wrap">
+      <p class="rotulo">Método Nexa</p>
+      <h1>Nenhuma ferramenta antes do processo que ela vai servir.</h1>
+      <p class="lead">O Ciclo Nexa tem 8 etapas, de 0 a 7. Cada uma termina com um artefato e um critério de passagem. Etapa sem artefato não entra no método.</p>
+    </div>
+  </section>
+
+  <section class="secao bg-branco" aria-labelledby="ciclo-t">
+    <div class="wrap">
+      <div class="cabeca">
+        <p class="rotulo">Ciclo Nexa · 8 etapas, 3 marcos</p>
+        <h2 id="ciclo-t">Do primeiro contato à evidência do que mudou.</h2>
+      </div>
+
+      {[1, 2].map((nivel) => (
+        <div class="nivel">
+          <div class="nivel__cab">
+            <span class="tag tag--linha">{nivel === 1 ? "Nível 1 · etapas 0 a 4" : "Nível 2 · etapas 5 a 7"}</span>
+            <p>{nivel === 1 ? "Governança: escuta, leitura, prioridades e a política ou diretriz de IA." : "Processo, pessoas e ferramenta: redesenho, equipamento, formação e medição."}</p>
+          </div>
+          <ol class="ciclo">
+            {CICLO.filter((e) => e.nivel === nivel).map((e) => (
+              <li class={"marco" in e ? "tem-marco" : ""}>
+                <span class="ciclo__n tabular">{e.n}</span>
+                <div class="ciclo__corpo">
+                  <h3>{e.nome}{"interno" in e && <span class="ciclo__int"> · interno</span>}</h3>
+                  <p>{e.texto}</p>
+                  <p class="ciclo__art"><Icone nome="evidencias" /> {e.artefato}</p>
+                </div>
+                {"marco" in e && <span class="ciclo__marco">Marco {e.marco}</span>}
+              </li>
+            ))}
+          </ol>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section class="secao bg-claro" aria-labelledby="ferr-t">
+    <div class="wrap grid-2 ferr">
+      <div class="cabeca">
+        <p class="rotulo">Regra de ferramenta</p>
+        <h2 id="ferr-t">Usar, contratar, construir. Nesta ordem.</h2>
+        <p class="lead">Quando a mesma solução é pedida por três instituições, separamos o núcleo comum e ele vira produto próprio. Documentar o processo manual é a especificação do futuro software.</p>
+      </div>
+      <ol class="ordem">
+        <li><Seta modo="cor" /><div><h3>Usar o que a instituição já tem</h3><p>Muitas escolas já pagam por IA embutida no sistema de ensino e não usam.</p></div></li>
+        <li><Seta modo="uma" /><div><h3>Contratar por curadoria</h3><p>Ao menos duas opções comparadas, sem comissão. Se uma delas for da Nexa, isso é declarado.</p></div></li>
+        <li><Seta modo="contorno" /><div><h3>Construir sob medida</h3><p>Só quando as duas primeiras não resolvem o processo. Sempre com suporte mensal.</p></div></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="secao bg-noite on-dark" aria-labelledby="med-t">
+    <div class="wrap">
+      <div class="cabeca">
+        <p class="rotulo">Medição</p>
+        <h2 id="med-t">Medimos o que entregamos. Inclusive o que não melhorou.</h2>
+        <p class="lead">Todo serviço termina com evidência, medida entre 60 e 90 dias. Usamos os três primeiros níveis do modelo de Thomas Guskey. Não prometemos resultado de aprendizagem que não conseguimos medir.</p>
+      </div>
+      <ol class="guskey">
+        {guskey.map((g) => (
+          <li><span class="guskey__n tabular">{g.n}</span><h3>{g.t}</h3><p>{g.d}</p></li>
+        ))}
+        <li class="guskey__nao"><span class="guskey__n">+</span><h3>O que não melhorou</h3><p>Campo obrigatório no relatório. Resultado negativo entra.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="secao bg-branco" aria-labelledby="reg-t">
+    <div class="wrap grid-2">
+      <div class="cabeca">
+        <p class="rotulo">Regras de condução</p>
+        <h2 id="reg-t">Como nos comportamos dentro da instituição.</h2>
+      </div>
+      <dl class="regras">
+        {regras.map((r) => (<div><dt>{r.t}</dt><dd>{r.d}</dd></div>))}
+      </dl>
+    </div>
+  </section>
+
+  <section class="secao bg-claro" aria-labelledby="ref-t">
+    <div class="wrap">
+      <div class="cabeca">
+        <p class="rotulo">Referências que usamos</p>
+        <h2 id="ref-t">Nomeadas quando ajudam, nunca para impressionar.</h2>
+        <p class="lead">Citamos apenas referências que já têm instrumento próprio da Nexa por trás.</p>
+      </div>
+      <ul class="refs">
+        {REFERENCIAIS.map((r) => (
+          <li><p class="refs__nome">{r.nome}</p><p class="legenda">{r.autor}</p><p class="refs__uso">{r.uso}</p></li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <Fechamento titulo="A etapa 0 é uma conversa." texto="40 a 45 minutos, sem custo. Saímos dela com o pedido entendido e, se fizer sentido seguir, um acordo de escopo por escrito." />
+</Base>
+
+<style>
+  .hero { padding-block: clamp(56px, 8vw, 112px); }
+  .hero .wrap > * + * { margin-top: 24px; }
+  .hero h1 { max-width: 18ch; }
+
+  .nivel { margin-top: 56px; }
+  .nivel__cab { display: flex; flex-wrap: wrap; align-items: center; gap: 16px; padding-bottom: 16px; border-bottom: 2px solid var(--nexa-noite); }
+  .nivel__cab p { color: var(--nexa-muted); }
+  .ciclo { list-style: none; padding: 0; margin: 0; }
+  .ciclo li { display: grid; grid-template-columns: 72px 1fr auto; gap: 24px; padding: 28px 0; border-bottom: 1px solid var(--nexa-linha); align-items: start; }
+  .ciclo__n { font-family: var(--font-titulo); font-weight: 600; font-size: 40px; line-height: 1; color: var(--nexa-violeta); }
+  .ciclo__corpo > * + * { margin-top: 8px; }
+  .ciclo__corpo > p:not(.ciclo__art) { color: var(--nexa-muted); max-width: 64ch; }
+  .ciclo__int { font-family: var(--font-texto); font-weight: 600; font-size: 14px; color: var(--nexa-muted); }
+  .ciclo__art { display: flex; align-items: center; gap: 8px; font-weight: 600; font-size: 15px; }
+  .ciclo__art :global(.icone) { width: 20px; height: 20px; color: var(--nexa-violeta); }
+  .ciclo__marco { background: var(--nexa-menta); color: var(--nexa-noite); font-weight: 700; font-size: 12px; letter-spacing: .1em; text-transform: uppercase; padding: 6px 12px; border-radius: 999px; white-space: nowrap; }
+  @media (max-width: 640px) {
+    .ciclo li { grid-template-columns: 48px 1fr; }
+    .ciclo__marco { grid-column: 2; justify-self: start; }
+    .ciclo__n { font-size: 32px; }
+  }
+
+  .ferr { align-items: start; }
+  .ordem { list-style: none; padding: 0; margin: 0; display: grid; gap: 16px; }
+  .ordem li { display: grid; grid-template-columns: 40px 1fr; gap: 20px; align-items: start; background: var(--nexa-branco); border: 1px solid var(--nexa-linha); border-radius: var(--raio); padding: 24px; }
+  .ordem li > div > * + * { margin-top: 6px; }
+  .ordem p { color: var(--nexa-muted); }
+  .ordem :global(.seta) { width: 32px; color: var(--nexa-violeta); }
+
+  .guskey { list-style: none; padding: 0; margin: 56px 0 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+  .guskey li { border-top: 2px solid var(--nexa-menta); padding-top: 20px; }
+  .guskey li > * + * { margin-top: 8px; }
+  .guskey p { color: var(--nexa-claro-noite); }
+  .guskey__n { font-family: var(--font-titulo); font-weight: 600; font-size: 44px; color: var(--nexa-menta); line-height: 1; display: block; }
+  .guskey__nao { border-top-color: var(--nexa-claro) !important; }
+  .guskey__nao .guskey__n { color: var(--nexa-claro); }
+  @media (max-width: 900px) { .guskey { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 520px) { .guskey { grid-template-columns: 1fr; } }
+
+  .regras { margin: 0; }
+  .regras div { padding: 20px 0; border-top: 1px solid var(--nexa-linha); }
+  .regras dt { font-family: var(--font-titulo); font-weight: 600; font-size: 19px; }
+  .regras dd { margin: 6px 0 0; color: var(--nexa-muted); }
+
+  .refs { list-style: none; padding: 0; margin: 48px 0 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 16px; }
+  .refs li { background: var(--nexa-branco); border: 1px solid var(--nexa-linha); border-radius: var(--raio-sm); padding: 20px; }
+  .refs li > * + * { margin-top: 4px; }
+  .refs__nome { font-family: var(--font-titulo); font-weight: 600; }
+  .refs__uso { font-size: 13px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--nexa-violeta); margin-top: 12px !important; }
+</style>

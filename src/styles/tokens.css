@@ -1,0 +1,41 @@
+/* Nexa Identidade Visual 4.1 · paleta Aurora
+   Fonte: Nexa_Identidade_Visual_v4/07_Digital/cores.css + Guia 4.1 (Parte II) */
+:root {
+  /* principais */
+  --nexa-violeta: #7546f6;
+  --nexa-menta: #71e3ba;
+  /* secundária: só pontua, nunca texto sobre claro */
+  --nexa-ciano: #22c6e8;
+  /* base */
+  --nexa-noite: #111a33;
+  --nexa-claro: #f4f9fc;
+  --nexa-branco: #ffffff;
+  /* apoio */
+  --nexa-muted: #536077;
+  --nexa-linha: #dce2ee;
+  --nexa-claro-noite: #ccd5e5;
+  /* registro escola (Encontro) */
+  --nexa-menta-papel: #eafaf4;
+  --nexa-menta-suave: #c6f3e2;
+  /* degradê Aurora: só em tela, nunca em texto */
+  --nexa-degrade: linear-gradient(135deg, #7546f6 0%, #22c6e8 52%, #71e3ba 100%);
+
+  /* tipografia */
+  --font-titulo: "Sora", system-ui, sans-serif;
+  --font-texto: "Manrope", system-ui, sans-serif;
+
+  /* malha base 8 */
+  --s1: 8px;
+  --s2: 16px;
+  --s3: 24px;
+  --s4: 32px;
+  --s6: 48px;
+  --s8: 64px;
+  --s12: 96px;
+  --s16: 128px;
+
+  --largura: 1200px;
+  --gutter: max(5vw, 16px); /* margem mínima de 5% da largura */
+  --raio: 16px;
+  --raio-sm: 8px;
+}

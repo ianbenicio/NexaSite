@@ -1,0 +1,18 @@
+---
+/** Seta do símbolo. "cor" = dobra violeta + corpo menta; "uma" = uma cor (currentColor). Sempre na horizontal, apontando para a direita. */
+import { SETA } from "../data/brand";
+interface Props { modo?: "cor" | "uma" | "contorno"; class?: string; }
+const { modo = "uma", class: cls = "" } = Astro.props;
+const id = `sd-${Math.random().toString(36).slice(2, 8)}`;
+---
+<svg class={`seta ${cls}`} viewBox={`-4 -4 ${SETA.w + 8} ${SETA.h + 8}`} aria-hidden="true" focusable="false">
+  {modo === "cor" && (
+    <>
+      <defs><clipPath id={id}><path d={SETA.dobra} /></clipPath></defs>
+      <path d={SETA.corpo} fill="#71E3BA" />
+      <path d={SETA.corpo} fill="#7546F6" clip-path={`url(#${id})`} />
+    </>
+  )}
+  {modo === "uma" && <path d={SETA.corpo} fill="currentColor" />}
+  {modo === "contorno" && <path d={SETA.corpo} fill="none" stroke="currentColor" stroke-width="22" />}
+</svg>

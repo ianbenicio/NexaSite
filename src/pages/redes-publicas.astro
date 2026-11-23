@@ -1,0 +1,216 @@
+---
+/**
+ * Registro Dossiê · rede B2G (Guia 4.1 · Parte III).
+ * Papel claro, noite e violeta. A menta só marca o que é entregue. Grafismo: trilho de etapas.
+ * Gramática B2G (Doutrina 1.6): adequação, diretriz, conformidade, indicador, relatório de impacto, prazo.
+ * Fonte do conteúdo: Portfólio v1 · B2G N1 e N2. Preços não aparecem (faixas provisórias até pendência 7).
+ */
+import Base from "../layouts/Base.astro";
+import Seta from "../components/Seta.astro";
+import Icone from "../components/Icone.astro";
+import Fechamento from "../components/Fechamento.astro";
+import { FALAS, CNE, WORKSHOPS } from "../data/site";
+
+const n1 = [
+  "Levantamento do uso atual de IA e dos processos pedagógicos e de gestão em uma amostra de escolas: questionário à rede e escuta de gestores e coordenadores.",
+  "Matriz regulatória aplicada à rede: o que é vedado, o que é obrigatório e o que é recomendado, com prazos.",
+  "Diretriz municipal de IA: usos permitidos por etapa, vedações, papéis, governança, dados e revisão.",
+  "Mapa de processos prioritários em três categorias: implementar agora, preparar antes, não usar IA.",
+  "Plano de adequação de 12 meses, com responsáveis e marcos.",
+  "Apresentação à equipe gestora e versão resumida para comunicar às escolas.",
+];
+const n2 = [
+  "Trilha de formação em blocos presenciais concentrados, de 2 a 3 dias por ida, com acompanhamento remoto entre os blocos.",
+  "Formação de coordenadores pedagógicos como multiplicadores.",
+  "Curadoria de ferramentas para os processos priorizados: ao menos duas opções comparadas, sem comissão, com preferência pelo que a rede ou o programa estadual já oferecem.",
+  "Piloto supervisionado em escolas selecionadas.",
+  "Relatório de impacto nos níveis 1 a 3 de Guskey: reação, aprendizagem da equipe e condições da instituição, com o campo “o que não melhorou”.",
+];
+const trilho = [
+  { t: "Conhecer a rede", m: false },
+  { t: "Levantar uso e processos", m: false },
+  { t: "Redigir a diretriz com a equipe", m: false },
+  { t: "Priorizar processos", m: false },
+  { t: "Apresentar e pactuar", m: true },
+];
+const vedacoes = [
+  "Correção ou atribuição de nota exclusivamente automatizada de redação e produção autoral.",
+  "Punição acadêmica baseada só em detector de texto de IA.",
+  "Pontuação social ou reconhecimento automatizado de emoções.",
+  "Acesso direto e não supervisionado de crianças da educação infantil e dos anos iniciais a ferramentas de IA.",
+];
+---
+<Base titulo="Redes públicas" descricao="Diretriz municipal de IA, plano de adequação de 12 meses e formação docente com relatório de impacto. Planilha de custos aberta.">
+  <section class="hero bg-claro">
+    <div class="wrap">
+      <p class="rotulo">Para redes públicas · secretarias municipais de educação</p>
+      <h1>Em 12 meses, sua rede precisa ter governança de IA, letramento no currículo e formação docente.</h1>
+      <p class="lead">Entregamos a diretriz, o plano de adequação e a formação com relatório de evidência, com planilha aberta e prazo claro.</p>
+      <div class="acoes">
+        <a class="btn" href="/contato?perfil=rede">Agendar conversa com a Nexa <Seta /></a>
+        <a class="btn btn--ghost" href="#nivel-1">Ver os serviços</a>
+      </div>
+      <ol class="ppf" aria-label="Ordem de trabalho">
+        <li>Processo</li><li>Pessoas</li><li class="ppf__ult">Ferramenta</li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="secao--tight bg-branco" aria-labelledby="prazo-t">
+    <div class="wrap grid-2 prazo">
+      <div class="stack-sm">
+        <p class="rotulo">Prazo e conformidade</p>
+        <h2 id="prazo-t">A adequação tem data.</h2>
+        <p>{CNE.frase} A rede precisa mostrar ao controle externo que tem regra, responsáveis e evidência.</p>
+        <p class="legenda">Janelas: saldo orçamentário em novembro e dezembro; ciclo de propostas de janeiro a março.</p>
+      </div>
+      <div class="cartao">
+        <p class="rotulo">Vedações que já valem</p>
+        <ul class="lista-seta">{vedacoes.map((v) => <li>{v}</li>)}</ul>
+        <p class="legenda">Fonte: {CNE.curto}, {CNE.data}. Na Nexa, cada vedação é requisito de projeto.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Nível 1 -->
+  <section id="nivel-1" class="secao bg-claro" aria-labelledby="n1-t">
+    <div class="wrap">
+      <div class="servico">
+        <div class="servico__cab">
+          <span class="tag tag--linha">Nível 1 · 6 a 8 semanas</span>
+          <h2 id="n1-t">Diretriz de IA da Rede</h2>
+          <p class="lead">A rede já usa IA sem regra, e agora tem prazo. Entregamos a diretriz municipal de uso de IA, adequada às diretrizes do CNE, ao Referencial do MEC, à LGPD e ao ECA Digital, com plano de adequação de 12 meses: um documento defensável diante do controle externo.</p>
+          <p class="legenda">Nenhuma ferramenta é implementada no Nível 1. O mapa de processos indica onde ela fará sentido no Nível 2.</p>
+        </div>
+        <div>
+          <p class="rotulo">Entregas</p>
+          <ol class="lista-entrega" style="margin-top:24px">{n1.map((e) => <li>{e}</li>)}</ol>
+        </div>
+      </div>
+
+      <div class="trilho" aria-label="Como funciona o Nível 1">
+        <p class="rotulo">Como funciona</p>
+        <ol>
+          {trilho.map((p, i) => (
+            <li class={p.m ? "marco" : ""}>
+              <span class="trilho__ponto" aria-hidden="true"></span>
+              <span class="trilho__n tabular">{i + 1}</span>
+              <span>{p.t}</span>
+              {p.m && <span class="trilho__marco">Marco de entrega</span>}
+            </li>
+          ))}
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- Nível 2 -->
+  <section class="secao bg-branco" aria-labelledby="n2-t">
+    <div class="wrap servico">
+      <div class="servico__cab">
+        <span class="tag tag--linha">Nível 2 · 4 a 6 meses</span>
+        <h2 id="n2-t">Formação e Implementação Assistida</h2>
+        <p class="lead">Transforma a diretriz em prática. Coordenadores e professores são formados nos processos priorizados no Nível 1, como planejamento, avaliação e letramento em IA para os alunos, com piloto supervisionado de ferramenta e relatório de impacto: a evidência de gestão responsável.</p>
+        <p class="legenda">Para redes que concluíram o Nível 1 ou já têm diretriz própria equivalente.</p>
+      </div>
+      <div>
+        <p class="rotulo">Entregas</p>
+        <ol class="lista-entrega" style="margin-top:24px">{n2.map((e) => <li>{e}</li>)}</ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- Como contratamos -->
+  <section class="secao bg-claro" aria-labelledby="contr-t">
+    <div class="wrap">
+      <div class="cabeca">
+        <p class="rotulo">Como contratamos</p>
+        <h2 id="contr-t">Preço defensável em auditoria.</h2>
+      </div>
+      <div class="grid-4 regras">
+        <div><Icone nome="evidencias" /><h3>Planilha aberta</h3><p>Toda proposta sai com planilha de custos aberta.</p></div>
+        <div><Icone nome="processos" /><h3>Pagamento por marco</h3><p>Parcelas ligadas a entregas, com começo e fim declarados.</p></div>
+        <div><Icone nome="conexao" /><h3>Curadoria sem comissão</h3><p>Se uma solução da Nexa estiver entre as opções, isso é declarado, com ao menos duas alternativas.</p></div>
+        <div><Icone nome="governanca" /><h3>Sem conflito</h3><p>Não redigimos termo de referência de processo que vamos disputar.</p></div>
+      </div>
+      <div class="cartao dados-lgpd">
+        <Icone nome="governanca" />
+        <div class="stack-sm">
+          <h3>Dados e LGPD como condição de assinatura</h3>
+          <p>A rede é a controladora e a Nexa, operadora. Não coletamos dado de aluno por conta própria. Todo contrato com solução leva contrato de tratamento de dados, minimização e cuidado reforçado com crianças e adolescentes. Dados nunca são usados para treinar modelo.</p>
+          <p>Software desenvolvido entra como licença de solução Nexa preexistente, customizada para a rede, com suporte mensal.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Workshops -->
+  <section class="secao bg-branco" aria-labelledby="wsr-t">
+    <div class="wrap">
+      <div class="cabeca">
+        <p class="rotulo">Workshops para redes</p>
+        <h2 id="wsr-t">Para começar com a equipe técnica.</h2>
+        <p class="lead">Duas a três horas, práticos. Gratuitos em eventos, associações e redes, dentro do nosso limite mensal. Todo workshop termina com o convite para o Nível 1.</p>
+      </div>
+      <ul class="grid-2 ws-lista">
+        {WORKSHOPS.redes.map((w) => (
+          <li class="cartao"><h3>{w.titulo}</h3>{w.sub && <p>{w.sub}</p>}<p class="legenda">Para: {w.publico}</p></li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <Fechamento
+    titulo="Comece por uma conversa com a secretaria."
+    texto={FALAS.trinta}
+    href="/contato?perfil=rede"
+  />
+</Base>
+
+<style>
+  .hero { padding-block: clamp(56px, 8vw, 112px) clamp(48px, 6vw, 80px); }
+  .hero .wrap > * + * { margin-top: 24px; }
+  .hero h1 { max-width: 20ch; font-size: clamp(34px, 4.6vw, 58px); }
+  .hero .acoes { margin-top: 40px; }
+
+  /* trilho Processo — Pessoas — Ferramenta (capa de proposta, registro Dossiê) */
+  .ppf { list-style: none; padding: 0; margin-top: 72px !important; display: flex; align-items: center; max-width: 720px; font-weight: 600; font-size: 18px; }
+  .ppf li { display: flex; align-items: center; gap: 12px; flex: 1; }
+  .ppf li::before { content: ""; width: 20px; height: 20px; border-radius: 50%; background: var(--nexa-noite); flex: none; }
+  .ppf li:not(:last-child)::after { content: ""; flex: 1; height: 1px; background: var(--nexa-claro-noite); margin-inline: 16px; }
+  .ppf__ult { flex: none !important; color: var(--nexa-violeta); }
+  .ppf__ult::before { background: var(--nexa-violeta) !important; }
+  @media (max-width: 520px) { .ppf { font-size: 15px; } .ppf li::before { width: 14px; height: 14px; } .ppf li:not(:last-child)::after { margin-inline: 8px; } }
+
+  .prazo { align-items: center; }
+
+  .servico { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(32px, 6vw, 96px); align-items: start; }
+  .servico__cab > * + * { margin-top: 20px; }
+  @media (max-width: 900px) { .servico { grid-template-columns: 1fr; } }
+
+  .trilho { margin-top: 80px; }
+  .trilho ol { list-style: none; padding: 0; margin: 32px 0 0; display: grid; grid-template-columns: repeat(5, 1fr); position: relative; }
+  .trilho ol::before { content: ""; position: absolute; left: 10px; right: 10px; top: 9px; height: 2px; background: var(--nexa-noite); }
+  .trilho li { position: relative; display: flex; flex-direction: column; gap: 8px; padding-right: 16px; font-weight: 600; }
+  .trilho__ponto { width: 20px; height: 20px; border-radius: 50%; background: var(--nexa-claro); border: 2px solid var(--nexa-noite); position: relative; }
+  .marco .trilho__ponto { background: var(--nexa-menta); border-color: var(--nexa-noite); }
+  .trilho__n { font-size: 13px; color: var(--nexa-muted); letter-spacing: .1em; margin-top: 8px; }
+  .trilho__marco { font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--nexa-violeta); }
+  @media (max-width: 800px) {
+    .trilho ol { grid-template-columns: 1fr; gap: 24px; }
+    .trilho ol::before { left: 9px; right: auto; top: 10px; bottom: 10px; width: 2px; height: auto; }
+    .trilho li { padding-left: 40px; }
+    .trilho__ponto { position: absolute; left: 0; top: 0; }
+    .trilho__n { margin-top: 0; }
+  }
+
+  .regras { margin-top: 48px; }
+  .regras > div > * + * { margin-top: 12px; }
+  .regras p { color: var(--nexa-muted); }
+  .dados-lgpd { margin-top: 56px; display: flex; gap: 24px; align-items: flex-start; }
+  .dados-lgpd > * + * { margin-top: 0; }
+  @media (max-width: 600px) { .dados-lgpd { flex-direction: column; } }
+
+  .ws-lista { list-style: none; padding: 0; margin: 48px 0 0; }
+  .ws-lista p:not(.legenda) { color: var(--nexa-muted); }
+</style>

@@ -1,0 +1,105 @@
+---
+/** Fonte: Doutrina MVP 1.1–1.4 e 3.5. Fotos e cargos dos sócios a confirmar (campos em colchetes). */
+import Base from "../layouts/Base.astro";
+import Logo from "../components/Logo.astro";
+import Fechamento from "../components/Fechamento.astro";
+import { VALORES, NAO_SOMOS } from "../data/site";
+
+const socios = [
+  { nome: "Ian Viana Benício", papel: "[Cargo]", area: "[Área de atuação]" },
+  { nome: "Marina Soares", papel: "[Cargo]", area: "[Área de atuação]" },
+];
+---
+<Base titulo="Sobre" descricao="A Nexa Inteligência Educacional é uma consultoria em educação. Propósito: fazer a tecnologia trabalhar para a educação, e não a educação para a tecnologia.">
+  <section class="hero bg-claro">
+    <div class="wrap hero__in">
+      <div class="stack">
+        <p class="rotulo">Quem somos</p>
+        <h1>Uma consultoria em educação. O que se repete entre clientes vira produto.</h1>
+        <p class="lead">Ajudamos redes públicas e escolas particulares a organizar seus processos pedagógicos e de gestão, formar as pessoas que executam esses processos e escolher, ou construir, a tecnologia certa para cada um.</p>
+      </div>
+      <div class="hero__marca" aria-hidden="true"><Logo variante="simbolo" altura={260} /></div>
+    </div>
+  </section>
+
+  <section class="secao bg-noite on-dark" aria-label="Propósito, missão e visão">
+    <div class="wrap pmv">
+      <div><p class="rotulo">Propósito</p><p class="pmv__t">Fazer a tecnologia trabalhar para a educação, e não a educação para a tecnologia.</p></div>
+      <div><p class="rotulo">Missão</p><p class="pmv__t">Organizar processos, formar pessoas e implementar tecnologia com critério em redes públicas e escolas, medindo o que muda.</p></div>
+      <div><p class="rotulo">Visão 2030</p><p class="pmv__t">Ser reconhecida no Nordeste como a consultoria que faz a IA funcionar nas escolas com responsabilidade, com ao menos um produto próprio usado por escolas e redes que não precisaram de consultoria para adotá-lo.</p></div>
+    </div>
+  </section>
+
+  <section class="secao bg-branco" aria-labelledby="val-t">
+    <div class="wrap">
+      <div class="cabeca">
+        <p class="rotulo">Valores</p>
+        <h2 id="val-t">Cada valor é uma regra.</h2>
+        <p class="lead">Na prática, o que fazemos. Na última coluna, o que recusamos, mesmo quando nos pedem.</p>
+      </div>
+      <table class="tabela" style="margin-top:48px">
+        <thead><tr><th scope="col">Valor</th><th scope="col">Na prática</th><th scope="col">O que recusamos</th></tr></thead>
+        <tbody>
+          {VALORES.map((v) => (
+            <tr><td>{v.valor}</td><td data-label="Na prática">{v.pratica}</td><td data-label="O que recusamos">{v.recusa}</td></tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="secao bg-claro" aria-labelledby="nao-t">
+    <div class="wrap">
+      <div class="cabeca">
+        <p class="rotulo">O que não somos</p>
+        <h2 id="nao-t">Cinco coisas que a Nexa não faz.</h2>
+      </div>
+      <ul class="grid-3 nao">
+        {NAO_SOMOS.map((n) => <li class="cartao"><h3>{n.titulo}</h3><p>{n.texto}</p></li>)}
+      </ul>
+    </div>
+  </section>
+
+  <section class="secao bg-branco" aria-labelledby="soc-t">
+    <div class="wrap">
+      <div class="cabeca">
+        <p class="rotulo">Sócios</p>
+        <h2 id="soc-t">Quem conduz o trabalho.</h2>
+      </div>
+      <ul class="grid-2 socios">
+        {socios.map((s) => (
+          <li>
+            <div class="socios__foto" aria-hidden="true">[FOTO]</div>
+            <div class="stack-sm"><h3>{s.nome}</h3><p class="placeholder-texto">{s.papel} · {s.area}</p></div>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <Fechamento titulo="Converse com quem vai fazer o trabalho." />
+</Base>
+
+<style>
+  .hero { padding-block: clamp(56px, 8vw, 112px); overflow: hidden; }
+  .hero__in { display: grid; grid-template-columns: 1.6fr 1fr; gap: 48px; align-items: center; }
+  .hero h1 { max-width: 20ch; }
+  .hero__marca { justify-self: end; }
+  .hero__marca :global(svg) { width: clamp(160px, 22vw, 280px); }
+  @media (max-width: 800px) { .hero__in { grid-template-columns: 1fr; } .hero__marca { display: none; } }
+
+  .pmv { display: grid; grid-template-columns: repeat(3, 1fr); gap: 48px; }
+  .pmv > div > * + * { margin-top: 16px; }
+  .pmv__t { font-family: var(--font-titulo); font-weight: 600; font-size: clamp(19px, 1.8vw, 23px); line-height: 1.4; }
+  @media (max-width: 860px) { .pmv { grid-template-columns: 1fr; gap: 40px; } }
+
+  .nao { list-style: none; padding: 0; margin: 48px 0 0; }
+  .nao p { color: var(--nexa-muted); }
+
+  .socios { list-style: none; padding: 0; margin: 48px 0 0; }
+  .socios li { display: flex; gap: 24px; align-items: center; }
+  .socios__foto {
+    width: 120px; height: 120px; border-radius: 50%; flex: none; display: grid; place-items: center;
+    background: var(--nexa-linha); color: var(--nexa-muted); font-weight: 700; font-size: 13px; letter-spacing: .12em;
+  }
+</style>

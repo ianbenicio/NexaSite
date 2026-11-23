@@ -1,0 +1,56 @@
+---
+import Logo from "./Logo.astro";
+import { NAV, SITE } from "../data/site";
+const ano = new Date().getFullYear();
+const { contato } = SITE;
+---
+<footer class="rodape bg-noite on-dark">
+  <div class="wrap rodape__in">
+    <div class="rodape__marca">
+      <Logo variante="principal" tom="claro" altura={56} />
+      <p class="rodape__assinatura">{SITE.assinatura}</p>
+    </div>
+
+    <nav aria-label="Rodapé" class="rodape__col">
+      <p class="rotulo">Navegar</p>
+      <ul>
+        {NAV.map((i) => <li><a href={i.href}>{i.rotulo}</a></li>)}
+        <li><a href="/contato">Contato</a></li>
+      </ul>
+    </nav>
+
+    <div class="rodape__col">
+      <p class="rotulo">Falar com a Nexa</p>
+      <ul>
+        <li>{contato.email ? <a href={`mailto:${contato.email}`}>{contato.email}</a> : <span class="placeholder-texto">{contato.emailRotulo}</span>}</li>
+        <li>{contato.whatsapp ? <a href={`https://wa.me/${contato.whatsapp}`}>WhatsApp</a> : <span class="placeholder-texto">{contato.whatsappRotulo}</span>}</li>
+        <li>{contato.cidade}</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="wrap rodape__base">
+    <p class="legenda">© {ano} Nexa Inteligência Educacional · CNPJ {contato.cnpj}</p>
+    <p class="legenda"><a href="/privacidade">Privacidade e dados</a> · Curadoria sem comissão de fornecedor.</p>
+  </div>
+</footer>
+
+<style>
+  .rodape { padding-top: 80px; }
+  .rodape a { color: var(--nexa-claro); text-decoration: none; }
+  .rodape a:hover { color: var(--nexa-menta); }
+  .rodape__in { display: grid; gap: 48px; grid-template-columns: 1.6fr 1fr 1fr; padding-bottom: 64px; }
+  .rodape__assinatura {
+    margin-top: 24px; font-family: var(--font-titulo); font-weight: 600; font-size: 22px; letter-spacing: -0.01em;
+    color: var(--nexa-menta);
+  }
+  .rodape__col ul { list-style: none; padding: 0; margin: 16px 0 0; display: grid; gap: 10px; }
+  .rodape .placeholder-texto { color: var(--nexa-claro-noite); }
+  .rodape__base {
+    display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 24px;
+    padding-block: 24px 32px; border-top: 1px solid rgb(204 213 229 / 0.18);
+  }
+  .rodape__base a { text-decoration: underline; }
+  @media (max-width: 860px) { .rodape__in { grid-template-columns: 1fr 1fr; } .rodape__marca { grid-column: 1 / -1; } }
+  @media (max-width: 480px) { .rodape__in { grid-template-columns: 1fr; } }
+</style>

@@ -1,0 +1,96 @@
+---
+import Logo from "./Logo.astro";
+import Seta from "./Seta.astro";
+import { NAV } from "../data/site";
+const atual = Astro.url.pathname.replace(/\/$/, "") || "/";
+---
+<header class="topo">
+  <div class="wrap topo__in">
+    <a href="/" class="topo__marca" aria-label="Nexa Inteligência Educacional, página inicial">
+      <span class="so-largo"><Logo variante="principal" altura={44} /></span>
+      <span class="so-estreito"><Logo variante="compacta" altura={36} /></span>
+    </a>
+
+    <nav class="topo__nav" aria-label="Principal">
+      <ul>
+        {NAV.map((i) => (
+          <li><a href={i.href} aria-current={atual === i.href ? "page" : undefined}>{i.rotulo}</a></li>
+        ))}
+      </ul>
+      <a class="btn topo__cta" href="/contato">Agendar conversa <Seta /></a>
+    </nav>
+
+    <details class="menu">
+      <summary aria-label="Abrir menu">
+        <span class="menu__barras" aria-hidden="true"></span>
+        <span class="menu__rotulo">Menu</span>
+      </summary>
+      <div class="menu__painel">
+        <ul>
+          {NAV.map((i) => (
+            <li><a href={i.href} aria-current={atual === i.href ? "page" : undefined}>{i.rotulo}</a></li>
+          ))}
+        </ul>
+        <a class="btn" href="/contato">Agendar conversa <Seta /></a>
+      </div>
+    </details>
+  </div>
+</header>
+
+<style>
+  .topo {
+    position: sticky; top: 0; z-index: 50;
+    background: color-mix(in srgb, var(--nexa-claro) 92%, transparent);
+    backdrop-filter: saturate(1.4) blur(10px);
+    border-bottom: 1px solid var(--nexa-linha);
+  }
+  .topo__in { display: flex; align-items: center; justify-content: space-between; gap: 24px; min-height: 80px; }
+  .topo__marca { display: flex; }
+  .so-estreito { display: none; }
+  .topo__nav { display: flex; align-items: center; gap: 32px; }
+  .topo__nav ul { display: flex; gap: 4px; list-style: none; margin: 0; padding: 0; }
+  .topo__nav ul a, .menu__painel ul a {
+    display: block; padding: 8px 12px; border-radius: 8px;
+    color: var(--nexa-noite); text-decoration: none; font-weight: 600; font-size: 15px;
+  }
+  .topo__nav ul a:hover { background: var(--nexa-branco); }
+  .topo__nav ul a[aria-current="page"] { color: var(--nexa-violeta); box-shadow: inset 0 -2px 0 var(--nexa-violeta); border-radius: 0; }
+  .topo__cta { min-height: 44px; padding: 10px 20px; font-size: 15px; }
+
+  .menu { display: none; position: relative; }
+  .menu summary {
+    list-style: none; cursor: pointer; display: flex; align-items: center; gap: 10px;
+    min-height: 44px; padding: 8px 14px; border: 1.5px solid var(--nexa-noite); border-radius: 999px;
+    font-weight: 700; font-size: 15px;
+  }
+  .menu summary::-webkit-details-marker { display: none; }
+  .menu__barras, .menu__barras::before, .menu__barras::after {
+    display: block; width: 16px; height: 2px; background: var(--nexa-noite); border-radius: 2px; position: relative;
+  }
+  .menu__barras::before, .menu__barras::after { content: ""; position: absolute; left: 0; }
+  .menu__barras::before { top: -5px; }
+  .menu__barras::after { top: 5px; }
+  .menu[open] .menu__barras { background: transparent; }
+  .menu[open] .menu__barras::before { top: 0; transform: rotate(45deg); }
+  .menu[open] .menu__barras::after { top: 0; transform: rotate(-45deg); }
+  .menu__painel {
+    position: absolute; right: 0; top: calc(100% + 12px); width: min(320px, calc(100vw - 32px));
+    background: var(--nexa-branco); border: 1px solid var(--nexa-linha); border-radius: var(--raio);
+    padding: 16px; box-shadow: 0 16px 48px rgb(17 26 51 / 0.14);
+  }
+  .menu__painel ul { list-style: none; margin: 0 0 16px; padding: 0; }
+  .menu__painel ul a { font-size: 17px; padding: 12px; }
+  .menu__painel ul a[aria-current="page"] { color: var(--nexa-violeta); }
+  .menu__painel .btn { width: 100%; justify-content: center; }
+
+  @media (max-width: 1080px) {
+    .topo__nav { display: none; }
+    .menu { display: block; }
+  }
+  /* abaixo de 320 px a principal perde o descritor: troca pela compacta (Guia · mínimos) */
+  @media (max-width: 520px) {
+    .so-largo { display: none; }
+    .so-estreito { display: block; }
+    .topo__in { min-height: 68px; }
+  }
+</style>

@@ -1,0 +1,91 @@
+---
+/** Fonte: Doutrina 5.5 (D-052) e Portfólio v1 · Workshops. Página de tela/evento: registro Faixa diagonal no topo. */
+import Base from "../layouts/Base.astro";
+import Seta from "../components/Seta.astro";
+import Icone from "../components/Icone.astro";
+import Fechamento from "../components/Fechamento.astro";
+import { WORKSHOPS } from "../data/site";
+import { FAIXA, FAIXA_ESTREITA } from "../data/brand";
+
+const grupos = [
+  { id: "redes", rotulo: "Para redes públicas", lista: WORKSHOPS.redes, perfil: "rede", proximo: "Abre o Nível 1 · Diretriz de IA da Rede" },
+  { id: "escolas", rotulo: "Para escolas particulares", lista: WORKSHOPS.escolas, perfil: "escola", proximo: "Abre o Programa 1 · Escola Preparada para IA" },
+  { id: "empresas", rotulo: "Para empresas do ecossistema educacional", lista: WORKSHOPS.empresas, perfil: "empresa", proximo: "Módulo de formação adaptado ao produto da empresa" },
+];
+---
+<Base titulo="Workshops" descricao="Workshops práticos de 2 a 3 horas sobre IA na educação para redes públicas, escolas e empresas do ecossistema. Você sai com uma ferramenta de uso imediato.">
+  <section class="hero bg-noite on-dark">
+    <svg class="hero__faixas" viewBox="0 0 900 560" aria-hidden="true" preserveAspectRatio="xMaxYMid slice">
+      <defs>
+        <linearGradient id="aurora-ws" x1="0" y1="1" x2="1" y2="0">
+          <stop offset="0" stop-color="#7546F6" /><stop offset=".52" stop-color="#22C6E8" /><stop offset="1" stop-color="#71E3BA" />
+        </linearGradient>
+      </defs>
+      <path d={FAIXA.d} fill="url(#aurora-ws)" transform="translate(320 60) scale(1.05)" />
+      <path d={FAIXA_ESTREITA.d} fill="#71E3BA" transform="translate(600 120) scale(.85)" />
+    </svg>
+    <div class="wrap hero__in">
+      <p class="rotulo">Workshops · 2 a 3 horas · prático</p>
+      <h1>Você sai com uma ferramenta de uso imediato.</h1>
+      <p class="lead">Por exemplo, um checklist de adequação às diretrizes aprovadas pelo CNE. Gratuitos em eventos, associações e redes, dentro do nosso limite de dois por mês. In-company sob proposta.</p>
+      <div class="acoes"><a class="btn" href="/contato?assunto=workshop">Solicitar um workshop <Seta /></a></div>
+    </div>
+  </section>
+
+  {grupos.map((g, gi) => (
+    <section class={`secao ${gi % 2 ? "bg-branco" : "bg-claro"}`} aria-labelledby={`g-${g.id}`}>
+      <div class="wrap">
+        <div class="grupo__cab">
+          <h2 id={`g-${g.id}`}>{g.rotulo}</h2>
+          <p class="legenda">{g.proximo}</p>
+        </div>
+        <ol class="temas">
+          {g.lista.map((w, i) => (
+            <li>
+              <span class="temas__n tabular">{String(i + 1).padStart(2, "0")}</span>
+              <div>
+                <h3>{w.titulo}</h3>
+                {w.sub && <p>{w.sub}</p>}
+                <p class="legenda">Para: {w.publico}</p>
+              </div>
+              <a class="link-seta" href={`/contato?perfil=${g.perfil}&assunto=workshop`} aria-label={`Solicitar: ${w.titulo}`}>Solicitar <Seta /></a>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </section>
+  ))}
+
+  <section class="secao--tight bg-menta-papel">
+    <div class="wrap regra">
+      <Icone nome="conexao" />
+      <p><strong>Todo workshop termina com um próximo passo nomeado.</strong> Para quem quiser seguir, o convite é para o primeiro nível de trabalho do seu público. Workshop sem próximo passo não acontece.</p>
+    </div>
+  </section>
+
+  <Fechamento titulo="Quer levar um tema para o seu evento ou equipe?" href="/contato?assunto=workshop" cta="Solicitar um workshop" />
+</Base>
+
+<style>
+  .hero { position: relative; overflow: hidden; padding-block: clamp(64px, 9vw, 128px); }
+  .hero__faixas { position: absolute; right: -4%; top: 0; height: 100%; width: 55%; pointer-events: none; }
+  .hero__in { position: relative; }
+  .hero__in > * + * { margin-top: 24px; }
+  .hero h1 { max-width: 15ch; }
+  .hero .acoes { margin-top: 40px; }
+  @media (max-width: 860px) { .hero__faixas { width: 120%; right: -70%; opacity: .4; } }
+
+  .grupo__cab { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 8px 32px; padding-bottom: 20px; border-bottom: 2px solid var(--nexa-noite); }
+  .temas { list-style: none; padding: 0; margin: 0; }
+  .temas li { display: grid; grid-template-columns: 64px 1fr auto; gap: 24px; align-items: center; padding: 28px 0; border-bottom: 1px solid var(--nexa-linha); }
+  .temas li > div > * + * { margin-top: 6px; }
+  .temas li > div > p:not(.legenda) { color: var(--nexa-muted); }
+  .temas__n { font-family: var(--font-titulo); font-weight: 600; font-size: 28px; color: var(--nexa-violeta); }
+  @media (max-width: 640px) {
+    .temas li { grid-template-columns: 44px 1fr; }
+    .temas .link-seta { grid-column: 2; }
+  }
+
+  .regra { display: flex; gap: 20px; align-items: flex-start; max-width: 860px; }
+  .regra p { font-size: 18px; }
+</style>
