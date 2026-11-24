@@ -60,11 +60,36 @@ const cenasRede = [
     texto: "Condicionalidades, relatórios, prestações de contas. A memória da rede mora em pastas pessoais, e cada troca de equipe recomeça do zero.",
   },
 ];
+// Percurso por área: o que muda para cada um, como a Nexa entra e o indicador que acompanha.
 const percurso = [
-  { quem: "Secretaria", medida: "Marcos do plano de adequação cumpridos no prazo e processos redesenhados em uso." },
-  { quem: "Diretores", medida: "Rotinas combinadas funcionando na escola, com registro de acompanhamento." },
-  { quem: "Coordenadores", medida: "Encontros de acompanhamento e devolutivas feitos como multiplicadores." },
-  { quem: "Professores", medida: "Participação, prática aplicada em sala entre os blocos e percepção de uso." },
+  {
+    quem: "Secretaria",
+    titulo: "Adequar a rede às diretrizes do CNE, com prazo e evidência.",
+    texto: "Cabe ao secretário publicar a regra da rede, nomear responsáveis, organizar a formação e mostrar ao controle externo que a adequação está em curso.",
+    nexa: "Traduzimos as diretrizes em diretriz municipal, plano de 12 meses com marcos e um painel que mostra, escola por escola, o que já foi feito.",
+    medida: "Marcos do plano de adequação cumpridos no prazo.",
+  },
+  {
+    quem: "Diretores",
+    titulo: "Levar a regra da rede para a rotina da escola.",
+    texto: "A diretriz só vale quando vira combinado na escola: quem pode usar, para quê, com que registro.",
+    nexa: "Desenhamos com a direção as rotinas da escola e um registro simples de acompanhamento.",
+    medida: "Rotinas combinadas funcionando, com registro.",
+  },
+  {
+    quem: "Coordenadores",
+    titulo: "Acompanhar o trabalho pedagógico com processo, não com memória.",
+    texto: "Planejamentos, observações de aula e devolutivas ficam espalhados. Sem processo, a coordenação só descobre o que travou quando o ano já passou.",
+    nexa: "Organizamos processos de monitoramento: o que acompanhar, com que frequência, onde registrar e como devolver ao professor. A IA ajuda a reunir e resumir; a decisão segue com o coordenador.",
+    medida: "Ciclos de acompanhamento e devolutivas feitos no prazo.",
+  },
+  {
+    quem: "Professores",
+    titulo: "Menos tempo em tarefa repetida, mais tempo com o aluno.",
+    texto: "Com processos bem definidos, a IA entra como suporte pedagógico: ajuda a preparar materiais, adaptar atividades e organizar registros, sempre com revisão do professor.",
+    nexa: "Formamos a equipe em cima do trabalho real e mostramos onde a IA cabe e onde não cabe. O tempo devolvido vai para o que mais importa: planejar, ensinar e acompanhar cada aluno.",
+    medida: "Prática aplicada em sala e tempo devolvido percebido.",
+  },
 ];
 const referencias = ["Saeb e Ideb", "Indicador Criança Alfabetizada", "Avaliação estadual", "Avaliações próprias do município"];
 ---
@@ -121,17 +146,29 @@ const referencias = ["Saeb e Ideb", "Indicador Criança Alfabetizada", "Avaliaç
         ))}
       </ul>
 
+      <div class="percurso">
+        <div class="percurso__cab">
+          <p class="rotulo">O percurso, área por área</p>
+          <h3>Cada área da rede tem um papel. Cada papel tem um indicador.</h3>
+        </div>
+        <ol class="percurso__lista">
+          {percurso.map((p) => (
+            <li>
+              <p class="percurso__quem">{p.quem}</p>
+              <h4>{p.titulo}</h4>
+              <p>{p.texto}</p>
+              <p class="percurso__nexa"><strong>Com a Nexa.</strong> {p.nexa}</p>
+              <p class="percurso__medida"><span>Indicador</span>{p.medida}</p>
+            </li>
+          ))}
+        </ol>
+      </div>
+
       <div class="painel">
         <div class="painel__cab">
           <p class="rotulo">Com a Nexa</p>
           <p class="painel__tit">Cada etapa do trabalho vira indicador. Cada indicador tem dono, escola e data.</p>
           <p>Combinamos com a secretaria, logo no começo, o que vai ser medido e como. Poucos indicadores, possíveis de coletar com a equipe que existe, lidos a cada 60 a 90 dias e não só no fim do ano.</p>
-        </div>
-        <div class="painel__col">
-          <p class="rotulo">O percurso, que medimos</p>
-          <dl class="painel__lista">
-            {percurso.map((p) => <div><dt>{p.quem}</dt><dd>{p.medida}</dd></div>)}
-          </dl>
         </div>
         <div class="painel__col">
           <p class="rotulo">A aprendizagem, que a rede já mede</p>
@@ -293,7 +330,7 @@ const referencias = ["Saeb e Ideb", "Indicador Criança Alfabetizada", "Avaliaç
   .foco__cenas li > * + * { margin-top: 12px; }
   .foco__cenas h3 { font-size: clamp(19px, 1.8vw, 22px); color: var(--nexa-branco); }
   .foco__cenas p { opacity: .78; }
-  .painel { margin-top: 72px; display: grid; grid-template-columns: 1.1fr 1fr 1fr; gap: clamp(24px, 3.5vw, 48px); background: var(--nexa-claro); color: var(--nexa-noite); border-radius: var(--raio); padding: clamp(28px, 4vw, 56px); border-top: 4px solid var(--nexa-menta); }
+  .painel { margin-top: 72px; display: grid; grid-template-columns: 1fr 1fr; gap: clamp(24px, 3.5vw, 48px); background: var(--nexa-claro); color: var(--nexa-noite); border-radius: var(--raio); padding: clamp(28px, 4vw, 56px); border-top: 4px solid var(--nexa-menta); }
   @media (max-width: 1000px) { .painel { grid-template-columns: 1fr; } }
   .painel .rotulo { color: var(--nexa-violeta); }
   .painel__cab > * + *, .painel__col > * + * { margin-top: 16px; }
@@ -306,6 +343,19 @@ const referencias = ["Saeb e Ideb", "Indicador Criança Alfabetizada", "Avaliaç
   .painel__ref { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
   .painel__ref li { font-size: 14px; font-weight: 600; padding: 6px 12px; border-radius: 999px; border: 1px solid var(--nexa-linha); background: var(--nexa-branco); }
   .painel__nota { color: var(--nexa-muted); font-size: 15px; }
+  .percurso { margin-top: 72px; padding-top: 56px; border-top: 1px solid rgb(204 213 229 / .25); }
+  .percurso__cab { max-width: 760px; }
+  .percurso__cab > * + * { margin-top: 12px; }
+  .percurso__cab h3 { font-size: clamp(22px, 2.4vw, 30px); color: var(--nexa-branco); }
+  .percurso__lista { list-style: none; padding: 0; margin: 40px 0 0; display: grid; grid-template-columns: 1fr 1fr; gap: 48px clamp(32px, 5vw, 72px); }
+  @media (max-width: 760px) { .percurso__lista { grid-template-columns: 1fr; } }
+  .percurso__lista li { display: flex; flex-direction: column; gap: 12px; padding-top: 20px; border-top: 2px solid var(--nexa-violeta); }
+  .percurso__quem { font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--nexa-menta); }
+  .percurso__lista h4 { font-family: var(--font-titulo); font-weight: 600; font-size: 19px; line-height: 1.3; color: var(--nexa-branco); }
+  .percurso__lista p { color: var(--nexa-claro-noite); font-size: 15px; }
+  .percurso__nexa strong { color: var(--nexa-branco); }
+  .percurso__lista .percurso__medida { margin-top: auto; padding-top: 12px; border-top: 1px solid rgb(204 213 229 / .25); color: var(--nexa-branco); font-weight: 600; }
+  .percurso__medida span { display: block; font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--nexa-claro-noite); font-weight: 700; margin-bottom: 4px; }
 
   .servico { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(32px, 6vw, 96px); align-items: start; }
   .servico__cab > * + * { margin-top: 20px; }

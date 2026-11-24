@@ -80,6 +80,36 @@ const medidas = [
   </section>
 
   <!-- Foco: qualidade que a família percebe, custo que a mantenedora enxerga -->
+  <!-- O custo de esperar: mercado e qualidade, sem número inventado (D-007) -->
+  <section class="secao bg-branco" aria-labelledby="espera-t">
+    <div class="wrap">
+      <div class="cabeca espera__cab">
+        <p class="rotulo">O custo de esperar</p>
+        <h2 id="espera-t">A escola que não se adapta perde mercado e perde qualidade.</h2>
+        <p class="lead">A IA já entrou na casa das famílias, no celular dos alunos e no planejamento de parte dos professores. A escola que age como se nada tivesse mudado não fica parada: fica para trás.</p>
+      </div>
+      <div class="espera">
+        <div class="espera__col">
+          <p class="rotulo">Perde mercado</p>
+          <ul class="lista-seta">
+            <li>Na visita de matrícula, a família pergunta como a escola lida com IA. Sem resposta clara, ela compara com a escola ao lado, que tem.</li>
+            <li>A concorrente que organizou processos atende mais rápido, comunica melhor e mostra resultado com dados.</li>
+            <li>Bons professores procuram escolas que dão estrutura e tempo para ensinar.</li>
+          </ul>
+        </div>
+        <div class="espera__col">
+          <p class="rotulo">Perde qualidade</p>
+          <ul class="lista-seta">
+            <li>Alunos usam IA sem orientação, e a escola não sabe dizer o que é aprendizagem e o que é cópia.</li>
+            <li>Cada professor improvisa do seu jeito, e a proposta pedagógica perde unidade.</li>
+            <li>O tempo da equipe continua preso em tarefa repetida, longe do aluno.</li>
+          </ul>
+        </div>
+      </div>
+      <p class="espera__nota"><strong>Adaptar não é comprar ferramenta.</strong> É organizar o processo, preparar a equipe e só então escolher a tecnologia. É por aí que a Nexa começa.</p>
+    </div>
+  </section>
+
   <section class="secao bg-menta-papel foco" aria-labelledby="foco-t">
     <div class="wrap">
       <div class="cabeca">
@@ -225,6 +255,13 @@ const medidas = [
   .painel__lista div:first-child { border-top: 0; padding-top: 0; }
   .painel__lista dt { font-weight: 700; }
   .painel__lista dd { margin: 4px 0 0; color: var(--nexa-muted); font-size: 15px; }
+  .espera__cab { max-width: 860px; }
+  .espera__cab > * + * { margin-top: 20px; }
+  .espera { margin-top: 48px; display: grid; grid-template-columns: 1fr 1fr; gap: clamp(32px, 5vw, 72px); }
+  @media (max-width: 860px) { .espera { grid-template-columns: 1fr; } }
+  .espera__col { padding-top: 24px; border-top: 2px solid var(--nexa-noite); }
+  .espera__col > * + * { margin-top: 16px; }
+  .espera__nota { margin-top: 40px; max-width: 760px; padding: 20px 24px; border-left: 3px solid var(--nexa-menta); background: var(--nexa-menta-papel); border-radius: var(--raio-sm); }
   .retorno { margin-top: 48px; display: grid; grid-template-columns: 1fr 1fr; gap: clamp(32px, 5vw, 72px); }
   @media (max-width: 860px) { .retorno { grid-template-columns: 1fr; } }
   .retorno__col > * + * { margin-top: 20px; }
