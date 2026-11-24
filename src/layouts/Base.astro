@@ -6,6 +6,8 @@ import { SITE } from "../data/site";
 
 interface Props { titulo?: string; descricao?: string; }
 const { titulo, descricao = SITE.descricao } = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
+const ogImg = new URL("/brand/og-nexa.png", Astro.site).href;
 const tituloFinal = titulo ? `${titulo} · Nexa Inteligência Educacional` : `Nexa Inteligência Educacional · ${SITE.assinatura}`;
 ---
 <!doctype html>
@@ -19,13 +21,21 @@ const tituloFinal = titulo ? `${titulo} · Nexa Inteligência Educacional` : `Ne
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-    <link rel="preload" href="/fonts/Sora-600.ttf" as="font" type="font/ttf" crossorigin />
-    <link rel="preload" href="/fonts/Manrope-400.ttf" as="font" type="font/ttf" crossorigin />
+    <link rel="preload" href="/fonts/Sora-600.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/Manrope-400.woff2" as="font" type="font/woff2" crossorigin />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="pt_BR" />
     <meta property="og:title" content={tituloFinal} />
     <meta property="og:description" content={descricao} />
-    <meta property="og:image" content="/brand/avatar-512.png" />
+    <link rel="canonical" href={canonical} />
+    <link rel="sitemap" href="/sitemap.xml" />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:site_name" content="Nexa Inteligência Educacional" />
+    <meta property="og:image" content={ogImg} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Nexa Inteligência Educacional: Organize o processo antes da escolha da ferramenta." />
+    <meta name="twitter:card" content="summary_large_image" />
   </head>
   <body>
     <a class="pular" href="#conteudo">Pular para o conteúdo</a>

@@ -26,6 +26,12 @@ const cenas = [
     texto: "As famílias leem sobre IA todos os dias e querem saber o que acontece com os filhos. Sem uma posição clara, cada conversa vira improviso, e isso aparece na matrícula.",
     nexa: "Construímos a política de IA da escola e uma versão em linguagem de família, com roteiro para a equipe usar nas conversas de matrícula.",
   },
+  {
+    quem: "Escola particular",
+    titulo: "A escola paga por várias ferramentas, e a equipe usa poucas.",
+    texto: "Uma assinatura veio com a plataforma, outra foi contratada por um setor, uma terceira ficou de um teste. Algumas fazem a mesma coisa, outras ninguém abre. A fatura chega todo mês, e ninguém sabe dizer quanto disso volta em tempo para o professor.",
+    nexa: "Mapeamos o que é contratado e o que é usado de fato, cortamos sobreposições e reorganizamos o processo em torno das ferramentas que ficam. A escola passa a pagar só pelo que a equipe usa.",
+  },
 ];
 ---
 <Base>
@@ -135,7 +141,7 @@ const cenas = [
         <ul class="indaga__lista">
           {EVIDENCIAS.map((d) => (
             <li>
-              <p class="indaga__v tabular">{d.valor}</p>
+              <p class:list={["indaga__v tabular", { "indaga__v--longo": d.valor.length > 8 }]}>{d.valor}</p>
               <p>{d.texto}</p>
               <p class="legenda">Fonte: <a href={d.url} target="_blank" rel="noopener">{d.fonte}<span class="sr-only"> (abre em nova aba)</span></a></p>
             </li>
@@ -217,7 +223,8 @@ const cenas = [
   .indaga__lista li { display: grid; grid-template-columns: 8.5em 1fr; column-gap: 20px; padding: 20px 0; border-top: 1px solid rgb(204 213 229 / .25); }
   .indaga__lista li:first-child { border-top: 0; padding-top: 0; }
   .indaga__lista .legenda { grid-column: 2; margin-top: 6px; }
-  .indaga__v { grid-row: span 2; font-family: var(--font-titulo); font-weight: 600; font-size: clamp(26px, 2.6vw, 32px); line-height: 1.1; color: var(--nexa-claro); white-space: nowrap; }
+  .indaga__v { grid-row: span 2; font-family: var(--font-titulo); font-weight: 600; font-size: clamp(26px, 2.6vw, 32px); line-height: 1.1; color: var(--nexa-claro); }
+  .indaga__v--longo { font-size: clamp(20px, 1.9vw, 24px); }
   @media (max-width: 520px) { .indaga__lista li { grid-template-columns: 1fr; } .indaga__lista .legenda { grid-column: 1; } .indaga__v { grid-row: auto; margin-bottom: 6px; } }
   .dados__v { font-family: var(--font-titulo); font-weight: 600; font-size: clamp(44px, 5vw, 64px); line-height: 1; color: var(--nexa-menta); letter-spacing: -0.02em; }
   @media (max-width: 720px) { .dados { grid-template-columns: 1fr; gap: 0; } .dados li { padding-block: 24px; } }
@@ -250,7 +257,7 @@ const cenas = [
   .recusa { margin: 8px 0 40px; padding: 24px 28px; border-left: 3px solid var(--nexa-violeta); background: var(--nexa-claro); border-radius: 0 var(--raio-sm) var(--raio-sm) 0; max-width: 860px; }
   .recusa > * + * { margin-top: 8px; }
 
-  .cenas { list-style: none; padding: 0; margin: 56px 0 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr)); gap: 24px; }
+  .cenas { list-style: none; padding: 0; margin: 56px 0 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr)); gap: 24px; }
   .cena { display: flex; flex-direction: column; gap: 14px; padding: clamp(24px, 3vw, 36px); border: 1px solid var(--nexa-linha); border-radius: var(--raio); background: var(--nexa-branco); }
   .cena__quem { font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--nexa-muted); }
   .cena h3 { font-size: clamp(19px, 1.7vw, 21px); }

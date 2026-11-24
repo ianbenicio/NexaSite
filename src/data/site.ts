@@ -48,7 +48,7 @@ export const DADOS = [
 export const EVIDENCIAS = [
   { valor: "7 em 10", texto: "alunos do ensino médio usam IA generativa em pesquisas escolares, com orientação da escola ainda limitada.", fonte: "TIC Educação 2025, Cetic.br", url: "https://cetic.br/media/pdf/analises/20260804094932_pt_br_tic_educacao_2025_coletiva_de_imprensa.pdf" },
   { valor: "39%", texto: "dos professores brasileiros dizem precisar de formação para usar IA no ensino.", fonte: "OCDE, TALIS 2024", url: "https://agenciabrasil.ebc.com.br/educacao/noticia/2025-10/professores-no-brasil-usam-mais-ia-que-media-dos-paises-da-ocde/" },
-  { valor: "Acima", texto: "do esperado: no Brasil, o uso de IA pelos professores supera o nível de formação que eles receberam.", fonte: "BID, Nota CIMA 37, com dados da TALIS 2024", url: "https://publications.iadb.org/publications/spanish/document/Nota-CIMA-37-Inteligencia-artificial-en-las-escuelas-evidencia-desde-TALIS-2024.pdf" },
+  { valor: "Acima do esperado", texto: "No Brasil, o uso de IA pelos professores supera o nível de formação que eles receberam.", fonte: "BID, Nota CIMA 37, com dados da TALIS 2024", url: "https://publications.iadb.org/publications/spanish/document/Nota-CIMA-37-Inteligencia-artificial-en-las-escuelas-evidencia-desde-TALIS-2024.pdf" },
 ];
 
 // Doutrina 5.1 · uma mensagem, três falas.
