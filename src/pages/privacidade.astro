@@ -12,7 +12,8 @@ import { SITE } from "../data/site";
 
       <h2>Dados deste site</h2>
       <p>O formulário de contato pede nome, cargo, instituição, e-mail e, se você quiser, WhatsApp. Usamos esses dados só para responder ao seu contato e registrar a conversa no nosso controle comercial. Não vendemos nem compartilhamos esses dados com terceiros para fins de marketing.</p>
-      <p>Para pedir acesso, retificação ou exclusão dos seus dados, escreva para <span class="placeholder-texto">{SITE.contato.emailRotulo}</span>.</p>
+      <p>Para pedir acesso, retificação ou exclusão dos seus dados, escreva para <a href={`mailto:${SITE.contato.email}`}>{SITE.contato.email}</a>.</p>
+      <p>Responsável pelos dados deste site: {SITE.nome}, CNPJ {SITE.contato.cnpj}, {SITE.contato.cidade}.</p>
 
       <h2>Dados das instituições que atendemos</h2>
       <ul class="lista-seta">
