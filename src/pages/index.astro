@@ -166,7 +166,7 @@ const cenas = [
               <Seta modo={i === 0 ? "cor" : i === 1 ? "uma" : "contorno"} class={`trilho__seta t${i}`} />
               <span class="trilho__n tabular">0{i + 1}</span>
             </div>
-            <h3>{e.nome}</h3>
+            <h3 class="trilho__tit"><Icone nome={e.icone} class="trilho__ic" />{e.nome}</h3>
             <p>{e.texto}</p>
           </li>
         ))}
@@ -272,4 +272,6 @@ const cenas = [
   .ws h2 { font-size: clamp(21px, 2.2vw, 26px); margin-top: 8px; max-width: 32ch; }
   .ws :global(.icone) { width: 48px; height: 48px; }
   @media (max-width: 720px) { .ws { flex-direction: column; align-items: flex-start; gap: 16px; } }
+  .trilho__tit { display: flex; align-items: center; gap: 12px; }
+  .trilho__ic { width: 28px; height: 28px; color: var(--nexa-violeta); }
 </style>

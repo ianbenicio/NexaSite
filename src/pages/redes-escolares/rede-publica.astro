@@ -63,28 +63,28 @@ const cenasRede = [
 // Percurso por área: o que muda para cada um, como a Nexa entra e o indicador que acompanha.
 const percurso = [
   {
-    quem: "Secretaria",
+    quem: "Secretaria", icone: "governanca" as const,
     titulo: "Adequar a rede às diretrizes do CNE, com prazo e evidência.",
     texto: "Cabe ao secretário publicar a regra da rede, nomear responsáveis, organizar a formação e mostrar ao controle externo que a adequação está em curso.",
     nexa: "Traduzimos as diretrizes em diretriz municipal, plano de 12 meses com marcos e um painel que mostra, escola por escola, o que já foi feito.",
     medida: "Marcos do plano de adequação cumpridos no prazo.",
   },
   {
-    quem: "Diretores",
+    quem: "Diretores", icone: "processos" as const,
     titulo: "Levar a regra da rede para a rotina da escola.",
     texto: "A diretriz só vale quando vira combinado na escola: quem pode usar, para quê, com que registro.",
     nexa: "Desenhamos com a direção as rotinas da escola e um registro simples de acompanhamento.",
     medida: "Rotinas combinadas funcionando, com registro.",
   },
   {
-    quem: "Coordenadores",
+    quem: "Coordenadores", icone: "evidencias" as const,
     titulo: "Acompanhar o trabalho pedagógico com processo, não com memória.",
     texto: "Planejamentos, observações de aula e devolutivas ficam espalhados. Sem processo, a coordenação só descobre o que travou quando o ano já passou.",
     nexa: "Organizamos processos de monitoramento: o que acompanhar, com que frequência, onde registrar e como devolver ao professor. A IA ajuda a reunir e resumir; a decisão segue com o coordenador.",
     medida: "Ciclos de acompanhamento e devolutivas feitos no prazo.",
   },
   {
-    quem: "Professores",
+    quem: "Professores", icone: "formacao" as const,
     titulo: "Menos tempo em tarefa repetida, mais tempo com o aluno.",
     texto: "Com processos bem definidos, a IA entra como suporte pedagógico: ajuda a preparar materiais, adaptar atividades e organizar registros, sempre com revisão do professor.",
     nexa: "Formamos a equipe em cima do trabalho real e mostramos onde a IA cabe e onde não cabe. O tempo devolvido vai para o que mais importa: planejar, ensinar e acompanhar cada aluno.",
@@ -154,7 +154,7 @@ const referencias = ["Saeb e Ideb", "Indicador Criança Alfabetizada", "Avaliaç
         <ol class="percurso__lista">
           {percurso.map((p) => (
             <li>
-              <p class="percurso__quem">{p.quem}</p>
+              <p class="percurso__quem"><Icone nome={p.icone} class="percurso__ic" />{p.quem}</p>
               <h4>{p.titulo}</h4>
               <p>{p.texto}</p>
               <p class="percurso__nexa"><strong>Com a Nexa.</strong> {p.nexa}</p>
@@ -350,7 +350,8 @@ const referencias = ["Saeb e Ideb", "Indicador Criança Alfabetizada", "Avaliaç
   .percurso__lista { list-style: none; padding: 0; margin: 40px 0 0; display: grid; grid-template-columns: 1fr 1fr; gap: 48px clamp(32px, 5vw, 72px); }
   @media (max-width: 760px) { .percurso__lista { grid-template-columns: 1fr; } }
   .percurso__lista li { display: flex; flex-direction: column; gap: 12px; padding-top: 20px; border-top: 2px solid var(--nexa-violeta); }
-  .percurso__quem { font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--nexa-menta); }
+  .percurso__ic { width: 32px; height: 32px; color: var(--nexa-menta); }
+  .percurso__quem { display: flex; align-items: center; gap: 12px; font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--nexa-menta); }
   .percurso__lista h4 { font-family: var(--font-titulo); font-weight: 600; font-size: 19px; line-height: 1.3; color: var(--nexa-branco); }
   .percurso__lista p { color: var(--nexa-claro-noite); font-size: 15px; }
   .percurso__nexa strong { color: var(--nexa-branco); }
