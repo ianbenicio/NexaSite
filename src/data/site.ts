@@ -7,14 +7,14 @@ export const SITE = {
   descricao:
     "Parceira de redes públicas e escolas particulares na chegada da IA. Organizamos o processo, formamos a equipe e só então escolhemos a ferramenta.",
   // Doutrina 1.7 / Pontos a ver 7: domínio, e-mail e WhatsApp ainda em aberto.
-  url: "https://[dominio].com.br",
+  url: "https://nexa-int-edu.com.br",
   contato: {
-    email: null as string | null, // ex.: "contato@[dominio].com.br"
-    whatsapp: null as string | null, // ex.: "5586999999999"
+    email: "nexainteligencia.edu@gmail.com" as string | null, // trocar por contato@dominio quando houver
+    whatsapp: "5586994903720" as string | null,
     emailRotulo: "[E-mail institucional]",
     whatsappRotulo: "[WhatsApp]",
     cidade: "Teresina · Piauí",
-    cnpj: "[CNPJ]",
+    cnpj: "66.284.551/0001-32",
   },
 };
 

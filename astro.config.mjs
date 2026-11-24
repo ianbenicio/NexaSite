@@ -1,8 +1,8 @@
 import { defineConfig } from "astro/config";
 
-// Domínio ainda não definido (Doutrina 1.7). Trocar `site` quando houver.
+// Domínio principal: nexa-int-edu.com.br (o .com redireciona para cá).
 export default defineConfig({
-  site: "https://example.com",
+  site: "https://nexa-int-edu.com.br",
   trailingSlash: "ignore",
   build: { format: "directory" },
   // Rotas antigas (antes do menu "Redes escolares" e "Conteúdos").

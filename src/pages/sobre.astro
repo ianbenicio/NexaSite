@@ -6,8 +6,8 @@ import Fechamento from "../components/Fechamento.astro";
 import { VALORES, NAO_SOMOS } from "../data/site";
 
 const socios = [
-  { nome: "Ian Viana Benício", papel: "[Cargo]", area: "[Área de atuação]" },
-  { nome: "Marina Soares", papel: "[Cargo]", area: "[Área de atuação]" },
+  { nome: "Ian Viana Benício", papel: "Direção de Tecnologia", iniciais: "IB" },
+  { nome: "Marina Soares", papel: "Direção de Educação", iniciais: "MS" },
 ];
 ---
 <Base titulo="Sobre" descricao="A Nexa Inteligência Educacional trabalha ao lado de redes públicas e escolas particulares. Propósito: fazer a tecnologia trabalhar para a educação, e não a educação para a tecnologia.">
@@ -68,8 +68,8 @@ const socios = [
       <ul class="grid-2 socios">
         {socios.map((s) => (
           <li>
-            <div class="socios__foto" aria-hidden="true">[FOTO]</div>
-            <div class="stack-sm"><h3>{s.nome}</h3><p class="placeholder-texto">{s.papel} · {s.area}</p></div>
+            <div class="socios__foto" aria-hidden="true">{s.iniciais}</div>
+            <div class="stack-sm"><h3>{s.nome}</h3><p>{s.papel}</p></div>
           </li>
         ))}
       </ul>
