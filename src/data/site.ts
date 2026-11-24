@@ -9,7 +9,7 @@ export const SITE = {
   // Doutrina 1.7 / Pontos a ver 7: domínio, e-mail e WhatsApp ainda em aberto.
   url: "https://nexa-int-edu.com.br",
   contato: {
-    email: "nexainteligencia.edu@gmail.com" as string | null, // trocar por contato@dominio quando houver
+    email: "contato@nexa-int-edu.com.br" as string | null, // repassado ao Gmail via Cloudflare Email Routing
     whatsapp: "5586994903720" as string | null,
     emailRotulo: "[E-mail institucional]",
     whatsappRotulo: "[WhatsApp]",
