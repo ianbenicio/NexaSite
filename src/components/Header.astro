@@ -8,8 +8,8 @@ const ativo = (href: string) => (href === "/" ? atual === "/" : atual === href |
 <header class="topo">
   <div class="wrap topo__in">
     <a href="/" class="topo__marca" aria-label="Nexa Inteligência Educacional, página inicial">
-      <span class="so-largo"><Logo variante="compacta" altura={50} /></span>
-      <span class="so-estreito"><Logo variante="compacta" altura={40} /></span>
+      <span class="so-largo"><Logo variante="principal" altura={64} /></span>
+      <span class="so-estreito"><Logo variante="principal" altura={46} /></span>
     </a>
 
     <nav class="topo__nav" aria-label="Principal">
@@ -45,7 +45,7 @@ const ativo = (href: string) => (href === "/" ? atual === "/" : atual === href |
     backdrop-filter: saturate(1.4) blur(10px);
     border-bottom: 1px solid var(--nexa-linha);
   }
-  .topo__in { display: flex; align-items: center; justify-content: space-between; gap: 24px; min-height: 80px; }
+  .topo__in { display: flex; align-items: center; justify-content: space-between; gap: 24px; min-height: 88px; }
   .topo__marca { display: flex; }
   .so-estreito { display: none; }
   .topo__nav { display: flex; align-items: center; gap: 32px; }
